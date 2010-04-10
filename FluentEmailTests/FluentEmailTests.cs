@@ -15,7 +15,7 @@ namespace FluentEmailTests
         {
             string toEmail = "bob@test.com";
 
-            var email = Email.New
+            var email = Email.New()
                 .To(toEmail);
 
             Assert.AreEqual(toEmail, email.Message.To[0].Address);
@@ -26,7 +26,7 @@ namespace FluentEmailTests
         {
             string fromEmail = "johno@test.com";
 
-            var email = Email.New
+            var email = Email.New()
                 .From(fromEmail);
 
             Assert.AreEqual(fromEmail, email.Message.From.Address);
@@ -37,7 +37,7 @@ namespace FluentEmailTests
         {
             string subject = "sup dawg";
 
-            var email = Email.New
+            var email = Email.New()
                 .Subject(subject);
 
             Assert.AreEqual(subject, email.Message.Subject);
@@ -48,7 +48,7 @@ namespace FluentEmailTests
         {
             string body = "what be the hipitity hap?";
 
-            var email = Email.New
+            var email = Email.New()
                 .Body(body);
 
             Assert.AreEqual(body, email.Message.Body);
@@ -60,7 +60,7 @@ namespace FluentEmailTests
             string toEmail1 = "bob@test.com";
             string toEmail2 = "ratface@test.com";
 
-            var email = Email.New
+            var email = Email.New()
                 .To(toEmail1)
                 .To(toEmail2);
 
@@ -74,7 +74,7 @@ namespace FluentEmailTests
             string subject = "sup dawg";
             string body = "what be the hipitity hap?";
 
-            var email = Email.New
+            var email = Email.New()
                 .To(toEmail)
                 .Subject(subject)
                 .Body(body)

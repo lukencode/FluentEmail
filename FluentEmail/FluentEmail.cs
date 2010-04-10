@@ -8,6 +8,8 @@ namespace FluentEmail
 {
     public class Email
     {
+        private SmtpClient _client;
+
         public MailMessage Message { get; set; }
         public Exception Error { get; set; }
         public bool HasError
@@ -18,11 +20,20 @@ namespace FluentEmail
             }
         }
 
-        public static Email New { get { return new Email(); } }
+        public static Email New()
+        { 
+            return new Email(new SmtpClient());
+        }
 
-        private Email()
+        public static Email New(SmtpClient client)
+        {
+            return new Email(client);
+        }
+
+        private Email(SmtpClient client)
         {
             Message = new MailMessage() { IsBodyHtml = true };
+            _client = client;
         }
 
         public Email To(string emailAddress, string name = "")
@@ -53,8 +64,7 @@ namespace FluentEmail
         {
             try
             {
-                var client = new SmtpClient();
-                client.Send(Message);
+                _client.Send(Message);
             }
             catch (Exception ex)
             {
@@ -66,10 +76,15 @@ namespace FluentEmail
 
         public Email SendAsync(SendCompletedEventHandler callback, object token = null)
         {
-            var client = new SmtpClient();
-            client.SendCompleted += callback;
-            client.SendAsync(Message, token);
+            _client.SendCompleted += callback;
+            _client.SendAsync(Message, token);
 
+            return this;
+        }
+
+        public Email Cancel()
+        {
+            _client.SendAsyncCancel();
             return this;
         }
     }
