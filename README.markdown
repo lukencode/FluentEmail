@@ -1,0 +1,1 @@
+Playing around with a fluent email class in c#
