@@ -18,14 +18,6 @@ namespace FluentEmail
             }
         }
 
-        public bool IsValid
-        {
-            get
-            {
-
-            }
-        }
-
         public static Email New { get { return new Email(); } }
 
         private Email()
@@ -68,6 +60,15 @@ namespace FluentEmail
             {
                 Error = ex;
             }
+
+            return this;
+        }
+
+        public Email SendAsync(SendCompletedEventHandler callback, object token = null)
+        {
+            var client = new SmtpClient();
+            client.SendCompleted += callback;
+            client.SendAsync(Message, token);
 
             return this;
         }

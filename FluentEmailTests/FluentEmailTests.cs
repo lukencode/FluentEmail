@@ -79,6 +79,11 @@ namespace FluentEmailTests
                 .Subject(subject)
                 .Body(body)
                 .From(fromEmail);
+
+            Assert.AreEqual(body, email.Message.Body);
+            Assert.AreEqual(subject, email.Message.Subject);
+            Assert.AreEqual(fromEmail, email.Message.From.Address);
+            Assert.AreEqual(toEmail, email.Message.To[0].Address);
         }
     }
 }
