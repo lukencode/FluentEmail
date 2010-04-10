@@ -42,6 +42,15 @@ namespace FluentEmail
             return this;
         }
 
+        public Email To(IList<MailAddress> mailAddresses)
+        {
+            foreach (var address in mailAddresses)
+            {
+                Message.To.Add(address);
+            }
+            return this;
+        }
+
         public Email From(string emailAddress, string name = "")
         {
             Message.From = new MailAddress(emailAddress, name);

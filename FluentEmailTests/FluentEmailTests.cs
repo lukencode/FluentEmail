@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentEmail;
+using System.Net.Mail;
 
 namespace FluentEmailTests
 {
@@ -63,6 +64,19 @@ namespace FluentEmailTests
             var email = Email.New()
                 .To(toEmail1)
                 .To(toEmail2);
+
+            Assert.AreEqual(2, email.Message.To.Count);
+        }
+
+        [TestMethod]
+        public void Can_Add_Multiple_Recipients_From_List()
+        {
+            var emails = new List<MailAddress>();
+            emails.Add(new MailAddress("email1@email.com"));
+            emails.Add(new MailAddress("email2@email.com"));
+
+            var email = Email.New()
+                .To(emails);
 
             Assert.AreEqual(2, email.Message.To.Count);
         }

@@ -43,6 +43,7 @@
     <Compile Include="AsyncTests.cs" />
     <Compile Include="FluentEmailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SendTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FluentEmail\FluentEmail.csproj">
