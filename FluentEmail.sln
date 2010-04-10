@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail", "FluentEmail\FluentEmail.csproj", "{E3655E68-0152-4512-BB99-F4CF3BCA245C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmailTests", "FluentEmailTests\FluentEmailTests.csproj", "{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D8A38E5-15B0-4C2B-BD49-ED629E5DDC42}"
+EndProject
+Global
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FluentEmail.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
