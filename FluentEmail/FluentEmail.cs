@@ -6,19 +6,10 @@ using System.Net.Mail;
 
 namespace FluentEmail
 {
-    public class Email
+    public class Email : IHideObjectMembers
     {
         private SmtpClient _client;
-
         public MailMessage Message { get; set; }
-        public Exception Error { get; set; }
-        public bool HasError
-        {
-            get
-            {
-                return Error != null;
-            }
-        }
 
         private Email()
         {
@@ -48,6 +39,18 @@ namespace FluentEmail
             return this;
         }
 
+        public Email CC(string emailAddress, string name = "")
+        {
+            Message.CC.Add(new MailAddress(emailAddress, name));
+            return this;
+        }
+
+        public Email BCC(string emailAddress, string name = "")
+        {
+            Message.Bcc.Add(new MailAddress(emailAddress, name));
+            return this;
+        }
+
         public Email Subject(string subject)
         {
             Message.Subject = subject;
@@ -59,8 +62,7 @@ namespace FluentEmail
             Message.Body = body;
             return this;
         }
-
-
+        
         public Email UsingClient(SmtpClient client)
         {
             _client = client;
@@ -69,15 +71,7 @@ namespace FluentEmail
 
         public Email Send()
         {
-            try
-            {
-                _client.Send(Message);
-            }
-            catch (Exception ex)
-            {
-                Error = ex;
-            }
-
+            _client.Send(Message);
             return this;
         }
 
