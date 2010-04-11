@@ -11,13 +11,17 @@ namespace FluentEmailTests
     [TestClass]
     public class FluentEmailTests
     {
+        const string toEmail = "bob@test.com";
+        const string fromEmail = "johno@test.com";
+        const string subject = "sup dawg";
+        const string body = "what be the hipitity hap?";
+
         [TestMethod]
         public void To_Address_Is_Set()
         {
-            string toEmail = "bob@test.com";
-
-            var email = Email.New()
-                .To(toEmail);
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail);
 
             Assert.AreEqual(toEmail, email.Message.To[0].Address);
         }
@@ -25,10 +29,7 @@ namespace FluentEmailTests
         [TestMethod]
         public void From_Address_Is_Set()
         {
-            string fromEmail = "johno@test.com";
-
-            var email = Email.New()
-                .From(fromEmail);
+            var email = Email.From(fromEmail);
 
             Assert.AreEqual(fromEmail, email.Message.From.Address);
         }
@@ -36,10 +37,9 @@ namespace FluentEmailTests
         [TestMethod]
         public void Subject_Is_Set()
         {
-            string subject = "sup dawg";
-
-            var email = Email.New()
-                .Subject(subject);
+            var email = Email
+                        .From(fromEmail)
+                        .Subject(subject);
 
             Assert.AreEqual(subject, email.Message.Subject);
         }
@@ -47,10 +47,8 @@ namespace FluentEmailTests
         [TestMethod]
         public void Body_Is_Set()
         {
-            string body = "what be the hipitity hap?";
-
-            var email = Email.New()
-                .Body(body);
+            var email = Email.From(fromEmail)
+                                .Body(body);
 
             Assert.AreEqual(body, email.Message.Body);
         }
@@ -61,9 +59,10 @@ namespace FluentEmailTests
             string toEmail1 = "bob@test.com";
             string toEmail2 = "ratface@test.com";
 
-            var email = Email.New()
-                .To(toEmail1)
-                .To(toEmail2);
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail1)
+                        .To(toEmail2);
 
             Assert.AreEqual(2, email.Message.To.Count);
         }
@@ -75,24 +74,20 @@ namespace FluentEmailTests
             emails.Add(new MailAddress("email1@email.com"));
             emails.Add(new MailAddress("email2@email.com"));
 
-            var email = Email.New()
-                .To(emails);
+            var email = Email
+                        .From(fromEmail)
+                        .To(emails);
 
             Assert.AreEqual(2, email.Message.To.Count);
         }
 
         public void Is_Valid_With_Properties_Set()
-        {        
-            string toEmail = "bob@test.com";   
-            string fromEmail = "johno@test.com"; 
-            string subject = "sup dawg";
-            string body = "what be the hipitity hap?";
-
-            var email = Email.New()
-                .To(toEmail)
-                .Subject(subject)
-                .Body(body)
-                .From(fromEmail);
+        {
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .Subject(subject)
+                        .Body(body);
 
             Assert.AreEqual(body, email.Message.Body);
             Assert.AreEqual(subject, email.Message.Subject);

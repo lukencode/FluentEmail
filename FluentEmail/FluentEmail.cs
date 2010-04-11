@@ -20,22 +20,19 @@ namespace FluentEmail
             }
         }
 
-        public static Email New()
-        { 
-            return new Email(new SmtpClient());
-        }
-
-        public static Email New(SmtpClient client)
-        {
-            return new Email(client);
-        }
-
-        private Email(SmtpClient client)
+        private Email()
         {
             Message = new MailMessage() { IsBodyHtml = true };
-            _client = client;
+            _client = new SmtpClient();
         }
 
+        public static Email From(string emailAddress, string name = "")
+        {
+            var email = new Email();
+            email.Message.From = new MailAddress(emailAddress, name);
+            return email;
+        }
+        
         public Email To(string emailAddress, string name = "")
         {
             Message.To.Add(new MailAddress(emailAddress, name));
@@ -51,12 +48,6 @@ namespace FluentEmail
             return this;
         }
 
-        public Email From(string emailAddress, string name = "")
-        {
-            Message.From = new MailAddress(emailAddress, name);
-            return this;
-        }
-
         public Email Subject(string subject)
         {
             Message.Subject = subject;
@@ -66,6 +57,13 @@ namespace FluentEmail
         public Email Body(string body)
         {
             Message.Body = body;
+            return this;
+        }
+
+
+        public Email UsingClient(SmtpClient client)
+        {
+            _client = client;
             return this;
         }
 

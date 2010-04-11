@@ -24,11 +24,12 @@ namespace FluentEmailTests
             string subject = "sup dawg";
             string body = "what be the hipitity hap?";
 
-            var email = Email.New(new SmtpClient("localhost", 25))
+            var email = Email
+                .From(fromEmail)
                 .To(toEmail)
                 .Subject(subject)
                 .Body(body)
-                .From(fromEmail)
+                .UsingClient(new SmtpClient("localhost", 25))
                 .SendAsync(MailDeliveryComplete);
 
             email.Cancel();
