@@ -1,6 +1,6 @@
 Playing around with a fluent email class in c#
 
-Example usage from http://lukencode.com/2010/04/11/fluent-email-in-net/ :
+Example usage from:
 
 	var email = Email
             	.From("john@email.com")
@@ -13,3 +13,5 @@ Example usage from http://lukencode.com/2010/04/11/fluent-email-in-net/ :
  
 	//send asynchronously
 	email.SendAsync(MailDeliveredCallback);
+
+http://lukencode.com/2010/04/11/fluent-email-in-net
