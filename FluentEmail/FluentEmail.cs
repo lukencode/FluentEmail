@@ -57,6 +57,12 @@ namespace FluentEmail
             return this;
         }
 
+        /// <summary>
+        /// Adds a Body to the Email
+        /// </summary>
+        /// <param name="body">The content of the body</param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns></returns>
         public Email Body(string body, bool isHtml = true)
         {
             Message.Body = body;
@@ -64,13 +70,29 @@ namespace FluentEmail
             return this;
         }
 
-        public Email Attachments(IList<Attachment> attachments)
+        /// <summary>
+        /// Adds an Attachment to the Email
+        /// </summary>
+        /// <param name="attachment">The Attachment to add</param>
+        /// <returns></returns>
+        public Email Attach(Attachment attachment)
         {
-            //Not too sure about clearing them before adding them or just adding them again...?
-            Message.Attachments.Clear();
+            if (!Message.Attachments.Contains(attachment))
+                Message.Attachments.Add(attachment);
+            return this;
+        }
+
+        /// <summary>
+        /// Adds Multiple Attachments to the Email
+        /// </summary>
+        /// <param name="attachments">The List of Attachments to add</param>
+        /// <returns></returns>
+        public Email Attach(IList<Attachment> attachments)
+        {
             foreach (var attachment in attachments)
             {
-                Message.Attachments.Add(attachment);
+                if (!Message.Attachments.Contains(attachment))
+                    Message.Attachments.Add(attachment);
             }
             return this;
         }
