@@ -13,7 +13,7 @@ namespace FluentEmail
 
         private Email()
         {
-            Message = new MailMessage() { IsBodyHtml = true };
+            Message = new MailMessage();
             _client = new SmtpClient();
         }
 
@@ -57,9 +57,21 @@ namespace FluentEmail
             return this;
         }
 
-        public Email Body(string body)
+        public Email Body(string body, bool isHtml = true)
         {
             Message.Body = body;
+            Message.IsBodyHtml = isHtml;
+            return this;
+        }
+
+        public Email Attachments(IList<Attachment> attachments)
+        {
+            //Not too sure about clearing them before adding them or just adding them again...?
+            Message.Attachments.Clear();
+            foreach (var attachment in attachments)
+            {
+                Message.Attachments.Add(attachment);
+            }
             return this;
         }
         
