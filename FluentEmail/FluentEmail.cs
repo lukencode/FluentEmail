@@ -9,6 +9,8 @@ namespace FluentEmail
     public class Email : IHideObjectMembers
     {
         private SmtpClient _client;
+        private bool _useSsl;
+
         public MailMessage Message { get; set; }
 
         private Email()
@@ -17,6 +19,13 @@ namespace FluentEmail
             _client = new SmtpClient();
         }
 
+        /// <summary>
+        /// Creates a new Email instance and sets the from
+        /// property
+        /// </summary>
+        /// <param name="emailAddress">Email address to send from</param>
+        /// <param name="name">Name to send from</param>
+        /// <returns>Instance of the Email class</returns>
         public static Email From(string emailAddress, string name = "")
         {
             var email = new Email();
@@ -24,12 +33,23 @@ namespace FluentEmail
             return email;
         }
         
+        /// <summary>
+        /// Adds a reciepient to the email
+        /// </summary>
+        /// <param name="emailAddress">Email address of recipeient</param>
+        /// <param name="name">Name of recipient</param>
+        /// <returns>Instance of the Email class</returns>
         public Email To(string emailAddress, string name = "")
         {
             Message.To.Add(new MailAddress(emailAddress, name));
             return this;
         }
 
+        /// <summary>
+        /// Adds all reciepients in list to email
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients</param>
+        /// <returns>Instance of the Email class</returns>
         public Email To(IList<MailAddress> mailAddresses)
         {
             foreach (var address in mailAddresses)
@@ -39,18 +59,35 @@ namespace FluentEmail
             return this;
         }
 
+        /// <summary>
+        /// Adds a Carbon Copy to the email
+        /// </summary>
+        /// <param name="emailAddress">Email address to cc</param>
+        /// <param name="name">Name to cc</param>
+        /// <returns>Instance of the Email class</returns>
         public Email CC(string emailAddress, string name = "")
         {
             Message.CC.Add(new MailAddress(emailAddress, name));
             return this;
         }
 
+        /// <summary>
+        /// Adds a blind carbon copy to the email
+        /// </summary>
+        /// <param name="emailAddress">Email address of bcc</param>
+        /// <param name="name">Name of bcc</param>
+        /// <returns>Instance of the Email class</returns>
         public Email BCC(string emailAddress, string name = "")
         {
             Message.Bcc.Add(new MailAddress(emailAddress, name));
             return this;
         }
 
+        /// <summary>
+        /// Sets the subject of the email
+        /// </summary>
+        /// <param name="subject">email subject</param>
+        /// <returns>Instance of the Email class</returns>
         public Email Subject(string subject)
         {
             Message.Subject = subject;
@@ -74,7 +111,7 @@ namespace FluentEmail
         /// Adds an Attachment to the Email
         /// </summary>
         /// <param name="attachment">The Attachment to add</param>
-        /// <returns></returns>
+        /// <returns>Instance of the Email class</returns>
         public Email Attach(Attachment attachment)
         {
             if (!Message.Attachments.Contains(attachment))
@@ -86,7 +123,7 @@ namespace FluentEmail
         /// Adds Multiple Attachments to the Email
         /// </summary>
         /// <param name="attachments">The List of Attachments to add</param>
-        /// <returns></returns>
+        /// <returns>Instance of the Email class</returns>
         public Email Attach(IList<Attachment> attachments)
         {
             foreach (var attachment in attachments)
@@ -97,26 +134,54 @@ namespace FluentEmail
             return this;
         }
         
+        /// <summary>
+        /// Over rides the default client from .config file
+        /// </summary>
+        /// <param name="client">Smtp client to send from</param>
+        /// <returns>Instance of the Email class</returns>
         public Email UsingClient(SmtpClient client)
         {
             _client = client;
             return this;
         }
 
+        public Email UseSSL()
+        {
+            _useSsl = true;
+            return this;
+        }
+        
+        /// <summary>
+        /// Sends email synchronously
+        /// </summary>
+        /// <returns>Instance of the Email class</returns>
         public Email Send()
         {
+            _client.EnableSsl = _useSsl;
             _client.Send(Message);
             return this;
         }
 
+        /// <summary>
+        /// Sends message asynchronously with a callback
+        /// handler
+        /// </summary>
+        /// <param name="callback">Method to call on complete</param>
+        /// <param name="token">User token to pass to callback</param>
+        /// <returns>Instance of the Email class</returns>
         public Email SendAsync(SendCompletedEventHandler callback, object token = null)
         {
+            _client.EnableSsl = _useSsl;
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
 
             return this;
         }
 
+        /// <summary>
+        /// Cancels async message sending
+        /// </summary>
+        /// <returns>Instance of the Email class</returns>
         public Email Cancel()
         {
             _client.SendAsyncCancel();
