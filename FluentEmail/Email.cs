@@ -182,11 +182,8 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email Send()
         {
-            if (!String.IsNullOrEmpty(Message.BodyFileName) && String.IsNullOrEmpty(Message.Body))
-            {
-                //Using HTML template
-                Message.GenerateBody();
-            }
+            //Generate the body (Apply Replacements)
+            Message.GenerateBody();
             _client.EnableSsl = _useSsl;
             _client.Send(Message);
             return this;
@@ -201,11 +198,8 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email SendAsync(SendCompletedEventHandler callback, object token = null)
         {
-            if (!String.IsNullOrEmpty(Message.BodyFileName) && String.IsNullOrEmpty(Message.Body))
-            {
-                //Using HTML template
-                Message.GenerateBody();
-            }
+            //Generate the body (Apply Replacements)
+            Message.GenerateBody();
             _client.EnableSsl = _useSsl;
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
