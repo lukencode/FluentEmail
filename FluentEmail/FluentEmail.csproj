@@ -37,12 +37,13 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FluentEmail.cs" />
+    <Compile Include="TemplateMailMessage.cs" />
+    <Compile Include="EmailTemplate.cs" />
+    <Compile Include="Email.cs" />
     <Compile Include="IHideObjectMembers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
