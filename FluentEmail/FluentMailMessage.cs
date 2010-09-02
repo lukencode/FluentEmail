@@ -26,17 +26,21 @@ namespace FluentEmail
 
         public void GenerateBody()
         {
-            //Generate the Body Template
-            string path = Path.GetFullPath(BodyFileName);
+            //If a file is set load it as the Body
+            if (!String.IsNullOrEmpty(BodyFileName) && String.IsNullOrEmpty(Body))
+            {
+                //Generate the Body Template
+                string path = Path.GetFullPath(BodyFileName);
 
-            TextReader reader = new StreamReader(path);
-            try
-            {
-                Body = reader.ReadToEnd();
-            }
-            finally
-            {
-                reader.Close();
+                TextReader reader = new StreamReader(path);
+                try
+                {
+                    Body = reader.ReadToEnd();
+                }
+                finally
+                {
+                    reader.Close();
+                }
             }
 
             //Replace the stuff that need replacing
