@@ -18,6 +18,8 @@ Templates usage:
                 .Replace("<%CurrentDate%>", DateTime.Now.ToShortDateString())
                 .Replace("<%FullName%>", fullName)
                 .Replace("<%SaleDate%>", saleDate)
+
+Sending:
  
 	//send normally
 	email.Send();
