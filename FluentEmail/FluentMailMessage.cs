@@ -10,23 +10,15 @@ using System.IO;
 
 namespace FluentEmail
 {
-    public class TemplateMailMessage : MailMessage
+    public class FluentMailMessage : MailMessage
     {
         public Dictionary<string, string> Replacements { get; set; }
-        /// <summary>
-        /// Gets or sets the e-mail address of the message sender.
-        /// </summary>
-        public string From { get; set; }
-        /// <summary>
-        /// Gets or sets the subject line of the e-mail message.
-        /// </summary>
-        public string Subject { get; set; }
         /// <summary>
         /// Gets or sets the name of the file that contains text for the body of the e-mail message.
         /// </summary>
         public string BodyFileName { get; set; }
 
-        public TemplateMailMessage()
+        public FluentMailMessage()
             : base()
         {
             Replacements = new Dictionary<string, string>();

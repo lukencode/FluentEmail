@@ -11,11 +11,11 @@ namespace FluentEmail
         private SmtpClient _client;
         private bool _useSsl;
 
-        public MailMessage Message { get; set; }
+        public FluentMailMessage Message { get; set; }
 
         private Email()
         {
-            Message = new MailMessage();
+            Message = new FluentMailMessage();
             _client = new SmtpClient();
         }
 
@@ -108,6 +108,19 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Adds the template file to the email
+        /// </summary>
+        /// <param name="filename">The path to the file to load</param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email UsingTemplate(string filename, bool isHtml = true)
+        {
+            Message.BodyFileName = filename;
+            Message.IsBodyHtml = isHtml;
+            return this;
+        }
+
+        /// <summary>
         /// Adds an Attachment to the Email
         /// </summary>
         /// <param name="attachment">The Attachment to add</param>
@@ -135,6 +148,18 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Adds a replace field for the template
+        /// </summary>
+        /// <param name="key">The Template text to replace</param>
+        /// <param name="value">The value to replace the key with</param>
+        /// <returns>Instance of the TemplateEmail class</returns>
+        public Email Replace(string key, string value)
+        {
+            Message.Replacements.Add(key, value);
+            return this;
+        }
+
+        /// <summary>
         /// Over rides the default client from .config file
         /// </summary>
         /// <param name="client">Smtp client to send from</param>
@@ -157,6 +182,11 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email Send()
         {
+            if (!String.IsNullOrEmpty(Message.BodyFileName) && String.IsNullOrEmpty(Message.Body))
+            {
+                //Using HTML template
+                Message.GenerateBody();
+            }
             _client.EnableSsl = _useSsl;
             _client.Send(Message);
             return this;
@@ -171,6 +201,11 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email SendAsync(SendCompletedEventHandler callback, object token = null)
         {
+            if (!String.IsNullOrEmpty(Message.BodyFileName) && String.IsNullOrEmpty(Message.Body))
+            {
+                //Using HTML template
+                Message.GenerateBody();
+            }
             _client.EnableSsl = _useSsl;
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
