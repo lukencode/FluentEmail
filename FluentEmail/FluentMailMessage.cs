@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net.Mail;
-using System.Collections.Specialized;
-using System.Net.Configuration;
 using System.Text.RegularExpressions;
 using System.IO;
 
@@ -19,7 +15,6 @@ namespace FluentEmail
         public string BodyFileName { get; set; }
 
         public FluentMailMessage()
-            : base()
         {
             Replacements = new Dictionary<string, string>();
         }
