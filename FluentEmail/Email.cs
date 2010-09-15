@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Net.Mail;
 
 namespace FluentEmail
@@ -28,8 +26,10 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public static Email From(string emailAddress, string name = "")
         {
-            var email = new Email();
-            email.Message.From = new MailAddress(emailAddress, name);
+            var email = new Email
+                            {
+                                Message = {From = new MailAddress(emailAddress, name)}
+                            };
             return email;
         }
 
@@ -139,10 +139,9 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email Attach(IList<Attachment> attachments)
         {
-            foreach (var attachment in attachments)
+            foreach (var attachment in attachments.Where(attachment => !Message.Attachments.Contains(attachment)))
             {
-                if (!Message.Attachments.Contains(attachment))
-                    Message.Attachments.Add(attachment);
+                Message.Attachments.Add(attachment);
             }
             return this;
         }
