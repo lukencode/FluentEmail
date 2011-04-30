@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("FluentEmail")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("A Fluent Wrapper for System.Net.Mail")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
+[assembly: AssemblyCompany("Luke Lowrey")]
 [assembly: AssemblyProduct("FluentEmail")]
 [assembly: AssemblyCopyright("Copyright © Microsoft 2010")]
 [assembly: AssemblyTrademark("")]

@@ -81,6 +81,7 @@ namespace FluentEmailTests
             Assert.AreEqual(2, email.Message.To.Count);
         }
 
+        [TestMethod]
         public void Is_Valid_With_Properties_Set()
         {
             var email = Email
@@ -93,6 +94,17 @@ namespace FluentEmailTests
             Assert.AreEqual(subject, email.Message.Subject);
             Assert.AreEqual(fromEmail, email.Message.From.Address);
             Assert.AreEqual(toEmail, email.Message.To[0].Address);
+        }
+
+        [TestMethod]
+        public void ReplyTo_Address_Is_Set()
+        {
+            var replyEmail = "reply@email.com";
+
+            var email = Email.From(fromEmail)
+                             .ReplyTo(replyEmail);
+
+            Assert.AreEqual(replyEmail, email.Message.ReplyToList.First().Address);
         }
     }
 }
