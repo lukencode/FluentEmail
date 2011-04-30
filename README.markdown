@@ -11,7 +11,7 @@ Example usage from:
 
 Templates usage:
 
-var template = "Dear @Model.Name, You are totally @Model.Compliment.";
+	var template = "Dear @Model.Name, You are totally @Model.Compliment.";
  
 	var email = Email
             .From("bob@hotmail.com")
