@@ -10,14 +10,15 @@ Example usage from:
 
 
 Templates usage:
-    var email = Email
-            	.From("john@email.com")
-            	.To("bob@email.com", "bob")
-            	.Subject("hows it going bob")
-                .UsingTemplate(@"C:\Emailer\TransactionTemplate.htm")
-                .Replace("<%CurrentDate%>", DateTime.Now.ToShortDateString())
-                .Replace("<%FullName%>", fullName)
-                .Replace("<%SaleDate%>", saleDate)
+
+var template = "Dear @Model.Name, You are totally @Model.Compliment.";
+ 
+	var email = Email
+            .From("bob@hotmail.com")
+            .To("somedude@gmail.com")
+            .Subject("woo nuget")
+            .UsingTemplate(template, new { Name = "Luke", Compliment = "Awesome" });
+
 
 Sending:
  
@@ -28,4 +29,4 @@ Sending:
 	email.SendAsync(MailDeliveredCallback);
 
 
-<a href="http://lukencode.com/2010/04/11/fluent-email-in-net">http://lukencode.com/2010/04/11/fluent-email-in-net</a>
+<a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
