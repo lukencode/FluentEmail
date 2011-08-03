@@ -192,6 +192,26 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Marks the email as High Priority
+        /// </summary>
+        /// <returns></returns>
+        public Email HighPriority()
+        {
+            Message.Priority = MailPriority.High;
+            return this;
+        }
+
+        /// <summary>
+        /// Marks the email as Low Priority
+        /// </summary>
+        /// <returns></returns>
+        public Email LowPriority()
+        {
+            Message.Priority = MailPriority.Low;
+            return this;
+        }
+
+        /// <summary>
         /// Adds the template file to the email
         /// </summary>
         /// <param name="filename">The path to the file to load</param>
