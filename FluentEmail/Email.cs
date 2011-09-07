@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using FluentEmail.TemplateParsers;
 using RazorEngine;
 using RazorEngine.Templating;
 using System.Dynamic;
@@ -53,55 +54,15 @@ namespace FluentEmail
         }
 
         /// <summary>
-        /// Adds a reciepient to the email, Splits name and address on ';'
+		/// Adds a reciepient to the email. Supports semi colon and comma seperation of email addresses
+		/// If name is supplied it should be formatted in the same order as the email addresses
         /// </summary>
         /// <param name="emailAddress">Email address of recipeient</param>
         /// <param name="name">Name of recipient</param>
         /// <returns>Instance of the Email class</returns>
-        public Email To(string emailAddress, string name)
-        {
-            if (emailAddress.Contains(";"))
-            {
-                //email address has semi-colon, try split
-                var nameSplit = name.Split(';');
-                var addressSplit = emailAddress.Split(';');
-                for (int i = 0; i < addressSplit.Length; i++ )
-                {
-                    var currentName = string.Empty;
-                    if ((nameSplit.Length - 1) >= i)
-                    {
-                        currentName = nameSplit[i];
-                    }
-                    Message.To.Add(new MailAddress(addressSplit[i], currentName));
-                }
-            }
-            else
-            {
-                Message.To.Add(new MailAddress(emailAddress, name));
-            }
-            return this;
-        }
-
-        /// <summary>
-        /// Adds a reciepient to the email
-        /// </summary>
-        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
-        /// <returns></returns>
-        public Email To(string emailAddress)
-        {
-            if (emailAddress.Contains(";"))
-            {
-                foreach (string address in emailAddress.Split(';'))
-                {
-                    Message.To.Add(new MailAddress(address));
-                }
-            }
-            else
-            {
-                Message.To.Add(new MailAddress(emailAddress));
-            }
-            
-            return this;
+        public Email To(string emailAddress, string name = ""){
+        	AssignToAddresses(GetMailAddresses(emailAddress, name), AddressType.To);
+        	return this;
         }
 
         /// <summary>
@@ -111,59 +72,48 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email To(IList<MailAddress> mailAddresses)
         {
-            foreach (var address in mailAddresses)
-            {
-                Message.To.Add(address);
-            }
+            AssignToAddresses(mailAddresses, AddressType.To);
             return this;
         }
 
         /// <summary>
-        /// Adds a Carbon Copy to the email
+		/// Adds a Carbon Copy to the email. Supports semi colon and comma seperation of email addresses
+		/// If name is supplied it should be formatted in the same order as the email addresses
         /// </summary>
         /// <param name="emailAddress">Email address to cc</param>
         /// <param name="name">Name to cc</param>
         /// <returns>Instance of the Email class</returns>
         public Email CC(string emailAddress, string name = "")
         {
-            Message.CC.Add(new MailAddress(emailAddress, name));
+			AssignToAddresses(GetMailAddresses(emailAddress, name), AddressType.Cc);
             return this;
         }
 
-        /// <summary>
-        /// Adds a blind carbon copy to the email
-        /// </summary>
-        /// <param name="emailAddress">Email address of bcc</param>
-        /// <param name="name">Name of bcc</param>
-        /// <returns>Instance of the Email class</returns>
+		/// <summary>
+		/// Adds a blind carbon copy to the email. Supports semi colon and comma seperation of email addresses
+		/// If name is supplied it should be formatted in the same order as the email addresses
+		/// </summary>
+		/// <param name="emailAddress">Email address of bcc</param>
+		/// <param name="name">Name of bcc</param>
+		/// <returns>
+		/// Instance of the Email class
+		/// </returns>
         public Email BCC(string emailAddress, string name = "")
         {
-            Message.Bcc.Add(new MailAddress(emailAddress, name));
+			AssignToAddresses(GetMailAddresses(emailAddress, name), AddressType.Bcc);
             return this;
         }
 
-        /// <summary>
-        /// Sets the ReplyTo address on the email
-        /// </summary>
-        /// <param name="address">The ReplyTo Address</param>
-        /// <returns></returns>
-        public Email ReplyTo(string address)
+		/// <summary>
+		/// Sets the ReplyTo address on the email. Supports semi colon and comma seperation of email addresses
+		/// If name is supplied it should be formatted in the same order as the email addresses
+		/// </summary>
+		/// <param name="address">The ReplyTo Address</param>
+		/// <param name="name">The name.</param>
+		/// <returns></returns>
+		public Email ReplyTo(string address, string name = "")
         {
-            Message.ReplyToList.Add(new MailAddress(address));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the ReplyTo address on the email
-        /// </summary>
-        /// <param name="address">The ReplyTo Address</param>
-        /// <param name="name">The Display Name of the ReplyTo</param>
-        /// <returns></returns>
-        public Email ReplyTo(string address, string name)
-        {
-            Message.ReplyToList.Add(new MailAddress(address, name));
-
+			AssignToAddresses(GetMailAddresses(address, name), AddressType.ReplyTo);
             return this;
         }
 
@@ -211,59 +161,36 @@ namespace FluentEmail
             return this;
         }
 
-        /// <summary>
-        /// Adds the template file to the email
-        /// </summary>
-        /// <param name="filename">The path to the file to load</param>
-        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-        /// <returns>Instance of the Email class</returns>
-        public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true)
+		/// <summary>
+		/// Adds the template file to the email
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="filename">The path to the file to load</param>
+		/// <param name="model">The model.</param>
+		/// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+		/// <param name="parserType">Type of the parser.</param>
+		/// <returns>
+		/// Instance of the Email class
+		/// </returns>
+		public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true, ParserType parserType = ParserType.Razor){
+			AssignBody(parserType, filename, model, isHtml, true);
+			return this;
+		}
+
+    	/// <summary>
+		/// Adds razor template to the email
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="template">The template.</param>
+		/// <param name="model">The model.</param>
+		/// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+		/// <param name="parserType">Type of the parser.</param>
+		/// <returns>
+		/// Instance of the Email class
+		/// </returns>
+        public Email UsingTemplate<T>(string template, T model, bool isHtml = true, ParserType parserType = ParserType.Razor)
         {
-            if (filename.StartsWith("~"))
-            {
-                var baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
-                filename = Path.GetFullPath(baseDir + filename.Replace("~", ""));
-            }
-
-            //Generate the Template
-            var path = Path.GetFullPath(filename);
-            var template = "";
-
-            TextReader reader = new StreamReader(path);
-            try
-            {
-                template = reader.ReadToEnd();
-            }
-            finally
-            {
-                reader.Close();
-            }
-
-            //bind template
-            initializeRazorParser();
-
-            var result = Razor.Parse<T>(template, model);
-            Message.Body = result;
-            Message.IsBodyHtml = isHtml;
-
-            return this;
-        }
-        
-        /// <summary>
-        /// Adds razor template to the email
-        /// </summary>
-        /// <param name="filename">The path to the file to load</param>
-        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-        /// <returns>Instance of the Email class</returns>
-        public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
-        {
-            //HACK YO
-            initializeRazorParser();
-
-            var result = Razor.Parse<T>(template, model);
-            Message.Body = result;
-            Message.IsBodyHtml = isHtml;
-
+			AssignBody(parserType, template, model, isHtml, false);
             return this;
         }
 
@@ -305,6 +232,10 @@ namespace FluentEmail
             return this;
         }
 
+		/// <summary>
+		/// Uses the SSL transport layer.
+		/// </summary>
+		/// <returns></returns>
         public Email UseSSL()
         {
             _useSsl = true;
@@ -348,12 +279,76 @@ namespace FluentEmail
             return this;
         }
 
-        private void initializeRazorParser()
-        {
-            // HACK: this is required to get the Razor Parser to work, no idea why, something to with dynamic objects i guess, tracked this down as the test worked sometimes, turned out
-            // it was when the ViewBag was touched from the controller tests, if that happened before the Razor.Parse in ShoudSpikeTheSillyError() then it ran fine.
-            dynamic x2 = new ExpandoObject();
-            x2.Dummy = "";
-        }
+		/// <summary>
+		/// Assigns the body to the message.
+		/// </summary>
+		/// <typeparam name="T"></typeparam>
+		/// <param name="parserType">Type of the parser.</param>
+		/// <param name="content">The content.</param>
+		/// <param name="model">The model.</param>
+		/// <param name="isHtml">if set to <c>true</c> [is HTML].</param>
+		/// <param name="fromFile">if set to <c>true</c> [from file].</param>
+		private void AssignBody<T>(ParserType parserType, string content, T model, bool isHtml, bool fromFile) {
+			var body = fromFile ? ParserFactory.CreateParser(parserType).ParseFromFile(content, model) 
+					: ParserFactory.CreateParser(parserType).ParseFromString(content, model);
+
+			Message.Body = body;
+			Message.IsBodyHtml = isHtml;
+		}
+
+		/// <summary>
+		/// Gets the mail addresses from the email address string. Supports semi colon and comma seperation
+		/// </summary>
+		/// <param name="emailAddress">The email address.</param>
+		/// <param name="name">The name.</param>
+		/// <returns></returns>
+		private static IEnumerable<MailAddress> GetMailAddresses(string emailAddress, string name){
+
+			const char semiColon = ';';
+			const char comma = ',';
+			var splitArray = new[]{semiColon, comma};
+
+			IList<MailAddress> output = new List<MailAddress>();
+
+			if (emailAddress.Contains(semiColon) || emailAddress.Contains(comma)) {
+				var nameSplit = name.Split(splitArray);
+				var addressSplit = emailAddress.Split(splitArray);
+				for (int i = 0; i < addressSplit.Length; i++) {
+					var currentName = string.Empty;
+					if ((nameSplit.Length - 1) >= i) {
+						currentName = nameSplit[i];
+					}
+					output.Add(new MailAddress(addressSplit[i].Trim(), currentName.Trim()));
+				}
+			} else {
+				output.Add(new MailAddress(emailAddress, name));
+			}
+
+			return output;
+		}
+
+		/// <summary>
+		/// Assigns to addresses to the message. 
+		/// </summary>
+		/// <param name="addressList">The address list.</param>
+		/// <param name="type">The type.</param>
+		private void AssignToAddresses(IEnumerable<MailAddress> addressList, AddressType type) {
+			foreach (var address in addressList) {
+				switch (type) {
+					case AddressType.To:
+						Message.To.Add(address);
+						break;
+					case AddressType.Cc:
+						Message.CC.Add(address);
+						break;
+					case AddressType.Bcc:
+						Message.Bcc.Add(address);
+						break;
+					case AddressType.ReplyTo:
+						Message.ReplyToList.Add(address);
+						break;
+				}
+			}
+		}
     }
 }

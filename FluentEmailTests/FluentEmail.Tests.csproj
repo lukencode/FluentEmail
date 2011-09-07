@@ -45,6 +45,7 @@
     <Compile Include="FluentEmailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SendTests.cs" />
+    <Compile Include="StandaloneTemplateParserTests.cs" />
     <Compile Include="TemplateEmailTests.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -54,9 +55,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="test.txt">
+    <Content Include="test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Resource>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

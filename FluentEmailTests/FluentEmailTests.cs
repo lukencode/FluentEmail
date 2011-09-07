@@ -106,5 +106,6 @@ namespace FluentEmailTests
 
             Assert.AreEqual(replyEmail, email.Message.ReplyToList.First().Address);
         }
+
     }
 }
