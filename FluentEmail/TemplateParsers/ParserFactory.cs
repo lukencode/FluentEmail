@@ -12,15 +12,12 @@ namespace FluentEmail.TemplateParsers {
 		/// <summary>
 		/// Creates the parser.
 		/// </summary>
-		/// <param name="type">The type.</param>
+		/// <param name="templateImplementation">The template implementation.</param>
 		/// <returns></returns>
-		public static ITemplateParser CreateParser(ParserType type){
-			switch (type){
-				case ParserType.Razor:
-					return new RazorTemplateParserImpl();
-				default:
-					throw new ArgumentException("Unknown parser type");
-			}
+		public static ITemplateParser CreateParser(Type templateImplementation) {
+			var output = Activator.CreateInstance(templateImplementation);
+
+			return (ITemplateParser)output;
 		}
 	}
 }

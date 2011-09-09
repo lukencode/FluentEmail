@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -13,6 +14,7 @@ namespace FluentEmail
     {
         private SmtpClient _client;
         private bool _useSsl;
+    	private ITemplateParser _parser;
 
         public MailMessage Message { get; set; }
 
@@ -167,30 +169,29 @@ namespace FluentEmail
 		/// <typeparam name="T"></typeparam>
 		/// <param name="filename">The path to the file to load</param>
 		/// <param name="model">The model.</param>
+		/// <param name="parser">The parser.</param>
 		/// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-		/// <param name="parserType">Type of the parser.</param>
 		/// <returns>
 		/// Instance of the Email class
 		/// </returns>
-		public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true, ParserType parserType = ParserType.Razor){
-			AssignBody(parserType, filename, model, isHtml, true);
+		public Email UsingTemplateFromFile<T>(string filename, T model, Type parser, bool isHtml = true){
+			AssignBody(parser, filename, model, isHtml, true);
 			return this;
 		}
-
-    	/// <summary>
+		/// <summary>
 		/// Adds razor template to the email
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
 		/// <param name="template">The template.</param>
 		/// <param name="model">The model.</param>
+		/// <param name="parser">The parser.</param>
 		/// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-		/// <param name="parserType">Type of the parser.</param>
 		/// <returns>
 		/// Instance of the Email class
 		/// </returns>
-        public Email UsingTemplate<T>(string template, T model, bool isHtml = true, ParserType parserType = ParserType.Razor)
+        public Email UsingTemplate<T>(string template, T model, Type parser, bool isHtml = true)
         {
-			AssignBody(parserType, template, model, isHtml, false);
+			AssignBody(parser, template, model, isHtml, false);
             return this;
         }
 
@@ -283,14 +284,15 @@ namespace FluentEmail
 		/// Assigns the body to the message.
 		/// </summary>
 		/// <typeparam name="T"></typeparam>
-		/// <param name="parserType">Type of the parser.</param>
+		/// <param name="parser">The parser.</param>
 		/// <param name="content">The content.</param>
 		/// <param name="model">The model.</param>
 		/// <param name="isHtml">if set to <c>true</c> [is HTML].</param>
 		/// <param name="fromFile">if set to <c>true</c> [from file].</param>
-		private void AssignBody<T>(ParserType parserType, string content, T model, bool isHtml, bool fromFile) {
-			var body = fromFile ? ParserFactory.CreateParser(parserType).ParseFromFile(content, model) 
-					: ParserFactory.CreateParser(parserType).ParseFromString(content, model);
+		private void AssignBody<T>(Type parser, string content, T model, bool isHtml, bool fromFile) {
+			_parser = ParserFactory.CreateParser(parser);
+			var body = fromFile ? _parser.ParseFromFile(content, model)
+					: _parser.ParseFromString(content, model);
 
 			Message.Body = body;
 			Message.IsBodyHtml = isHtml;
