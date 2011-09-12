@@ -46,9 +46,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressType.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="IHideObjectMembers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TemplateParsers\ITemplateParser.cs" />
+    <Compile Include="TemplateParsers\ParserFactory.cs" />
+    <Compile Include="TemplateParsers\Parsers\RazorTemplateParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="FluentEmail.nuspec" />
