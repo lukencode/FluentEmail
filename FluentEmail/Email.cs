@@ -131,6 +131,20 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Adds all Carbon Copy in list to an email
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients to CC</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email CC(IList<MailAddress> mailAddresses)
+        {
+            foreach (var address in mailAddresses)
+            {
+                Message.CC.Add(address);
+            }
+            return this;
+        }
+        
+        /// <summary>
         /// Adds a blind carbon copy to the email
         /// </summary>
         /// <param name="emailAddress">Email address of bcc</param>
@@ -139,6 +153,20 @@ namespace FluentEmail
         public Email BCC(string emailAddress, string name = "")
         {
             Message.Bcc.Add(new MailAddress(emailAddress, name));
+            return this;
+        }
+
+        /// <summary>
+        /// Adds all blind carbon copy in list to an email
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients to BCC</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email BCC(IList<MailAddress> mailAddresses)
+        {
+            foreach (var address in mailAddresses)
+            {
+                Message.Bcc.Add(address);
+            }
             return this;
         }
 
