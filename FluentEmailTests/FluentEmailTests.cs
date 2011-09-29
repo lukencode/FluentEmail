@@ -82,6 +82,34 @@ namespace FluentEmailTests
         }
 
         [TestMethod]
+        public void Can_Add_Multiple_CCRecipients_From_List()
+        {
+            var emails = new List<MailAddress>();
+            emails.Add(new MailAddress("email1@email.com"));
+            emails.Add(new MailAddress("email2@email.com"));
+
+            var email = Email
+                        .From(fromEmail)
+                        .CC(emails);
+
+            Assert.AreEqual(2, email.Message.CC.Count);
+        }
+
+        [TestMethod]
+        public void Can_Add_Multiple_BCCRecipients_From_List()
+        {
+            var emails = new List<MailAddress>();
+            emails.Add(new MailAddress("email1@email.com"));
+            emails.Add(new MailAddress("email2@email.com"));
+
+            var email = Email
+                        .From(fromEmail)
+                        .BCC(emails);
+
+            Assert.AreEqual(2, email.Message.Bcc.Count);
+        }
+
+        [TestMethod]
         public void Is_Valid_With_Properties_Set()
         {
             var email = Email
