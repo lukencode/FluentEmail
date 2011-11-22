@@ -11,7 +11,7 @@ namespace FluentEmail
     public class Email : IHideObjectMembers
     {
         private SmtpClient _client;
-        private bool _useSsl;
+        private bool? _useSsl;
 
         public MailMessage Message { get; set; }
 
@@ -345,7 +345,9 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email Send()
         {
-            _client.EnableSsl = _useSsl;
+            if(_useSsl.HasValue)
+                _client.EnableSsl = _useSsl.Value;
+
             _client.Send(Message);
             return this;
         }
@@ -359,7 +361,9 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email SendAsync(SendCompletedEventHandler callback, object token = null)
         {
-            _client.EnableSsl = _useSsl;
+            if (_useSsl.HasValue)
+                _client.EnableSsl = _useSsl.Value;
+
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
 
