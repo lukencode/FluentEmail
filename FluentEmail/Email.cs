@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
@@ -8,7 +9,7 @@ using System.Dynamic;
 
 namespace FluentEmail
 {
-    public class Email : IHideObjectMembers
+    public class Email : IHideObjectMembers, IDisposable
     {
         private SmtpClient _client;
         private bool? _useSsl;
@@ -386,6 +387,18 @@ namespace FluentEmail
             // it was when the ViewBag was touched from the controller tests, if that happened before the Razor.Parse in ShoudSpikeTheSillyError() then it ran fine.
             dynamic x2 = new ExpandoObject();
             x2.Dummy = "";
+        }
+
+        /// <summary>
+        /// Releases all resources
+        /// </summary>
+        public void Dispose()
+        {
+            if (_client != null)
+                _client.Dispose();
+
+            if (Message != null)
+                Message.Dispose();
         }
     }
 }
