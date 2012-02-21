@@ -35,14 +35,14 @@
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="RazorEngine">
-      <HintPath>..\packages\RazorEngine.2.1\lib\.NetFramework 4.0\RazorEngine.dll</HintPath>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\RazorEngine.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\packages\RazorEngine.2.1\lib\.NetFramework 4.0\System.Web.Razor.dll</HintPath>
+      <HintPath>..\packages\RazorEngine.3.0.8\lib\net40\System.Web.Razor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
