@@ -66,7 +66,7 @@ namespace FluentEmail
                 //email address has semi-colon, try split
                 var nameSplit = name.Split(';');
                 var addressSplit = emailAddress.Split(';');
-                for (int i = 0; i < addressSplit.Length; i++ )
+                for (int i = 0; i < addressSplit.Length; i++)
                 {
                     var currentName = string.Empty;
                     if ((nameSplit.Length - 1) >= i)
@@ -101,7 +101,7 @@ namespace FluentEmail
             {
                 Message.To.Add(new MailAddress(emailAddress));
             }
-            
+
             return this;
         }
 
@@ -144,7 +144,7 @@ namespace FluentEmail
             }
             return this;
         }
-        
+
         /// <summary>
         /// Adds a blind carbon copy to the email
         /// </summary>
@@ -244,8 +244,10 @@ namespace FluentEmail
         /// Adds the template file to the email
         /// </summary>
         /// <param name="filename">The path to the file to load</param>
+        /// <param name="model">Model to pass to template</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
+        [Obsolete("This method is depreciated. Use the UsingRazorTemplateFromFile() method instead")]
         public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true)
         {
             if (filename.StartsWith("~"))
@@ -277,19 +279,89 @@ namespace FluentEmail
 
             return this;
         }
-        
+
         /// <summary>
         /// Adds razor template to the email
         /// </summary>
-        /// <param name="filename">The path to the file to load</param>
+        /// <param name="template">The path to the file to load</param>
+        /// <param name="model">The view model to pass to the template </param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
+        [Obsolete("This method is depreciated. Use the UsingRazorTemplate() method instead")]
         public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
         {
             //HACK YO
             initializeRazorParser();
 
             var result = Razor.Parse<T>(template, model);
+            Message.Body = result;
+            Message.IsBodyHtml = isHtml;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds Razor template to the email
+        /// </summary>
+        /// <param name="template">The path to the file to load</param>
+        /// <param name="model">The view model to pass to the template </param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email UsingRazorTemplate<T>(string template, T model, bool isHtml = true)
+        {
+#pragma warning disable 612,618
+            return UsingTemplate(template, model, isHtml);
+#pragma warning restore 612,618
+        }
+
+        /// <summary>
+        /// Adds Razor template file to the email
+        /// </summary>
+        /// <param name="filename">The path to the file to load</param>
+        /// <param name="model">Model to pass to template</param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email UsingRazorTemplateFromFile<T>(string filename, T model, bool isHtml = true)
+        {
+#pragma warning disable 612,618
+            return UsingTemplateFromFile(filename, model, isHtml);
+#pragma warning restore 612,618
+        }
+
+        /// <summary>
+        /// Adds Markdown template file to the email
+        /// </summary>
+        /// <param name="filename">The path to the file to load</param>
+        /// <param name="model">Model to pass to template</param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email UsingMarkdownTemplateFromFile<TModel>(string filename, TModel model, bool isHtml = true)
+        {
+            if (filename.StartsWith("~"))
+            {
+                var baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+                filename = Path.GetFullPath(baseDir + filename.Replace("~", ""));
+            }
+
+            var template = File.ReadAllText(filename);
+
+            var result = MarkdownParser.Parse<TModel>(template, model, isHtml);
+            Message.Body = result;
+            Message.IsBodyHtml = isHtml;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds Markdown template to the email
+        /// </summary>
+        /// <param name="template">Template markdown string</param>
+        /// <param name="model">The view model to pass to the template</param>
+        /// <param name="isHtml">True is Boyd is Html, false for plain text (Optional)</param>
+        /// <returns></returns>
+        public Email UsingMarkdownTempate<TModel>(string template, TModel model, bool isHtml = true)
+        {
+            var result = MarkdownParser.Parse<TModel>(template, model, isHtml);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -322,7 +394,7 @@ namespace FluentEmail
             }
             return this;
         }
-        
+
         /// <summary>
         /// Over rides the default client from .config file
         /// </summary>
@@ -346,7 +418,7 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email Send()
         {
-            if(_useSsl.HasValue)
+            if (_useSsl.HasValue)
                 _client.EnableSsl = _useSsl.Value;
 
             _client.Send(Message);

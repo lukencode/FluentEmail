@@ -29,3 +29,7 @@ obj/
 _ReSharper*/
 [Tt]est[Rr]esult*
 download/
+
+# Resharper
+_ReSharper.*/
+*[Rr]e[Ss]harper.user
