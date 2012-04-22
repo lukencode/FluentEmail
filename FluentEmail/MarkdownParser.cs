@@ -38,6 +38,9 @@ namespace FluentEmail
 
             var result = mdFormat.RenderDynamicPage(mdPage, scopeArgs, renderHtml, false);
 
+            // clean up temp file
+            fi.Delete();
+
             return result;
         }
     }

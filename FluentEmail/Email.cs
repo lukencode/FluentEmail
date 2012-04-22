@@ -247,8 +247,7 @@ namespace FluentEmail
         /// <param name="model">Model to pass to template</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        [Obsolete("This method is depreciated. Use the UsingRazorTemplateFromFile() method instead")]
-        public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true)
+        public Email UsingRazorTemplateFromFile<T>(string filename, T model, bool isHtml = true)
         {
             if (filename.StartsWith("~"))
             {
@@ -287,8 +286,7 @@ namespace FluentEmail
         /// <param name="model">The view model to pass to the template </param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        [Obsolete("This method is depreciated. Use the UsingRazorTemplate() method instead")]
-        public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
+        public Email UsingRazorTemplate<T>(string template, T model, bool isHtml = true)
         {
             //HACK YO
             initializeRazorParser();
@@ -307,11 +305,10 @@ namespace FluentEmail
         /// <param name="model">The view model to pass to the template </param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        public Email UsingRazorTemplate<T>(string template, T model, bool isHtml = true)
+        [Obsolete("This method is depreciated. Use the UsingRazorTemplate() method instead")]
+        public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
         {
-#pragma warning disable 612,618
-            return UsingTemplate(template, model, isHtml);
-#pragma warning restore 612,618
+            return UsingRazorTemplate(template, model, isHtml);
         }
 
         /// <summary>
@@ -321,11 +318,10 @@ namespace FluentEmail
         /// <param name="model">Model to pass to template</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        public Email UsingRazorTemplateFromFile<T>(string filename, T model, bool isHtml = true)
+        [Obsolete("This method is depreciated. Use the UsingRazorTemplateFromFile() method instead")]
+        public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true)
         {
-#pragma warning disable 612,618
-            return UsingTemplateFromFile(filename, model, isHtml);
-#pragma warning restore 612,618
+            return UsingRazorTemplateFromFile(filename, model, isHtml);
         }
 
         /// <summary>
