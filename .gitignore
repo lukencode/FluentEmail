@@ -2,7 +2,6 @@
 Thumbs.db
 #Ignore files build by Visual Studio
 *.obj
-*.exe
 *.pdb
 *.user
 *.aps
@@ -18,8 +17,7 @@ Thumbs.db
 *.cache
 *.ilk
 *.log
-*.testsettings
-*.log
+ClientBin
 [Bb]in
 [Dd]ebug*/
 *.lib
@@ -28,4 +26,14 @@ obj/
 [Rr]elease*/
 _ReSharper*/
 [Tt]est[Rr]esult*
-download/
+Examples*/
+SerializerTest*/
+*.csproj.user
+*.resharper*
+Download/
+#Ignore files from MonoDevelop
+*.pidb
+*.userprefs
+*/App_Data/Database*
+packages/
+*.ncrunchsolution

@@ -13,6 +13,7 @@ namespace FluentEmail
     {
         private SmtpClient _client;
         private bool? _useSsl;
+        private ITemplateRenderer _renderer;
 
         public MailMessage Message { get; set; }
 
@@ -20,6 +21,7 @@ namespace FluentEmail
         {
             Message = new MailMessage();
             _client = new SmtpClient();
+            _renderer = new RazorRenderer();
         }
 
         /// <summary>
@@ -212,7 +214,6 @@ namespace FluentEmail
         /// </summary>
         /// <param name="body">The content of the body</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-        /// <returns></returns>
         public Email Body(string body, bool isHtml = true)
         {
             Message.Body = body;
@@ -223,7 +224,6 @@ namespace FluentEmail
         /// <summary>
         /// Marks the email as High Priority
         /// </summary>
-        /// <returns></returns>
         public Email HighPriority()
         {
             Message.Priority = MailPriority.High;
@@ -233,10 +233,18 @@ namespace FluentEmail
         /// <summary>
         /// Marks the email as Low Priority
         /// </summary>
-        /// <returns></returns>
         public Email LowPriority()
         {
             Message.Priority = MailPriority.Low;
+            return this;
+        }
+
+        /// <summary>
+        /// Set the template rendering engine to use, defaults to RazorEngine
+        /// </summary>
+        public Email UsingTemplateEngine(ITemplateRenderer renderer)
+        {
+            _renderer = renderer;
             return this;
         }
 
@@ -246,7 +254,7 @@ namespace FluentEmail
         /// <param name="filename">The path to the file to load</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        public Email UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true)
+        public Email UsingTemplateFromFile<T>(string filename, T model,  bool isHtml = true)
         {
             if (filename.StartsWith("~"))
             {
@@ -268,10 +276,7 @@ namespace FluentEmail
                 reader.Close();
             }
 
-            //bind template
-            initializeRazorParser();
-
-            var result = Razor.Parse<T>(template, model);
+            var result = _renderer.Parse(template, model);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -286,10 +291,7 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
         {
-            //HACK YO
-            initializeRazorParser();
-
-            var result = Razor.Parse<T>(template, model);
+            var result = _renderer.Parse(template, model);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -379,14 +381,6 @@ namespace FluentEmail
         {
             _client.SendAsyncCancel();
             return this;
-        }
-
-        private void initializeRazorParser()
-        {
-            // HACK: this is required to get the Razor Parser to work, no idea why, something to with dynamic objects i guess, tracked this down as the test worked sometimes, turned out
-            // it was when the ViewBag was touched from the controller tests, if that happened before the Razor.Parse in ShoudSpikeTheSillyError() then it ran fine.
-            dynamic x2 = new ExpandoObject();
-            x2.Dummy = "";
         }
 
         /// <summary>

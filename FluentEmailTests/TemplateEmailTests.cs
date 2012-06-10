@@ -53,5 +53,28 @@ namespace FluentEmailTests
             Assert.AreEqual("sup LUKE here is a list 123", email.Message.Body);
         }
 
+        [TestMethod]
+        public void Set_Custom_Template()
+        {
+            string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .Subject(subject)
+                        .UsingTemplateEngine(new TestTemplate())
+                        .UsingTemplate(template, new { Name = "LUKE", Numbers = new string[] { "1", "2", "3" } });
+
+            Assert.AreEqual("custom template", email.Message.Body);
+        }
     }
+
+    public class TestTemplate : ITemplateRenderer
+    {
+        public string Parse<T>(string template, T model)
+        {
+            return "custom template";
+        }
+    }
+
 }
