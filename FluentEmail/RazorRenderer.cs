@@ -14,7 +14,7 @@ namespace FluentEmail
             initializeRazorParser();
         }
 
-        public string Parse<T>(string template, T model)
+        public string Parse<T>(string template, T model, bool isHtml = true)
         {
             return Razor.Parse<T>(template, model);
         }
