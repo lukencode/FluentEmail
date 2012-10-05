@@ -276,7 +276,7 @@ namespace FluentEmail
                 reader.Close();
             }
 
-            var result = _renderer.Parse(template, model);
+            var result = _renderer.Parse(template, model, isHtml);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -291,7 +291,7 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
         {
-            var result = _renderer.Parse(template, model);
+            var result = _renderer.Parse(template, model, isHtml);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
