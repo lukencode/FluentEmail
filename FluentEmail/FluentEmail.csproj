@@ -55,7 +55,9 @@
     <Compile Include="RazorRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="FluentEmail.nuspec" />
+    <None Include="FluentEmail.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

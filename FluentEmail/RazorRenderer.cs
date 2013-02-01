@@ -9,22 +9,17 @@ namespace FluentEmail
 {
     public class RazorRenderer : ITemplateRenderer
     {
-        private RazorMachine _razor;
-
         public RazorRenderer()
         {
-            initializeRazorParser();
         }
 
         public string Parse<T>(string template, T model)
         {
-            var razorTemplate = _razor.ExecuteContent(template, model);
-            return razorTemplate.Result;
-        }
+            var rm = new RazorMachine(htmlEncode: false);
 
-        private void initializeRazorParser()
-        {
-            _razor = new RazorMachine();
+            var razorTemplate = rm.ExecuteContent(template, model, null, true);
+
+            return razorTemplate.Result;
         }
     }
 }
