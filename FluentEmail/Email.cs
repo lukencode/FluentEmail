@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using RazorEngine;
-using RazorEngine.Templating;
 using System.Dynamic;
 
 namespace FluentEmail
 {
     public class Email : IHideObjectMembers, IDisposable
     {
+        public static ITemplateRenderer DefaultRenderer { get; set; }
+
         private SmtpClient _client;
         private bool? _useSsl;
         private ITemplateRenderer _renderer;
+
 
         public MailMessage Message { get; set; }
 
@@ -21,7 +22,6 @@ namespace FluentEmail
         {
             Message = new MailMessage();
             _client = new SmtpClient();
-            _renderer = new RazorRenderer();
         }
 
         /// <summary>
@@ -276,7 +276,9 @@ namespace FluentEmail
                 reader.Close();
             }
 
-            var result = _renderer.Parse(template, model, isHtml);
+            CheckRenderer();
+
+            var result = _renderer.Parse(template, model);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -291,7 +293,9 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
         {
-            var result = _renderer.Parse(template, model, isHtml);
+            CheckRenderer();
+
+            var result = _renderer.Parse(template, model);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -394,5 +398,20 @@ namespace FluentEmail
             if (Message != null)
                 Message.Dispose();
         }
+
+        private void CheckRenderer()
+        {
+            if (_renderer != null) return;
+
+            if (DefaultRenderer != null)
+            {
+                _renderer = DefaultRenderer;
+            }
+            else
+            {
+                _renderer = new RazorRenderer();
+            }
+        }
+
     }
 }
