@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>fluent-email</id>
-    <title>Fluent Email</title>
-    <version>$version$</version>
-    <authors>$author$</authors>
-    <owners>$author$</owners>
-    <projectUrl>https://github.com/lukencode/FluentEmail</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>$description$</description>
-    <tags>email fluent</tags>
-  </metadata>
+    <metadata>
+        <id>fluent-email</id>
+        <title>Fluent Email</title>
+        <version>1.2.0</version>
+        <authors>Luke Lowrey, Github Contributors</authors>
+        <owners>Luke Lowrey</owners>
+        <projectUrl>https://github.com/lukencode/FluentEmail</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>A Fluent Wrapper for System.Net.Mail with razor templating support.</description>
+        <tags>email fluent</tags>
+        <dependencies>
+            <group targetFramework="net40">
+                <dependency id="RazorMachine" version="2.5" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\FluentEmail.dll" target="lib\net40" />
+    </files>
 </package>

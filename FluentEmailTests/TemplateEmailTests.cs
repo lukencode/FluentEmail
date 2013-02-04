@@ -71,7 +71,7 @@ namespace FluentEmailTests
 
     public class TestTemplate : ITemplateRenderer
     {
-        public string Parse<T>(string template, T model)
+        public string Parse<T>(string template, T model, bool isHtml = true)
         {
             return "custom template";
         }
