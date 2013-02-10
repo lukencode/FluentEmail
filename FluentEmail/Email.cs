@@ -278,7 +278,7 @@ namespace FluentEmail
 
             CheckRenderer();
 
-            var result = _renderer.Parse(template, model);
+            var result = _renderer.Parse(template, model, isHtml);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
@@ -295,7 +295,7 @@ namespace FluentEmail
         {
             CheckRenderer();
 
-            var result = _renderer.Parse(template, model);
+            var result = _renderer.Parse(template, model, isHtml);
             Message.Body = result;
             Message.IsBodyHtml = isHtml;
 
