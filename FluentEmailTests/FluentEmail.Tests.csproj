@@ -54,6 +54,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="test.he-IL.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="test.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
