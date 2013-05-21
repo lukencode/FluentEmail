@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="AsyncTests.cs" />
+    <Compile Include="CachedTemplateTests.cs" />
     <Compile Include="DisposableEmailTests.cs" />
     <Compile Include="FluentEmailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

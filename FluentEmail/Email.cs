@@ -261,6 +261,7 @@ namespace FluentEmail
             var template = "";
 
             TextReader reader = new StreamReader(path);
+
             try
             {
                 template = reader.ReadToEnd();
@@ -280,7 +281,7 @@ namespace FluentEmail
         }
 
         /// <summary>
-        /// Adds a culture spesific template file to the email
+        /// Adds a culture specific template file to the email
         /// </summary>
         /// <param name="filename">The path to the file to load</param>
         /// /// <param name="model">The razor model</param>

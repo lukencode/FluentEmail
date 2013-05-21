@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
-using Xipton.Razor;
+using RazorEngine;
 
 namespace FluentEmail
 {
@@ -15,11 +15,7 @@ namespace FluentEmail
 
         public string Parse<T>(string template, T model, bool isHtml = true)
         {
-            var rm = new RazorMachine(htmlEncode: false);
-
-            var razorTemplate = rm.ExecuteContent(template, model, null, true);
-
-            return razorTemplate.Result;
+            return Razor.Parse(template, model, template.GetHashCode().ToString());
         }
     }
 }
