@@ -42,7 +42,6 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="AsyncTests.cs" />
-    <Compile Include="CachedTemplateTests.cs" />
     <Compile Include="DisposableEmailTests.cs" />
     <Compile Include="FluentEmailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -55,6 +54,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="test-embedded.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="test.he-IL.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Email.cs" />
+    <Compile Include="EmbeddedResourceHelper.cs" />
     <Compile Include="IHideObjectMembers.cs" />
     <Compile Include="ITemplateRenderer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

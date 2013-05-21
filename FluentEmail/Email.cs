@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
+using System.Reflection;
 using System.Threading;
 
 namespace FluentEmail
@@ -14,8 +15,8 @@ namespace FluentEmail
 
         private SmtpClient _client;
         private bool? _useSsl;
+        private bool _bodyIsHtml = true;
         private ITemplateRenderer _renderer;
-
 
         public MailMessage Message { get; set; }
 
@@ -215,10 +216,9 @@ namespace FluentEmail
         /// </summary>
         /// <param name="body">The content of the body</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-        public Email Body(string body, bool isHtml = true)
+        public Email Body(string body)
         {
             Message.Body = body;
-            Message.IsBodyHtml = isHtml;
             return this;
         }
 
@@ -250,12 +250,34 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Adds template to email from embedded resource
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="path">Path the the embedded resource eg [YourAssembly].[YourResourceFolder].[YourFilename.txt]</param>
+        /// <param name="model">Model for the template</param>
+        /// <param name="assembly">The assembly your resource is in. Defaults to calling assembly.</param>
+        /// <returns></returns>
+        public Email UsingTemplateFromEmbedded<T>(string path, T model, Assembly assembly = null)
+        {
+            CheckRenderer();
+
+            assembly = assembly ?? Assembly.GetCallingAssembly();
+
+            var template = EmbeddedResourceHelper.GetResourceAsString(assembly, path);
+            var result = _renderer.Parse(template, model, _bodyIsHtml);
+            Message.Body = result;
+            Message.IsBodyHtml = _bodyIsHtml;
+
+            return this;
+        }
+
+        /// <summary>
         /// Adds the template file to the email
         /// </summary>
         /// <param name="filename">The path to the file to load</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        public Email UsingTemplateFromFile<T>(string filename, T model,  bool isHtml = true)
+        public Email UsingTemplateFromFile<T>(string filename, T model)
         {
             var path = GetFullFilePath(filename);
             var template = "";
@@ -273,9 +295,9 @@ namespace FluentEmail
 
             CheckRenderer();
 
-            var result = _renderer.Parse(template, model, isHtml);
+            var result = _renderer.Parse(template, model, _bodyIsHtml);
             Message.Body = result;
-            Message.IsBodyHtml = isHtml;
+            Message.IsBodyHtml = _bodyIsHtml;
 
             return this;
         }
@@ -288,11 +310,11 @@ namespace FluentEmail
         /// <param name="culture">The culture of the template (Default is the current culture)</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
-        public Email UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture = null, bool isHtml = true)
+        public Email UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture = null)
         {
             var wantedCulture = culture ?? Thread.CurrentThread.CurrentUICulture;
             var cultureFile = GetCultureFileName(filename, wantedCulture);
-            return UsingTemplateFromFile(cultureFile, model, isHtml);
+            return UsingTemplateFromFile(cultureFile, model);
         }
 
         /// <summary>
@@ -357,6 +379,24 @@ namespace FluentEmail
         }
 
         /// <summary>
+        /// Sets Message to html (set by default)
+        /// </summary>
+        public Email BodyAsHtml()
+        {
+            _bodyIsHtml = true;
+            return this;
+        }
+
+        /// <summary>
+        /// Sets Message to plain text (set by default)
+        /// </summary>
+        public Email BodyAsPlainText()
+        {
+            _bodyIsHtml = false;
+            return this;
+        }
+
+        /// <summary>
         /// Sends email synchronously
         /// </summary>
         /// <returns>Instance of the Email class</returns>
@@ -364,6 +404,8 @@ namespace FluentEmail
         {
             if(_useSsl.HasValue)
                 _client.EnableSsl = _useSsl.Value;
+
+            Message.IsBodyHtml = _bodyIsHtml;
 
             _client.Send(Message);
             return this;
@@ -380,6 +422,8 @@ namespace FluentEmail
         {
             if (_useSsl.HasValue)
                 _client.EnableSsl = _useSsl.Value;
+
+            Message.IsBodyHtml = _bodyIsHtml;
 
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
