@@ -12,7 +12,7 @@
         <tags>email fluent</tags>
         <dependencies>
             <group targetFramework="net40">
-                <package id="RazorEngine" version="3.2.0" targetFramework="net40" />
+                <dependency id="RazorEngine" version="3.2.0" />
             </group>
         </dependencies>
     </metadata>
