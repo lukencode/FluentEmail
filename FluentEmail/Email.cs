@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
-using System.Dynamic;
+using System.Threading;
 
 namespace FluentEmail
 {
@@ -256,14 +257,7 @@ namespace FluentEmail
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplateFromFile<T>(string filename, T model,  bool isHtml = true)
         {
-            if (filename.StartsWith("~"))
-            {
-                var baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
-                filename = Path.GetFullPath(baseDir + filename.Replace("~", ""));
-            }
-
-            //Generate the Template
-            var path = Path.GetFullPath(filename);
+            var path = GetFullFilePath(filename);
             var template = "";
 
             TextReader reader = new StreamReader(path);
@@ -284,11 +278,26 @@ namespace FluentEmail
 
             return this;
         }
-        
+
+        /// <summary>
+        /// Adds a culture spesific template file to the email
+        /// </summary>
+        /// <param name="filename">The path to the file to load</param>
+        /// /// <param name="model">The razor model</param>
+        /// <param name="culture">The culture of the template (Default is the current culture)</param>
+        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <returns>Instance of the Email class</returns>
+        public Email UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture = null, bool isHtml = true)
+        {
+            var wantedCulture = culture ?? Thread.CurrentThread.CurrentUICulture;
+            var cultureFile = GetCultureFileName(filename, wantedCulture);
+            return UsingTemplateFromFile(cultureFile, model, isHtml);
+        }
+
         /// <summary>
         /// Adds razor template to the email
         /// </summary>
-        /// <param name="filename">The path to the file to load</param>
+        /// <param name="template">The razor template</param>
         /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplate<T>(string template, T model, bool isHtml = true)
@@ -413,5 +422,28 @@ namespace FluentEmail
             }
         }
 
+        private static string GetFullFilePath(string filename)
+        {
+            if (filename.StartsWith("~"))
+            {
+                var baseDir = System.AppDomain.CurrentDomain.BaseDirectory;
+                return Path.GetFullPath(baseDir + filename.Replace("~", ""));
+            }
+
+            return Path.GetFullPath(filename);
+        }
+
+        private static string GetCultureFileName(string fileName, CultureInfo culture)
+        {
+            var fullFilePath = GetFullFilePath(fileName);
+            var extension = Path.GetExtension(fullFilePath);
+            var cultureExtension = string.Format("{0}{1}", culture.Name, extension);
+
+            var cultureFile = Path.ChangeExtension(fullFilePath, cultureExtension);
+            if (File.Exists(cultureFile))
+                return cultureFile;
+            else
+                return fullFilePath;
+        }
     }
 }
