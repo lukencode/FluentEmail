@@ -119,6 +119,44 @@ namespace FluentEmailTests
 
             Assert.AreEqual("custom template", email.Message.Body);
         }
+
+        [TestMethod]
+        public void Using_Template_From_Embedded_Resource()
+        {
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .Subject(subject)
+                        .UsingTemplateFromEmbedded("FluentEmailTests.test-embedded.txt", new { Test = "EMBEDDEDTEST" });
+
+            Assert.AreEqual("yo email EMBEDDEDTEST", email.Message.Body);
+        }
+
+        [TestMethod]
+        public void Reuse_Cached_Templates()
+        {
+            string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+            string template2 = "sup @Model.Name this is the second template";
+
+            for (var i = 0; i < 10; i++)
+            {
+                var email = Email
+                            .From(fromEmail)
+                            .To(toEmail)
+                            .Subject(subject)
+                            .UsingTemplate(template, new { Name = i, Numbers = new string[] { "1", "2", "3" } });
+
+                Assert.AreEqual("sup " + i + " here is a list 123", email.Message.Body);
+
+                var email2 = Email
+                            .From(fromEmail)
+                            .To(toEmail)
+                            .Subject(subject)
+                            .UsingTemplate(template2, new { Name = i });
+
+                Assert.AreEqual("sup " + i + " this is the second template", email2.Message.Body);
+            }
+        }
     }
 
     public class TestTemplate : ITemplateRenderer

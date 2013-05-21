@@ -54,6 +54,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="test-embedded.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <Content Include="test.he-IL.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
