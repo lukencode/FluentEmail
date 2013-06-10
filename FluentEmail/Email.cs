@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading;
+using Microsoft.CSharp.RuntimeBinder;
+using RazorEngine.Templating;
+using Binder = Microsoft.CSharp.RuntimeBinder.Binder;
 
 namespace FluentEmail
 {
@@ -17,6 +22,7 @@ namespace FluentEmail
         private bool? _useSsl;
         private bool _bodyIsHtml = true;
         private ITemplateRenderer _renderer;
+        private string _viewBagSubjectKey;
 
         public MailMessage Message { get; set; }
 
@@ -208,6 +214,13 @@ namespace FluentEmail
         public Email Subject(string subject)
         {
             Message.Subject = subject;
+            _viewBagSubjectKey = null;
+            return this;
+        }
+
+        public Email SubjectFromViewBag(string viewBagSubjectKey = "Subject")
+        {
+            _viewBagSubjectKey = viewBagSubjectKey;
             return this;
         }
 
@@ -264,12 +277,12 @@ namespace FluentEmail
             assembly = assembly ?? Assembly.GetCallingAssembly();
 
             var template = EmbeddedResourceHelper.GetResourceAsString(assembly, path);
-            var result = _renderer.Parse(template, model, _bodyIsHtml);
-            Message.Body = result;
-            Message.IsBodyHtml = _bodyIsHtml;
+            RenderMessageFromTemplate(model, template);
 
             return this;
         }
+
+        
 
         /// <summary>
         /// Adds the template file to the email
@@ -295,9 +308,7 @@ namespace FluentEmail
 
             CheckRenderer();
 
-            var result = _renderer.Parse(template, model, _bodyIsHtml);
-            Message.Body = result;
-            Message.IsBodyHtml = _bodyIsHtml;
+            RenderMessageFromTemplate(model, template);
 
             return this;
         }
@@ -327,9 +338,7 @@ namespace FluentEmail
         {
             CheckRenderer();
 
-            var result = _renderer.Parse(template, model, isHtml);
-            Message.Body = result;
-            Message.IsBodyHtml = isHtml;
+            RenderMessageFromTemplate(model, template);
 
             return this;
         }
@@ -489,6 +498,33 @@ namespace FluentEmail
                 return cultureFile;
             else
                 return fullFilePath;
+        }
+
+        private void RenderMessageFromTemplate<T>(T model, string template)
+        {
+            var viewbag = new DynamicViewBag();
+            var result = _renderer.Parse(template, model, viewbag, _bodyIsHtml);
+            Message.Body = result;
+            Message.IsBodyHtml = _bodyIsHtml;
+            if (!string.IsNullOrEmpty(_viewBagSubjectKey))
+            {
+                Message.Subject = GetSubjectFromViewBag(viewbag);
+            }
+        }
+
+        private string GetSubjectFromViewBag(DynamicViewBag viewbag)
+        {
+            try
+            {
+                var binder = Binder.GetMember(CSharpBinderFlags.None, _viewBagSubjectKey, viewbag.GetType(),
+                    new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });
+                var callsite = CallSite<Func<CallSite, DynamicViewBag, string>>.Create(binder);
+                return callsite.Target(callsite, viewbag);
+            }
+            catch (RuntimeBinderException)
+            {
+                throw new InvalidOperationException("Template is missing a definition of ViewBag." + _viewBagSubjectKey);
+            }
         }
     }
 }
