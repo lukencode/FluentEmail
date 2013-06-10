@@ -218,6 +218,15 @@ namespace FluentEmail
             return this;
         }
 
+        /// <summary>
+        /// Adds the subject of the email defined in the template's ViewBag
+        /// </summary>
+        /// <param name="viewBagSubjectKey">The ViewBag's property name for the subject (default: Subject)</param>
+        /// <returns>Instance of the Email class</returns>
+        /// <example>@{
+        /// ViewBag.Subject = "Email Subject";
+        /// }
+        /// </example>
         public Email SubjectFromViewBag(string viewBagSubjectKey = "Subject")
         {
             _viewBagSubjectKey = viewBagSubjectKey;
@@ -228,7 +237,6 @@ namespace FluentEmail
         /// Adds a Body to the Email
         /// </summary>
         /// <param name="body">The content of the body</param>
-        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         public Email Body(string body)
         {
             Message.Body = body;
@@ -282,13 +290,12 @@ namespace FluentEmail
             return this;
         }
 
-        
 
         /// <summary>
         /// Adds the template file to the email
         /// </summary>
         /// <param name="filename">The path to the file to load</param>
-        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
+        /// <param name="model">The model of the template</param>
         /// <returns>Instance of the Email class</returns>
         public Email UsingTemplateFromFile<T>(string filename, T model)
         {
@@ -319,7 +326,6 @@ namespace FluentEmail
         /// <param name="filename">The path to the file to load</param>
         /// /// <param name="model">The razor model</param>
         /// <param name="culture">The culture of the template (Default is the current culture)</param>
-        /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
         /// <returns>Instance of the Email class</returns>
         public Email UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture = null)
         {
