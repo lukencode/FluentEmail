@@ -1,1 +1,1 @@
-﻿@{ViewBag.Title = "Subject From ViewBag";}yo email @Model.Test
+﻿@{ViewBag.Subject = "Subject From ViewBag";}yo email @Model.Test

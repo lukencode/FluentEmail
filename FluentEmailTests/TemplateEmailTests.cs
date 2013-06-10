@@ -173,7 +173,6 @@ namespace FluentEmailTests
             Assert.AreEqual("Subject From ViewBag", email.Message.Subject);
         }
         [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]        
         public void Subject_From_ViewBag_Not_Exist()
         {
             var email = Email
@@ -181,6 +180,8 @@ namespace FluentEmailTests
                         .To(toEmail)
                         .SubjectFromViewBag()
                         .UsingTemplateFromFile(@"~/test.txt", new { Test = "FLUENTEMAIL" });
+
+            Assert.AreEqual(string.Empty,email.Message.Subject);
 
         }
     }

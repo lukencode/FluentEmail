@@ -520,17 +520,10 @@ namespace FluentEmail
 
         private string GetSubjectFromViewBag(DynamicViewBag viewbag)
         {
-            try
-            {
                 var binder = Binder.GetMember(CSharpBinderFlags.None, _viewBagSubjectKey, viewbag.GetType(),
                     new[] { CSharpArgumentInfo.Create(CSharpArgumentInfoFlags.None, null) });
-                var callsite = CallSite<Func<CallSite, DynamicViewBag, string>>.Create(binder);
-                return callsite.Target(callsite, viewbag);
-            }
-            catch (RuntimeBinderException)
-            {
-                throw new InvalidOperationException("Template is missing a definition of ViewBag." + _viewBagSubjectKey);
-            }
+                var callsite = CallSite<Func<CallSite, DynamicViewBag, object>>.Create(binder);
+                return callsite.Target(callsite, viewbag) as string;
         }
     }
 }
