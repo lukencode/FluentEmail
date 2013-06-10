@@ -172,6 +172,17 @@ namespace FluentEmailTests
             Assert.AreEqual("yo email FLUENTEMAIL", email.Message.Body);
             Assert.AreEqual("Subject From ViewBag", email.Message.Subject);
         }
+        [TestMethod]
+        [ExpectedException(typeof(InvalidOperationException))]        
+        public void Subject_From_ViewBag_Not_Exist()
+        {
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .SubjectFromViewBag()
+                        .UsingTemplateFromFile(@"~/test.txt", new { Test = "FLUENTEMAIL" });
+
+        }
     }
 
     public class TestTemplate : ITemplateRenderer
