@@ -3,13 +3,13 @@
     <metadata>
         <id>fluent-email</id>
         <title>Fluent Email</title>
-        <version>1.3.0-RazorEngine</version>
+        <version>1.3.0</version>
         <authors>Luke Lowrey, Github Contributors</authors>
         <owners>Luke Lowrey</owners>
         <projectUrl>https://github.com/lukencode/FluentEmail</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>A Fluent Wrapper for System.Net.Mail with razor templating support.</description>
-        <tags>email fluent</tags>
+        <tags>email fluent fluentemail</tags>
         <dependencies>
             <group targetFramework="net40">
                 <dependency id="RazorEngine" version="3.2.0" />
