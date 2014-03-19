@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace FluentEmail
 {
@@ -427,6 +428,18 @@ namespace FluentEmail
 
             _client.SendCompleted += callback;
             _client.SendAsync(Message, token);
+
+            return this;
+        }
+
+        public async Task<Email> SendAsync()
+        {
+            if (_useSsl.HasValue)
+                _client.EnableSsl = _useSsl.Value;
+
+            Message.IsBodyHtml = _bodyIsHtml;
+
+            await _client.SendMailAsync(Message);
 
             return this;
         }
