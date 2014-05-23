@@ -4,11 +4,13 @@ using System.IO;
 using System.Threading;
 using FluentEmail;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RazorEngine.Templating;
 
 namespace FluentEmailTests
 {
     [TestClass]
     [DeploymentItem(@"FluentEmailTests\\test.txt")]
+    [DeploymentItem(@"FluentEmailTests\\test-subject.txt")]
     [DeploymentItem(@"FluentEmailTests\\test.he-IL.txt")]
     public class TemplateEmailTests
     {
@@ -157,11 +159,36 @@ namespace FluentEmailTests
                 Assert.AreEqual("sup " + i + " this is the second template", email2.Message.Body);
             }
         }
+
+        [TestMethod]
+        public void Subject_From_ViewBag()
+        {
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .SubjectFromViewBag()
+                        .UsingTemplateFromFile(@"~/test-subject.txt", new { Test = "FLUENTEMAIL" });
+
+            Assert.AreEqual("yo email FLUENTEMAIL", email.Message.Body);
+            Assert.AreEqual("Subject From ViewBag", email.Message.Subject);
+        }
+        [TestMethod]
+        public void Subject_From_ViewBag_Not_Exist()
+        {
+            var email = Email
+                        .From(fromEmail)
+                        .To(toEmail)
+                        .SubjectFromViewBag()
+                        .UsingTemplateFromFile(@"~/test.txt", new { Test = "FLUENTEMAIL" });
+
+            Assert.AreEqual(string.Empty,email.Message.Subject);
+
+        }
     }
 
     public class TestTemplate : ITemplateRenderer
     {
-        public string Parse<T>(string template, T model, bool isHtml = true)
+        public string Parse<T>(string template, T model,DynamicViewBag viewbag, bool isHtml = true)
         {
             return "custom template";
         }
