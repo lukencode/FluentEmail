@@ -1,12 +1,14 @@
-﻿/*
- * Created by SharpDevelop.
- * User: Dr. Hector Diaz
- * Date: 23/08/2014
- * Time: 01:17 a.m.
- */
-
+﻿
 namespace FluentEmail
 {
+	/*
+	 * Created by SharpDevelop.
+	 * User: Dr. Hector Diaz
+	 * Date: 23/08/2014
+	 * Time: 01:17 a.m.
+	 */
+
+	#region using
 	using System;
 	using System.Collections.Generic;
 	using System.Globalization;
@@ -15,6 +17,7 @@ namespace FluentEmail
 	using System.Net.Mail;
 	using System.Reflection;
 	using System.Threading;
+	#endregion
 	
 	/// <summary>
 	/// Description of Interface1.
