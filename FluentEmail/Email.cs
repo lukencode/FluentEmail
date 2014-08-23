@@ -33,10 +33,7 @@ namespace FluentEmail
 		/// Creates a new email instance using the default from
 		/// address from smtp config settings
 		/// </summary>
-		public  Email():this(new SmtpClient())
-		{
-			Message = new MailMessage();
-		}
+		public  Email():this(new SmtpClient()){}
 		
 		/// <summary>
 		/// Creates a new email instance overrides the default client from .config file
@@ -45,6 +42,7 @@ namespace FluentEmail
 		public Email(SmtpClient client)
 		{
 			_client = client;
+			Message = new MailMessage();
 		}
 		
 		#endregion
