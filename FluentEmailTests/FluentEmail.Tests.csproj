@@ -33,7 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="NUnit.Framework">
+      <HintPath>$(SharpDevelopBinPath)\Tools\NUnit\NUnit.Framework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core">
       <RequiredTargetFramework>3.5</RequiredTargetFramework>
@@ -42,6 +44,7 @@
   <ItemGroup>
     <Compile Include="AddressTests.cs" />
     <Compile Include="AsyncTests.cs" />
+    <Compile Include="DeploymentItem.cs" />
     <Compile Include="DisposableEmailTests.cs" />
     <Compile Include="FluentEmailTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

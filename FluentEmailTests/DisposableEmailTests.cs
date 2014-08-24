@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Net.Mail;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using FluentEmail;
 
 namespace FluentEmailTests
 {
-    [TestClass]
+    [TestFixture]
     public class DisposableEmailTests
     {
         const string FromEmail = "johno@test.com";
@@ -38,23 +38,26 @@ namespace FluentEmailTests
             }
         }
         
-        [TestMethod]
+        [Test]
         public void Email_Implements_IDisposable()
         {
-            var email = Email.From("johno@test.com");
-
-            Assert.IsInstanceOfType(email, typeof(IDisposable));
+        	var email = new Email().From("johno@test.com");
+        	
+            Assert.IsInstanceOf<IDisposable>(email);
 
             //Assert.AreEqual(replyEmail, email.Message.ReplyToList.First().Address);
+   
         }
 
-        [TestMethod]
+        [Test]
         public void Disposes_Of_The_Message()
         {
-            var email = Email.From(FromEmail).UsingClient(new FakeSmtpClient());
+      
+        	var email = new Email(new FakeSmtpClient()).From(FromEmail);
+//            var email = Email.From(FromEmail).UsingClient(new FakeSmtpClient());
 
             var mailMessage = new FakeEmailMessage();
-
+           
             email.Message = mailMessage;
 
             email.Dispose();
@@ -62,36 +65,35 @@ namespace FluentEmailTests
             Assert.IsTrue(mailMessage.DisposeHasBeenCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void Disposes_Of_The_SmtpClient()
         {
-            var email = Email.From(FromEmail);
+        	var smtpClient = new FakeSmtpClient();
+        	var email = new Email(smtpClient).From(FromEmail);
 
-            var smtpClient = new FakeSmtpClient();
-
-            email.UsingClient(smtpClient);
+//            email.UsingClient(smtpClient);
 
             email.Dispose();
 
             Assert.IsTrue(smtpClient.DisposeHasBeenCalled);
         }
 
-        [TestMethod]
+        [Test]
         public void Does_Not_Cause_An_Exception_If_Message_Is_Null()
         {
-            var email = Email.From(FromEmail).UsingClient(new FakeSmtpClient());
+        	var email = new Email(new FakeSmtpClient()).From(FromEmail);
 
             email.Message = null;
 
             email.Dispose();
         }
 
-        [TestMethod]
+        [Test]
         public void Does_Not_Cause_An_Exception_If_SmtpClient_Is_Null()
         {
-            var email = Email.From(FromEmail);
+        	var email = new Email(null).From(FromEmail);
 
-            email.UsingClient(null);
+//            email.UsingClient(null);
 
             email.Dispose();
         }

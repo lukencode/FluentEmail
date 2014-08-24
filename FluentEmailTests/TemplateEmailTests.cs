@@ -1,25 +1,26 @@
-﻿using System;
+﻿
+using System;
 using System.Globalization;
 using System.IO;
 using System.Threading;
 using FluentEmail;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace FluentEmailTests
 {
-    [TestClass]
-    [DeploymentItem(@"FluentEmailTests\\test.txt")]
-    [DeploymentItem(@"FluentEmailTests\\test.he-IL.txt")]
+    [TestFixture]
+    [DeploymentItem("test.txt")]
+    [DeploymentItem("test.he-IL.txt")]
     public class TemplateEmailTests
     {
         const string toEmail = "bob@test.com";
         const string fromEmail = "johno@test.com";
         const string subject = "sup dawg";
 
-        [TestMethod]
+        [Test]
         public void Anonymous_Model_Template_From_File_Matches()
         {
-            var email = Email
+        	var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -28,11 +29,11 @@ namespace FluentEmailTests
             Assert.AreEqual("yo email FLUENTEMAIL", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Using_Template_From_Not_Existing_Culture_File_Using_Defualt_Template()
         {
             var culture = new CultureInfo("fr-FR");
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -41,11 +42,11 @@ namespace FluentEmailTests
             Assert.AreEqual("yo email FLUENTEMAIL", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Using_Template_From_Culture_File()
         {
             var culture = new CultureInfo("he-IL");
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -54,14 +55,14 @@ namespace FluentEmailTests
             Assert.AreEqual("hebrew email FLUENTEMAIL", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Using_Template_From_Current_Culture_File()
         {
             var currentCulture = Thread.CurrentThread.CurrentUICulture;
             Thread.CurrentThread.CurrentUICulture = new CultureInfo("he-IL");
             try
             {
-                var email = Email
+                var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -77,12 +78,12 @@ namespace FluentEmailTests
             
         }
 
-        [TestMethod]
+        [Test]
         public void Anonymous_Model_Template_Matches()
         {
             string template = "sup @Model.Name";
 
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -91,12 +92,12 @@ namespace FluentEmailTests
             Assert.AreEqual("sup LUKE", email.Message.Body); 
         }
 
-        [TestMethod]
+        [Test]
         public void Anonymous_Model_With_List_Template_Matches()
         {
             string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -105,12 +106,12 @@ namespace FluentEmailTests
             Assert.AreEqual("sup LUKE here is a list 123", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Set_Custom_Template()
         {
             string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -120,10 +121,10 @@ namespace FluentEmailTests
             Assert.AreEqual("custom template", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Using_Template_From_Embedded_Resource()
         {
-            var email = Email
+            var email = new Email()
                         .From(fromEmail)
                         .To(toEmail)
                         .Subject(subject)
@@ -132,7 +133,7 @@ namespace FluentEmailTests
             Assert.AreEqual("yo email EMBEDDEDTEST", email.Message.Body);
         }
 
-        [TestMethod]
+        [Test]
         public void Reuse_Cached_Templates()
         {
             string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
@@ -140,7 +141,7 @@ namespace FluentEmailTests
 
             for (var i = 0; i < 10; i++)
             {
-                var email = Email
+                var email = new Email()
                             .From(fromEmail)
                             .To(toEmail)
                             .Subject(subject)
@@ -148,7 +149,7 @@ namespace FluentEmailTests
 
                 Assert.AreEqual("sup " + i + " here is a list 123", email.Message.Body);
 
-                var email2 = Email
+                var email2 = new Email()
                             .From(fromEmail)
                             .To(toEmail)
                             .Subject(subject)
@@ -168,3 +169,4 @@ namespace FluentEmailTests
     }
 
 }
+
