@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace FluentEmail
+﻿namespace FluentEmail
 {
-    public interface ITemplateRenderer
-    {
-        string Parse<T>(string template, T model, bool isHtml = true);
-    }
+	
+	#region using
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using System.Text;
+	#endregion
+
+	public interface ITemplateRenderer
+	{
+		string Parse<T>(string template, T model, bool isHtml = true);
+	}
 }
