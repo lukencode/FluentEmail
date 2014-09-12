@@ -10,39 +10,64 @@ using System.Threading;
 
 namespace FluentEmailTests
 {
-    [TestClass]
-    public class AsyncTests
-    {
-        static bool callbackCalled = false;
-        static private ManualResetEvent updatedEvent = new ManualResetEvent(false);
+	[TestClass]
+	public class AsyncTests
+	{
+		static bool callbackCalled = false;
+		static private ManualResetEvent updatedEvent = new ManualResetEvent(false);
 
-        [TestMethod]
-        public void Callback_Method_Is_Called_On_Cancel()
-        {
-            string toEmail = "bob@test.com";
-            string fromEmail = "johno@test.com";
-            string subject = "sup dawg";
-            string body = "what be the hipitity hap?";
+		[TestMethod]
+		public void Callback_Method_Is_Called_On_Cancel()
+		{
+			string toEmail = "bob@test.com";
+			string fromEmail = "johno@test.com";
+			string subject = "sup dawg";
+			string body = "what be the hipitity hap?";
 
-            var email = Email
-                .From(fromEmail)
-                .To(toEmail)
-                .Subject(subject)
-                .Body(body)
-                .UsingClient(new SmtpClient("localhost", 25))
-                .SendAsync(MailDeliveryComplete);
+			var email = Email
+				.From(fromEmail)
+				.To(toEmail)
+				.Subject(subject)
+				.Body(body)
+				.UsingClient(new SmtpClient("localhost", 25))
+				.SendAsync(MailDeliveryComplete);
 
-            email.Cancel();
+			email.Cancel();
 
-            updatedEvent.WaitOne();
+			updatedEvent.WaitOne();
 
-            Assert.IsTrue(callbackCalled);
-        }
+			Assert.IsTrue(callbackCalled);
+		}
 
-        private static void MailDeliveryComplete(object sender, AsyncCompletedEventArgs e)
-        {
-            callbackCalled = true;
-            updatedEvent.Set();
-        }
-    }
+		#region Refactored tests using setup through constructors.
+		[TestMethod]
+		public void New_Callback_Method_Is_Called_On_Cancel()
+		{
+			string toEmail = "bob@test.com";
+			string fromEmail = "johno@test.com";
+			string subject = "sup dawg";
+			string body = "what be the hipitity hap?";
+
+			var email = new Email(new SmtpClient("localhost", 25), fromEmail)
+				//.From(fromEmail)
+				.To(toEmail)
+				.Subject(subject)
+				.Body(body)
+				//.UsingClient(new SmtpClient("localhost", 25))
+				.SendAsync(MailDeliveryComplete);
+
+			email.Cancel();
+
+			updatedEvent.WaitOne();
+
+			Assert.IsTrue(callbackCalled);
+		}
+		#endregion
+		
+		private static void MailDeliveryComplete(object sender, AsyncCompletedEventArgs e)
+		{
+			callbackCalled = true;
+			updatedEvent.Set();
+		}
+	}
 }
