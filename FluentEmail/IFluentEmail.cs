@@ -29,8 +29,6 @@
 		
 		MailMessage Message { get; set; }
 		IFluentEmail UsingClient(SmtpClient client);
-//		IFluentEmail FromDefault(int dummy);
-//		IFluentEmail From(int dummy, string emailAddress, string name = "");
 		IFluentEmail To(string emailAddress, string name);
 		IFluentEmail To(string emailAddress);
 		IFluentEmail To(IList<MailAddress> mailAddresses);
@@ -52,8 +50,7 @@
 		IFluentEmail UsingTemplateFromEmbedded<T>(string path, T model, Assembly assembly = null);
 		IFluentEmail UsingTemplateFromFile<T>(string filename, T model);
 		IFluentEmail UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture = null);
-		IFluentEmail UsingTemplate<T>(string template, T model, bool isHtml = true);
-		
+		IFluentEmail UsingTemplate<T>(string template, T model, bool isHtml = true);		
 		IFluentEmail Send();
 		IFluentEmail SendAsync(SendCompletedEventHandler callback, object token = null);
 		IFluentEmail Cancel();
