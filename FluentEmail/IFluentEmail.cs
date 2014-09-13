@@ -1,16 +1,5 @@
 ﻿namespace FluentEmail
 {
-
-	
-	/*
-	 * Created by SharpDevelop.
-	 * User: Dr. Hector Diaz
-	 * Date: 9/12/2014
-	 * Time: 12:23 PM
-	 * 
-	 */
-
-	#region using
 	using System;
 	using System.Collections.Generic;
 	using System.Globalization;
@@ -19,14 +8,9 @@
 	using System.Net.Mail;
 	using System.Reflection;
 	using System.Threading;
-	#endregion
-	
-	/// <summary>
-	/// Description of Interface1.
-	/// </summary>
+
 	public interface IFluentEmail: IHideObjectMembers, IDisposable
-	{
-		
+	{		
 		MailMessage Message { get; set; }
 		IFluentEmail UsingClient(SmtpClient client);
 		IFluentEmail To(string emailAddress, string name);
