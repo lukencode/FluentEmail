@@ -18,7 +18,6 @@
 
         public MailMessage Message { get; set; }
 
-        [Obsolete("FluentEmail.Email.DefaultRenderer is obsolete: 'Please use the constructor'")]
         public static ITemplateRenderer DefaultRenderer { get; set; }
 
         /// <summary>
@@ -88,7 +87,6 @@
         /// address from smtp config settings
         /// </summary>
         /// <returns>Instance of the Email class</returns>
-        [Obsolete("FluentEmail.Email.FromDefault() is obsolete: 'Please use the constructor'")]
         public static IFluentEmail FromDefault()
         {
             var email = new Email
@@ -106,7 +104,6 @@
         /// <param name="emailAddress">Email address to send from</param>
         /// <param name="name">Name to send from</param>
         /// <returns>Instance of the Email class</returns>
-        [Obsolete("FluentEmail.Email.From(string emailAddress, string name) is obsolete: 'Please use the constructor'")]
         public static IFluentEmail From(string emailAddress, string name = "")
         {
             var email = new Email
@@ -460,7 +457,7 @@
         /// Sends email synchronously
         /// </summary>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail Send()
+        public virtual IFluentEmail Send()
         {
             if (_useSsl.HasValue)
                 _client.EnableSsl = _useSsl.Value;
@@ -478,7 +475,7 @@
         /// <param name="callback">Method to call on complete</param>
         /// <param name="token">User token to pass to callback</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail SendAsync(SendCompletedEventHandler callback, object token = null)
+        public virtual IFluentEmail SendAsync(SendCompletedEventHandler callback, object token = null)
         {
             if (_useSsl.HasValue)
                 _client.EnableSsl = _useSsl.Value;
