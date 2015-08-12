@@ -48,6 +48,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdvancedRazorRenderer.cs" />
     <Compile Include="Email.cs" />
     <Compile Include="EmbeddedResourceHelper.cs" />
     <Compile Include="IHideObjectMembers.cs" />
