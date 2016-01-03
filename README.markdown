@@ -29,7 +29,7 @@ Sending:
 email.Send();
 
 //send asynchronously
-email.Sendsync(MailDeliveredCallback);
+await email.SendAsync(MailDeliveredCallback);
 ```
 
 <a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
