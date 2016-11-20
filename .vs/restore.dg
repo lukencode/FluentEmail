@@ -1,0 +1,5 @@
+#:C:\Data\Projects\FluentEmail\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.xproj
+C:\Data\Projects\FluentEmail\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.xproj|C:\Data\Projects\FluentEmail\src\FluentEmail.Core\FluentEmail.Core.xproj
+#:C:\Data\Projects\FluentEmail\src\FluentEmail.Core\FluentEmail.Core.xproj
+#:C:\Data\Projects\FluentEmail\test\FluentEmail.Core.Tests\FluentEmail.Core.Tests.xproj
+C:\Data\Projects\FluentEmail\test\FluentEmail.Core.Tests\FluentEmail.Core.Tests.xproj|C:\Data\Projects\FluentEmail\src\FluentEmail.Core\FluentEmail.Core.xproj

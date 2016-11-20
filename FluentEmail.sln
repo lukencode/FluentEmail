@@ -1,20 +1,32 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail", "FluentEmail\FluentEmail.csproj", "{E3655E68-0152-4512-BB99-F4CF3BCA245C}"
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC215BD-05EF-49A6-ADBE-8AE399952EEC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Tests", "FluentEmailTests\FluentEmail.Tests.csproj", "{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Tests", "test\FluentEmailTests\FluentEmail.Tests.csproj", "{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{8C8294AE-C401-4B58-9DB4-3914555978D2}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D5C44238-0312-43F8-9705-EACFB039A48C}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Core", "src\FluentEmail.Core\FluentEmail.Core.xproj", "{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{12F031E5-8DDC-40A0-9862-8764A6E190C0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Senders", "Senders", "{926C0980-31D9-4449-903F-3C756044C28A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Smtp", "src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj", "{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Razor", "src\Renderers\FluentEmail.Razor\FluentEmail.Razor.xproj", "{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B3C8C77-C54A-4F9E-A241-676AC01E49BB}"
 	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
+		global.json = global.json
 	EndProjectSection
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Core.Tests", "test\FluentEmail.Core.Tests\FluentEmail.Core.Tests.xproj", "{72D765E8-81DE-4E18-92C5-ED5BDD65324F}"
+EndProject
 Global
-	GlobalSection(TestCaseManagementSettings) = postSolution
-		CategoryFile = FluentEmail.vsmdi
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
@@ -24,12 +36,36 @@ Global
 		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E3655E68-0152-4512-BB99-F4CF3BCA245C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{595F5D5C-F2F2-4E23-90D6-5D75CB73BF4F} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876} = {D5C44238-0312-43F8-9705-EACFB039A48C}
+		{12F031E5-8DDC-40A0-9862-8764A6E190C0} = {D5C44238-0312-43F8-9705-EACFB039A48C}
+		{926C0980-31D9-4449-903F-3C756044C28A} = {D5C44238-0312-43F8-9705-EACFB039A48C}
+		{5A4E8B2D-6968-4961-9FD5-CC07AF8D7194} = {926C0980-31D9-4449-903F-3C756044C28A}
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73} = {12F031E5-8DDC-40A0-9862-8764A6E190C0}
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = FluentEmail.vsmdi
 	EndGlobalSection
 EndGlobal

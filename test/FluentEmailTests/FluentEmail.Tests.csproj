@@ -52,12 +52,6 @@
     <Compile Include="TemplateEmailTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FluentEmail\FluentEmail.csproj">
-      <Project>{E3655E68-0152-4512-BB99-F4CF3BCA245C}</Project>
-      <Name>FluentEmail</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="test-embedded.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
