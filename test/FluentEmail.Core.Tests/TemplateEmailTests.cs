@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.IO;
 using System.Reflection;
 using System.Threading;
 using FluentEmail.Core.Defaults;
@@ -7,7 +8,8 @@ using NUnit.Framework;
 
 namespace FluentEmail.Core.Tests
 {
-	public class TemplateEmailTests
+    [TestFixture]
+    public class TemplateEmailTests
 	{
 		const string toEmail = "bob@test.com";
 		const string fromEmail = "johno@test.com";
@@ -20,7 +22,7 @@ namespace FluentEmail.Core.Tests
 				.From(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL" });
+				.UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL" });
 
 			Assert.AreEqual("yo email FLUENTEMAIL", email.Data.Body);
 		}
@@ -33,7 +35,7 @@ namespace FluentEmail.Core.Tests
 				.From(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingCultureTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL", culture }, culture);
+				.UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL", culture }, culture);
 
 			Assert.AreEqual("yo email FLUENTEMAIL", email.Data.Body);
 		}
@@ -46,7 +48,7 @@ namespace FluentEmail.Core.Tests
 				.From(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingCultureTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL" }, culture);
+				.UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL" }, culture);
 
 			Assert.AreEqual("hebrew email FLUENTEMAIL", email.Data.Body);
 		}
@@ -59,7 +61,7 @@ namespace FluentEmail.Core.Tests
 	            .From(fromEmail)
 	            .To(toEmail)
 	            .Subject(subject)
-	            .UsingCultureTemplateFromFile(@"~/Test.txt", new {Test = "FLUENTEMAIL"}, culture);
+	            .UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new {Test = "FLUENTEMAIL"}, culture);
 
 	        Assert.AreEqual("hebrew email FLUENTEMAIL", email.Data.Body);
 	    }
@@ -67,7 +69,7 @@ namespace FluentEmail.Core.Tests
 	    [Test]
 		public void Anonymous_Model_Template_Matches()
 		{
-			string template = "sup @Model.Name";
+			string template = "sup ##Name##";
 
 			var email = Email
 				.From(fromEmail)
@@ -81,7 +83,7 @@ namespace FluentEmail.Core.Tests
 		[Test]
 		public void Anonymous_Model_With_List_Template_Matches()
 		{
-			string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+			string template = "sup ##Name## here is a list @foreach(var i in Model.Numbers) { @i }";
 
 			var email = Email
 				.From(fromEmail)
@@ -95,7 +97,7 @@ namespace FluentEmail.Core.Tests
 		[Test]
 		public void Set_Custom_Template()
 		{
-			string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+			string template = "sup ##Name## here is a list @foreach(var i in Model.Numbers) { @i }";
 
 			var email = Email
 				.From(fromEmail)
@@ -122,8 +124,8 @@ namespace FluentEmail.Core.Tests
 		[Test]
 		public void Reuse_Cached_Templates()
 		{
-			string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
-			string template2 = "sup @Model.Name this is the second template";
+			string template = "sup ##Name## here is a list @foreach(var i in Model.Numbers) { @i }";
+			string template2 = "sup ##Name## this is the second template";
 
 			for (var i = 0; i < 10; i++)
 			{
@@ -152,7 +154,7 @@ namespace FluentEmail.Core.Tests
 			var email = new Email(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL" });
+				.UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL" });
 
 			Assert.AreEqual("yo email FLUENTEMAIL", email.Data.Body);
 		}
@@ -164,7 +166,7 @@ namespace FluentEmail.Core.Tests
 			var email = new Email(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingCultureTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL", culture }, culture);
+				.UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL", culture }, culture);
 
 			Assert.AreEqual("yo email FLUENTEMAIL", email.Data.Body);
 		}
@@ -176,7 +178,7 @@ namespace FluentEmail.Core.Tests
 			var email = new Email(fromEmail)
 				.To(toEmail)
 				.Subject(subject)
-				.UsingCultureTemplateFromFile(@"~/Test.txt", new { Test = "FLUENTEMAIL" }, culture);
+				.UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new { Test = "FLUENTEMAIL" }, culture);
 
 			Assert.AreEqual("hebrew email FLUENTEMAIL", email.Data.Body);
 		}
@@ -188,7 +190,7 @@ namespace FluentEmail.Core.Tests
 	        var email = new Email(fromEmail)
 	            .To(toEmail)
 	            .Subject(subject)
-	            .UsingCultureTemplateFromFile(@"~/Test.txt", new {Test = "FLUENTEMAIL"}, culture);
+	            .UsingCultureTemplateFromFile($"{Directory.GetCurrentDirectory()}/Test.txt", new {Test = "FLUENTEMAIL"}, culture);
 
 	        Assert.AreEqual("hebrew email FLUENTEMAIL", email.Data.Body);
 	    }

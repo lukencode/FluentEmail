@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace FluentEmail.Core.Tests
 {
-	public class FluentEmailTests
+    [TestFixture]
+    public class FluentEmailTests
 	{
 		const string toEmail = "bob@test.com";
 		const string fromEmail = "johno@test.com";

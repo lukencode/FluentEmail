@@ -2,6 +2,7 @@
 
 namespace FluentEmail.Core.Tests
 {
+    [TestFixture]
 	public class AddressTests
 	{
 		[Test]
