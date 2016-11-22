@@ -1,5 +1,6 @@
 ﻿using FluentEmail.Core.Interfaces;
 using RazorLight;
+using RazorLight.Extensions;
 
 namespace FluentEmail.Razor
 {
@@ -8,7 +9,7 @@ namespace FluentEmail.Razor
         public string Parse<T>(string template, T model, bool isHtml = true)
         {
             var engine = EngineFactory.CreatePhysical("/");
-            return engine.Parse(template, model);
+            return engine.ParseString(template, model);
         }
     }
 }

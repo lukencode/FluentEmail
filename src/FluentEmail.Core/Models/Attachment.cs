@@ -7,5 +7,6 @@ namespace FluentEmail.Core.Models
 {
     public class Attachment
     {
+
     }
 }

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FluentEmail.Smtp")]
+[assembly: AssemblyProduct("FluentEmail.Razor.Tests")]
 [assembly: AssemblyTrademark("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -16,4 +16,4 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("3808d62f-9f8a-4644-a965-361968770cfb")]
+[assembly: Guid("f54586ba-31f0-4ef4-b965-90007c9aa04c")]

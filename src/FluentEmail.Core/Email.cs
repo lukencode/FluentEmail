@@ -97,12 +97,12 @@ namespace FluentEmail.Core
                     {
                         currentName = nameSplit[i];
                     }
-                    Data.ToAddresses.Add(new Address(addressSplit[i], currentName));
+                    Data.ToAddresses.Add(new Address(addressSplit[i].Trim(), currentName.Trim()));
                 }
             }
             else
             {
-                Data.ToAddresses.Add(new Address(emailAddress, name));
+                Data.ToAddresses.Add(new Address(emailAddress.Trim(), name.Trim()));
             }
             return this;
         }
