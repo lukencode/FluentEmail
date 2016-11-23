@@ -1,5 +1,13 @@
 {
-  "version": "1.0.0-*",
+  "version": "2.0.0-*",
+  "title": "Fluent Email - SMTP",
+  "description": "Now we're talking. Send emails via SMTP. At the moment, only works on .NET 4.",
+  "authors": [ "Luke Lowrey", "Ben Cull", "Github Contributors" ],
+  "packOptions": {
+    "repository": { "url": "https://github.com/lukencode/FluentEmail" },
+    "projectUrl": "https://github.com/lukencode/FluentEmail",
+    "tags": [ "email", "razor", "smtp", "fluent", "fluentemail" ]
+  },
 
   "dependencies": {
     "NETStandard.Library": "1.6.0",
@@ -9,8 +17,14 @@
   "frameworks": {
     "net451": {
       "frameworkAssemblies": {
-        "System.Net": "4.0.0.0" 
+        "System.Net": "4.0.0.0"
       }
     }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
   }
 }

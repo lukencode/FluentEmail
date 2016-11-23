@@ -1,5 +1,13 @@
 ﻿{
-  "version": "1.0.0-*",
+  "version": "2.0.0-*",
+  "title": "Fluent Email",
+  "description": "Just the domain model. Includes very basic defaults, but is also included with every other package here.",
+  "authors": [ "Luke Lowrey", "Ben Cull", "Github Contributors" ],
+  "packOptions": {
+    "repository": { "url": "https://github.com/lukencode/FluentEmail" },
+    "projectUrl": "https://github.com/lukencode/FluentEmail",
+    "tags": [ "email", "razor", "smtp", "fluent", "fluentemail" ]
+  },
 
   "dependencies": {
     "NETStandard.Library": "1.6.0"
@@ -10,5 +18,11 @@
     "netstandard1.6": {
       "imports": "dnxcore50"
     }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
   }
 }
