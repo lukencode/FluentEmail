@@ -3,13 +3,13 @@ Send email from .NET or .NET Core. A bunch of useful extension packages make thi
 
 ## Packages
 
-[FluentEmail.Core]() - Just the domain model. Includes very basic defaults, but is also included with every other package here.
+[FluentEmail.Core](src/FluentEmail.Core) - Just the domain model. Includes very basic defaults, but is also included with every other package here.
 
-[FluentEmail.Smtp]() - Now we're talking. Send emails via SMTP. At the moment, only works on .NET 4.
+[FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) - Now we're talking. Send emails via SMTP. At the moment, only works on .NET 4.
 
-[FluentEmail.Razor]() - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight]() project under the hood. 
+[FluentEmail.Razor](src/Renderers/FluentEmail.Razor) - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight]() project under the hood. 
 
-[FluentEmail.Mailgun]() - Send emails via MailGun's REST API. Works with .NET Core :)
+[FluentEmail.Mailgun](src/Senders/FluentEmail.Mailgun) - Send emails via MailGun's REST API. Works with .NET Core :)
 
 ## Usage
 

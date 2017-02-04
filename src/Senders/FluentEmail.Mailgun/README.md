@@ -35,6 +35,6 @@ Send the email in the usual Fluent Email way.
 
 ## Further Information
 
-Don't forget you can use Razor templating using the [FluentEmail.Razor]() package as well.
+Don't forget you can use Razor templating using the [FluentEmail.Razor](../Renderers/FluentEmail.Razor) package as well.
 
 If you'd like to create your own sender for another service, check out the source code. All you need to do is implement the `ISender` interface :)
