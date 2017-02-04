@@ -9,6 +9,8 @@ Send email from .NET or .NET Core. A bunch of useful extension packages make thi
 
 [FluentEmail.Razor]() - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight]() project under the hood. 
 
+[FluentEmail.Mailgun]() - Send emails via MailGun's REST API. Works with .NET Core :)
+
 ## Usage
 
 You can choose which renderer and sender you would like to use, or build your own inheriting from ITemplateRenderer and ISender.

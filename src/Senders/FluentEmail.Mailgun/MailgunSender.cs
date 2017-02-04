@@ -24,7 +24,7 @@ namespace FluentEmail.Mailgun
 
         public SendResponse Send(Email email, CancellationToken? token = null)
         {
-            throw new NotImplementedException();
+            return SendAsync(email, token).GetAwaiter().GetResult();
         }
 
         public Task<SendResponse> SendAsync(Email email, CancellationToken? token = null)

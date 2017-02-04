@@ -1,4 +1,5 @@
-﻿using FluentEmail.Core;
+﻿using System.Threading.Tasks;
+using FluentEmail.Core;
 using NUnit.Framework;
 
 namespace FluentEmail.Mailgun.Tests
@@ -18,14 +19,15 @@ namespace FluentEmail.Mailgun.Tests
         }
 
         [Test]
-        public void CanSendEmail()
+        public async Task CanSendEmail()
         {
             var email = Email
                 .From(fromEmail)
                 .To(toEmail)
-                .Body("Test");
+                .Subject(subject)
+                .Body(body);
 
-            var response = email.Send();
+            var response = await email.SendAsync();
 
             Assert.IsTrue(response.Successful);
         }

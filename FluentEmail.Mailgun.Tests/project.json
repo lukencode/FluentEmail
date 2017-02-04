@@ -1,5 +1,6 @@
 ﻿{
   "version": "1.0.0-*",
+  "testRunner": "nunit",
 
   "dependencies": {
     "NETStandard.Library": "1.6.1-preview1-24530-04",

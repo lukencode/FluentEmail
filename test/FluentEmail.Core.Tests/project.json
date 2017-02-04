@@ -27,6 +27,10 @@
       "include": [
         "*.txt"
       ]
-    }
+    },
+    "copyToOutput": [
+      "*.txt"
+    ]
   }
 }
+

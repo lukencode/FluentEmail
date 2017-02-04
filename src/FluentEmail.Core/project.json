@@ -1,9 +1,10 @@
 ﻿{
-  "version": "2.0.0-*",
+  "version": "2.0.2",
   "title": "Fluent Email",
-  "description": "Just the domain model. Includes very basic defaults, but is also included with every other package here.",
+  "description": "Send emails very easily. Use razor templates, smtp, embedded files, all without hassle. This is a Base Package and includes just the domain model, very basic defaults, and is also included with every other Fluent Email package here.",
   "authors": [ "Luke Lowrey", "Ben Cull", "Github Contributors" ],
   "packOptions": {
+    "iconUrl": "https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png",
     "repository": { "url": "https://github.com/lukencode/FluentEmail" },
     "projectUrl": "https://github.com/lukencode/FluentEmail",
     "tags": [ "email", "razor", "smtp", "fluent", "fluentemail" ]
