@@ -1,0 +1,30 @@
+{
+  "version": "2.0.2",
+  "title": "Fluent Email - MailGun",
+  "description": "Send emails via MailGun using their REST API",
+  "authors": [ "Luke Lowrey", "Ben Cull", "Github Contributors" ],
+  "packOptions": {
+    "iconUrl": "https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png",
+    "repository": { "url": "https://github.com/lukencode/FluentEmail" },
+    "projectUrl": "https://github.com/lukencode/FluentEmail",
+    "tags": [ "email", "razor", "mailgun", "fluent", "fluentemail" ]
+  },
+
+  "dependencies": {
+    "FluentEmail.Core": "2.0.2",
+    "NETStandard.Library": "1.6.0",
+    "RestSharp.NetCore": "105.2.3"
+  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}
