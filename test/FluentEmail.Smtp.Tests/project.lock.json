@@ -663,7 +663,7 @@
           "lib/net45/_._": {}
         }
       },
-      "FluentEmail.Core/1.0.0": {
+      "FluentEmail.Core/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -676,7 +676,7 @@
           "net451/FluentEmail.Core.dll": {}
         }
       },
-      "FluentEmail.Smtp/1.0.0": {
+      "FluentEmail.Smtp/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -3053,12 +3053,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "FluentEmail.Core/1.0.0": {
+    "FluentEmail.Core/2.0.3": {
       "type": "project",
       "path": "../../src/FluentEmail.Core/project.json",
       "msbuildProject": "../../src/FluentEmail.Core/FluentEmail.Core.xproj"
     },
-    "FluentEmail.Smtp/1.0.0": {
+    "FluentEmail.Smtp/2.0.3": {
       "type": "project",
       "path": "../../src/Senders/FluentEmail.Smtp/project.json",
       "msbuildProject": "../../src/Senders/FluentEmail.Smtp/FluentEmail.Smtp.xproj"
@@ -3066,7 +3066,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FluentEmail.Smtp >= 1.0.0-*",
+      "FluentEmail.Smtp",
       "NETStandard.Library >= 1.6.1-preview1-24530-04",
       "NUnit >= 3.5.0",
       "dotnet-test-nunit >= 3.4.0-beta-3"

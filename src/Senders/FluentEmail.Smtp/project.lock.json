@@ -393,7 +393,7 @@
           "lib/net45/_._": {}
         }
       },
-      "FluentEmail.Core/1.0.0": {
+      "FluentEmail.Core/2.0.3": {
         "type": "project",
         "framework": ".NETFramework,Version=v4.5.1",
         "dependencies": {
@@ -2490,7 +2490,7 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "FluentEmail.Core/1.0.0": {
+    "FluentEmail.Core/2.0.3": {
       "type": "project",
       "path": "../../FluentEmail.Core/project.json",
       "msbuildProject": "../../FluentEmail.Core/FluentEmail.Core.xproj"
@@ -2498,7 +2498,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FluentEmail.Core >= 1.0.0-*",
+      "FluentEmail.Core",
       "NETStandard.Library >= 1.6.0"
     ],
     ".NETFramework,Version=v4.5.1": [

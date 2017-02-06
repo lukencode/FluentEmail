@@ -1,0 +1,52 @@
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
+using System.Threading.Tasks;
+using FluentEmail.Core.Models;
+using NUnit.Framework;
+
+namespace FluentEmail.Core.Tests
+{
+    [TestFixture]
+    public class AttachmentTests
+    {
+        private Assembly ThisAssembly() => this.GetType().GetTypeInfo().Assembly;
+        const string toEmail = "bob@test.com";
+        const string fromEmail = "johno@test.com";
+        const string subject = "sup dawg";
+
+        [Test]
+        public void Attachment_from_stream_Is_set()
+        {
+            using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/Test.txt"))
+            {
+                var attachment = new Attachment()
+                {
+                    Data = stream,
+                    Filename = "Test.txt",
+                    ContentType = "text/plain"
+                };
+
+                var email = Email.From(fromEmail)
+                    .To(toEmail)
+                    .Subject(subject)
+                    .Attach(attachment);
+
+                Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
+            }
+        }
+
+        [Test]
+        public void Attachment_from_filename_Is_set()
+        {
+            var email = Email.From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .AttachFromFilename($"{Directory.GetCurrentDirectory()}/Test.txt", "text/plain");
+
+            Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
+        }
+    }
+}

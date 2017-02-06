@@ -104,7 +104,10 @@ namespace FluentEmail.Smtp
                 message.Priority = MailPriority.High;
             }
 
-            //TODO: Attachments
+            data.Attachments.ForEach(x =>
+            {
+                message.Attachments.Add(new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType));
+            });                       
 
             return message;
         }
