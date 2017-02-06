@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.IO;
+using System.Threading.Tasks;
 using FluentEmail.Core;
+using FluentEmail.Core.Models;
 using NUnit.Framework;
 
 namespace FluentEmail.Mailgun.Tests
@@ -8,8 +10,8 @@ namespace FluentEmail.Mailgun.Tests
     {
         const string toEmail = "bentest1@mailinator.com";
         const string fromEmail = "ben@test.com";
-        const string subject = "sup dawg";
-        const string body = "what be the hipitity hap?";
+        const string subject = "Attachment Tests";
+        const string body = "This email is testing the attachment functionality of MailGun.";
 
         [SetUp]
         public void SetUp()
@@ -26,6 +28,34 @@ namespace FluentEmail.Mailgun.Tests
                 .To(toEmail)
                 .Subject(subject)
                 .Body(body);
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public async Task CanSendEmailWithAttachments()
+        {
+            var stream = new MemoryStream();
+            var sw = new StreamWriter(stream);
+            sw.WriteLine("Hey this is some text in an attachment");
+            sw.Flush();
+            stream.Seek(0, SeekOrigin.Begin);            
+
+            var attachment = new Attachment()
+            {
+                Data = stream,
+                ContentType = "text/plain",
+                Filename = "mailgunTest.txt"
+            };
+
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body)
+                .Attach(attachment);
 
             var response = await email.SendAsync();
 

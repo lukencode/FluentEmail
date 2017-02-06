@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -47,6 +48,15 @@ namespace FluentEmail.Mailgun
 
             request.AddParameter(email.Data.IsHtml ? "html" : "text", email.Data.Body);
 
+            if (email.Data.Attachments.Any())
+            {
+                request.AlwaysMultipartFormData = true;
+            }
+            email.Data.Attachments.ForEach(x =>
+            {
+                request.AddFile("attachment", StreamWriter(x.Data), x.Filename, x.Data.Length, x.ContentType);
+            });
+
             return Task.Run(() =>
             {
                 var t = new TaskCompletionSource<SendResponse>();
@@ -63,6 +73,15 @@ namespace FluentEmail.Mailgun
 
                 return t.Task;
             });
+        }
+
+        private Action<Stream> StreamWriter(Stream stream)
+        {
+            return s =>
+            {
+                stream.CopyTo(s);
+                stream.Dispose();
+            };
         }
     }
 }
