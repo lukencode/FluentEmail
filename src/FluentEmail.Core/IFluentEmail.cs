@@ -183,5 +183,7 @@ namespace FluentEmail.Core
         /// <param name="token"></param>
         /// <returns></returns>
 	    Task<SendResponse> SendAsync(CancellationToken? token = null);
+
+	    IFluentEmail AttachFromFilename(string filename, string contentType = null);
 	}
 }

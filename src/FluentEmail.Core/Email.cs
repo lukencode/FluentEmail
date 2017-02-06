@@ -364,6 +364,19 @@ namespace FluentEmail.Core
             return this;
         }
 
+        public IFluentEmail AttachFromFilename(string filename, string contentType = null)
+        {
+            var stream = File.OpenRead(filename);
+            Attach(new Attachment()
+            {
+                Data = stream,
+                Filename = filename,
+                ContentType = contentType
+            });
+
+            return this;
+        }
+
         /// <summary>
         /// Sets Message to html (set by default)
         /// </summary>

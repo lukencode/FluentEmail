@@ -1440,7 +1440,7 @@
           "lib/netstandard1.3/System.Xml.XmlSerializer.dll": {}
         }
       },
-      "FluentEmail.Core/2.0.2": {
+      "FluentEmail.Core/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -5184,7 +5184,7 @@
         "runtimes/aot/lib/netcore50/System.Xml.XmlSerializer.dll"
       ]
     },
-    "FluentEmail.Core/2.0.2": {
+    "FluentEmail.Core/2.0.3": {
       "type": "project",
       "path": "../../FluentEmail.Core/project.json",
       "msbuildProject": "../../FluentEmail.Core/FluentEmail.Core.xproj"
@@ -5192,7 +5192,7 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FluentEmail.Core >= 2.0.2",
+      "FluentEmail.Core",
       "NETStandard.Library >= 1.6.0",
       "RestSharp.NetCore >= 105.2.3"
     ],
