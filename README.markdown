@@ -1,4 +1,4 @@
-![alt text](https://github.com/lukencode/FluentEmail/blob/master/assets/fluentemail_logo.png?raw=true "FluentEmail")
+![alt text](https://github.com/lukencode/FluentEmail/raw/master/assets/fluentemail_logo_64x64.png "FluentEmail")
 
 # FluentEmail - All in one email sender for .NET and .NET Core
 Send email from .NET or .NET Core. A bunch of useful extension packages make this dead simple and very powerful.
