@@ -50,7 +50,7 @@ Email.DefaultSender = new SmtpSender();
 email.Send();
 
 //send asynchronously
-await email.Sendsync();
+await email.SendAsync();
 ```
 
 <a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
