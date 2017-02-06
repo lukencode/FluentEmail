@@ -2662,7 +2662,7 @@
           "lib/netstandard1.3/System.Xml.XPath.XDocument.dll": {}
         }
       },
-      "FluentEmail.Core/1.0.0": {
+      "FluentEmail.Core/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -2675,7 +2675,7 @@
           "netstandard1.6/FluentEmail.Core.dll": {}
         }
       },
-      "FluentEmail.Razor/1.0.0": {
+      "FluentEmail.Razor/2.0.3": {
         "type": "project",
         "framework": ".NETStandard,Version=v1.6",
         "dependencies": {
@@ -7810,12 +7810,12 @@
         "ref/xamarinwatchos10/_._"
       ]
     },
-    "FluentEmail.Core/1.0.0": {
+    "FluentEmail.Core/2.0.3": {
       "type": "project",
       "path": "../../src/FluentEmail.Core/project.json",
       "msbuildProject": "../../src/FluentEmail.Core/FluentEmail.Core.xproj"
     },
-    "FluentEmail.Razor/1.0.0": {
+    "FluentEmail.Razor/2.0.3": {
       "type": "project",
       "path": "../../src/Renderers/FluentEmail.Razor/project.json",
       "msbuildProject": "../../src/Renderers/FluentEmail.Razor/FluentEmail.Razor.xproj"
@@ -7823,8 +7823,8 @@
   },
   "projectFileDependencyGroups": {
     "": [
-      "FluentEmail.Core >= 1.0.0-*",
-      "FluentEmail.Razor >= 1.0.0-*",
+      "FluentEmail.Core",
+      "FluentEmail.Razor",
       "NETStandard.Library >= 1.6.1-preview1-24530-04",
       "NUnit >= 3.5.0",
       "dotnet-test-nunit >= 3.4.0-beta-3"
