@@ -17,8 +17,6 @@ namespace FluentEmail.Smtp
         private SmtpClient _client;
         public bool UseSsl { get; set; }
 
-        public MailMessage Message { get; set; }
-
         public SmtpSender() : this(new SmtpClient())
         {
         }
@@ -26,7 +24,6 @@ namespace FluentEmail.Smtp
         public SmtpSender(SmtpClient client)
         {
             _client = client;
-            Message = new MailMessage();
             UseSsl = true;
         }
 
@@ -59,49 +56,51 @@ namespace FluentEmail.Smtp
         /// </summary>
         public void Dispose()
         {
-            if (_client != null)
-                _client.Dispose();
-
-            if (Message != null)
-                Message.Dispose();
+            _client?.Dispose();
         }
 
         private MailMessage CreateMailMessage(Email email)
         {
             var data = email.Data;
-            var message = new MailMessage();
-            message.Subject = data.Subject;
-            message.Body = data.Body;
-            Message.IsBodyHtml = data.IsHtml;
-            message.From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name);
+            var message = new MailMessage
+            {
+                Subject = data.Subject,
+                Body = data.Body,
+                IsBodyHtml = data.IsHtml,
+                From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
+            };
+
             data.ToAddresses.ForEach(x =>
             {
                 message.To.Add(new MailAddress(x.EmailAddress, x.Name));
             });
+
             data.CcAddresses.ForEach(x =>
             {
                 message.CC.Add(new MailAddress(x.EmailAddress, x.Name));
             });
+
             data.BccAddresses.ForEach(x =>
             {
                 message.Bcc.Add(new MailAddress(x.EmailAddress, x.Name));
             });
+
             data.ReplyToAddresses.ForEach(x =>
             {
                 message.ReplyToList.Add(new MailAddress(x.EmailAddress, x.Name));
             });
 
-            if (data.Priority == Priority.Low)
+            switch (data.Priority)
             {
-                message.Priority = MailPriority.Low;
-            }
-            else if (data.Priority == Priority.Normal)
-            {
-                message.Priority = MailPriority.Normal;                
-            }
-            else if (data.Priority == Priority.High)
-            {
-                message.Priority = MailPriority.High;
+                case Priority.Low:
+                    message.Priority = MailPriority.Low;
+                    break;
+                case Priority.Normal:
+                    message.Priority = MailPriority.Normal;
+                    break;
+                case Priority.High:
+                    message.Priority = MailPriority.High;
+                    break;
             }
 
             data.Attachments.ForEach(x =>
