@@ -1,0 +1,32 @@
+﻿{
+  "version": "1.0.0",
+  "title": "Fluent Email - SendGrid",
+  "description": "Send emails via SendGrid using their REST API",
+  "authors": [ "Luke Lowrey", "Ben Cull", "Ricardo Santos", "Github Contributors" ],
+  "packOptions": {
+    "iconUrl": "https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png",
+    "repository": { "url": "https://github.com/lukencode/FluentEmail" },
+    "projectUrl": "https://github.com/lukencode/FluentEmail",
+    "tags": [ "email", "razor", "sendgrid", "fluent", "fluentemail" ]
+  },
+
+  "dependencies": {
+    "FluentEmail.Core": {
+      "version": "*",
+      "target": "project"
+    },
+    "NETStandard.Library": "1.6.1",
+    "Sendgrid": "9.1.0"  },
+
+  "frameworks": {
+    "netstandard1.6": {
+      "imports": "dnxcore50"
+    }
+  },
+
+  "scripts": {
+    "postcompile": [
+      "dotnet pack --no-build --configuration %compile:Configuration%"
+    ]
+  }
+}
