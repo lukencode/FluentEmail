@@ -20,7 +20,7 @@ namespace FluentEmail.SendGrid.Tests
         [SetUp]
         public void SetUp()
         {
-            var sender = new SendGridSender(apiKey, false);
+            var sender = new SendGridSender(apiKey, true);
             Email.DefaultSender = sender;
         }
 
