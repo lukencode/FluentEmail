@@ -37,6 +37,10 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Mailgun", "src\
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Mailgun.Tests", "FluentEmail.Mailgun.Tests\FluentEmail.Mailgun.Tests.xproj", "{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}"
 EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.SendGrid", "src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.xproj", "{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.SendGrid.Tests", "test\FluentEmail.SendGrid.Tests\FluentEmail.SendGrid.Tests.xproj", "{4636C06B-60ED-48AC-9833-02B8F4EB75F9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +79,14 @@ Global
 		{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4636C06B-60ED-48AC-9833-02B8F4EB75F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4636C06B-60ED-48AC-9833-02B8F4EB75F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4636C06B-60ED-48AC-9833-02B8F4EB75F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4636C06B-60ED-48AC-9833-02B8F4EB75F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -92,6 +104,8 @@ Global
 		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{EFB250E1-92D2-476D-88A5-372B08D73C49} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
+		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8} = {926C0980-31D9-4449-903F-3C756044C28A}
+		{4636C06B-60ED-48AC-9833-02B8F4EB75F9} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FluentEmail.vsmdi
