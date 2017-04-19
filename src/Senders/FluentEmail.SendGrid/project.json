@@ -1,5 +1,5 @@
 ﻿{
-  "version": "1.0.0",
+  "version": "2.0.0",
   "title": "Fluent Email - SendGrid",
   "description": "Send emails via SendGrid using their REST API",
   "authors": [ "Luke Lowrey", "Ben Cull", "Ricardo Santos", "Github Contributors" ],
