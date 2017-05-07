@@ -1,45 +1,44 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC215BD-05EF-49A6-ADBE-8AE399952EEC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D5C44238-0312-43F8-9705-EACFB039A48C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Core", "src\FluentEmail.Core\FluentEmail.Core.xproj", "{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{12F031E5-8DDC-40A0-9862-8764A6E190C0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Senders", "Senders", "{926C0980-31D9-4449-903F-3C756044C28A}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Razor", "src\Renderers\FluentEmail.Razor\FluentEmail.Razor.xproj", "{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B3C8C77-C54A-4F9E-A241-676AC01E49BB}"
 	ProjectSection(SolutionItems) = preProject
-		global.json = global.json
 		README.markdown = README.markdown
 	EndProjectSection
-EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Core.Tests", "test\FluentEmail.Core.Tests\FluentEmail.Core.Tests.xproj", "{72D765E8-81DE-4E18-92C5-ED5BDD65324F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{47CB89AC-9615-4FA8-90DE-2D849935C36D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Senders", "Senders", "{4DADBE55-BD91-4D14-92EA-1BD0D1545145}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Smtp", "src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.xproj", "{3808D62F-9F8A-4644-A965-361968770CFB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Core", "src\FluentEmail.Core\FluentEmail.Core.csproj", "{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Razor.Tests", "test\FluentEmail.Razor.Tests\FluentEmail.Razor.Tests.xproj", "{F54586BA-31F0-4EF4-B965-90007C9AA04C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Razor", "src\Renderers\FluentEmail.Razor\FluentEmail.Razor.csproj", "{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Smtp.Tests", "test\FluentEmail.Smtp.Tests\FluentEmail.Smtp.Tests.xproj", "{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Core.Tests", "test\FluentEmail.Core.Tests\FluentEmail.Core.Tests.csproj", "{72D765E8-81DE-4E18-92C5-ED5BDD65324F}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Mailgun", "src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.xproj", "{EFB250E1-92D2-476D-88A5-372B08D73C49}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Smtp", "src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj", "{3808D62F-9F8A-4644-A965-361968770CFB}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.Mailgun.Tests", "FluentEmail.Mailgun.Tests\FluentEmail.Mailgun.Tests.xproj", "{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Razor.Tests", "test\FluentEmail.Razor.Tests\FluentEmail.Razor.Tests.csproj", "{F54586BA-31F0-4EF4-B965-90007C9AA04C}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.SendGrid", "src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.xproj", "{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Smtp.Tests", "test\FluentEmail.Smtp.Tests\FluentEmail.Smtp.Tests.csproj", "{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "FluentEmail.SendGrid.Tests", "test\FluentEmail.SendGrid.Tests\FluentEmail.SendGrid.Tests.xproj", "{4636C06B-60ED-48AC-9833-02B8F4EB75F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailgun", "src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj", "{EFB250E1-92D2-476D-88A5-372B08D73C49}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailgun.Tests", "FluentEmail.Mailgun.Tests\FluentEmail.Mailgun.Tests.csproj", "{6F1F1AB6-F05B-46DB-9251-10C3D9B10BDA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.SendGrid", "src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.csproj", "{03FFB5B9-54C9-45A3-8E13-3D4B972704F8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.SendGrid.Tests", "test\FluentEmail.SendGrid.Tests\FluentEmail.SendGrid.Tests.csproj", "{4636C06B-60ED-48AC-9833-02B8F4EB75F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -92,13 +91,13 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876} = {D5C44238-0312-43F8-9705-EACFB039A48C}
 		{12F031E5-8DDC-40A0-9862-8764A6E190C0} = {D5C44238-0312-43F8-9705-EACFB039A48C}
 		{926C0980-31D9-4449-903F-3C756044C28A} = {D5C44238-0312-43F8-9705-EACFB039A48C}
-		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73} = {12F031E5-8DDC-40A0-9862-8764A6E190C0}
-		{72D765E8-81DE-4E18-92C5-ED5BDD65324F} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
 		{47CB89AC-9615-4FA8-90DE-2D849935C36D} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
 		{4DADBE55-BD91-4D14-92EA-1BD0D1545145} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
+		{386B8AB1-E99A-4E08-83BE-DD1B8C2EE876} = {D5C44238-0312-43F8-9705-EACFB039A48C}
+		{1C444DDD-1E09-4EDB-A6A1-57BA29C54F73} = {12F031E5-8DDC-40A0-9862-8764A6E190C0}
+		{72D765E8-81DE-4E18-92C5-ED5BDD65324F} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
 		{3808D62F-9F8A-4644-A965-361968770CFB} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{F54586BA-31F0-4EF4-B965-90007C9AA04C} = {47CB89AC-9615-4FA8-90DE-2D849935C36D}
 		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
