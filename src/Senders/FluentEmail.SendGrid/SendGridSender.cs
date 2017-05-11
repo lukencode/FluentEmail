@@ -59,6 +59,11 @@ namespace FluentEmail.SendGrid
                 mailMessage.PlainTextContent = email.Data.Body;
             }
 
+            if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
+            {
+                mailMessage.PlainTextContent = email.Data.PlaintextAlternativeBody;
+            }
+
             if (email.Data.Attachments.Any())
             {
                 foreach (var attachment in email.Data.Attachments)
