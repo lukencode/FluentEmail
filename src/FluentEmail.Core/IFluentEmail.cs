@@ -94,7 +94,7 @@ namespace FluentEmail.Core
 	    /// </summary>
 	    /// <param name="body">The content of the body</param>
 	    /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-	    IFluentEmail Body(string body);
+	    IFluentEmail Body(string body, bool isHtml = false);
 
 	    /// <summary>
 	    /// Marks the email as High Priority
@@ -119,15 +119,16 @@ namespace FluentEmail.Core
 	    /// <param name="model">Model for the template</param>
 	    /// <param name="assembly">The assembly your resource is in. Defaults to calling assembly.</param>
 	    /// <returns></returns>
-	    IFluentEmail UsingTemplateFromEmbedded<T>(string path, T model, Assembly assembly);
+	    IFluentEmail UsingTemplateFromEmbedded<T>(string path, T model, Assembly assembly, bool isHtml = true);
 
-	    /// <summary>
-	    /// Adds the template file to the email
-	    /// </summary>
-	    /// <param name="filename">The path to the file to load</param>
+        /// <summary>
+        /// Adds the template file to the email
+        /// </summary>
+        /// <param name="filename">The path to the file to load</param>
+        /// <param name="model">Model for the template</param>
 	    /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail UsingTemplateFromFile<T>(string filename, T model);
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail UsingTemplateFromFile<T>(string filename, T model, bool isHtml = true);
 
 	    /// <summary>
 	    /// Adds a culture specific template file to the email
@@ -137,15 +138,16 @@ namespace FluentEmail.Core
 	    /// <param name="culture">The culture of the template (Default is the current culture)</param>
 	    /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture);
+	    IFluentEmail UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture, bool isHtml = true);
 
-	    /// <summary>
-	    /// Adds razor template to the email
-	    /// </summary>
-	    /// <param name="template">The razor template</param>
+        /// <summary>
+        /// Adds razor template to the email
+        /// </summary>
+        /// <param name="template">The razor template</param>
+        /// <param name="model">Model for the template</param>
 	    /// <param name="isHtml">True if Body is HTML, false for plain text (Optional)</param>
-	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail UsingTemplate<T>(string template, T model, bool isHtml = true);
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail UsingTemplate<T>(string template, T model, bool isHtml = true);
 
 	    /// <summary>
 	    /// Adds an Attachment to the Email
@@ -162,16 +164,6 @@ namespace FluentEmail.Core
 	    IFluentEmail Attach(IList<Attachment> attachments);
 
 	    /// <summary>
-	    /// Sets Message to html (set by default)
-	    /// </summary>
-	    IFluentEmail BodyAsHtml();
-
-	    /// <summary>
-	    /// Sets Message to plain text (set by default)
-	    /// </summary>
-	    IFluentEmail BodyAsPlainText();
-
-	    /// <summary>
 	    /// Sends email synchronously
 	    /// </summary>
 	    /// <returns>Instance of the Email class</returns>
@@ -185,5 +177,47 @@ namespace FluentEmail.Core
 	    Task<SendResponse> SendAsync(CancellationToken? token = null);
 
 	    IFluentEmail AttachFromFilename(string filename, string contentType = null);
+
+	    /// <summary>
+	    /// Adds a Plaintext alternative Body to the Email. Used in conjunction with an HTML email,
+	    /// this allows for email readers without html capability, and also helps avoid spam filters.
+	    /// </summary>
+	    /// <param name="body">The content of the body</param>
+	    IFluentEmail PlaintextAlternativeBody(string body);
+
+	    /// <summary>
+	    /// Adds template to email from embedded resource
+	    /// </summary>
+	    /// <typeparam name="T"></typeparam>
+	    /// <param name="path">Path the the embedded resource eg [YourAssembly].[YourResourceFolder].[YourFilename.txt]</param>
+	    /// <param name="model">Model for the template</param>
+	    /// <param name="assembly">The assembly your resource is in. Defaults to calling assembly.</param>
+	    /// <returns></returns>
+	    IFluentEmail PlaintextAlternativeUsingTemplateFromEmbedded<T>(string path, T model, Assembly assembly);
+
+	    /// <summary>
+	    /// Adds the template file to the email
+	    /// </summary>
+	    /// <param name="filename">The path to the file to load</param>
+	    /// <param name="model">Model for the template</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail PlaintextAlternativeUsingTemplateFromFile<T>(string filename, T model);
+
+	    /// <summary>
+	    /// Adds a culture specific template file to the email
+	    /// </summary>
+	    /// <param name="filename">The path to the file to load</param>
+	    /// /// <param name="model">The razor model</param>
+	    /// <param name="culture">The culture of the template (Default is the current culture)</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail PlaintextAlternativeUsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture);
+
+	    /// <summary>
+	    /// Adds razor template to the email
+	    /// </summary>
+	    /// <param name="template">The razor template</param>
+	    /// <param name="model">Model for the template</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail PlaintextAlternativeUsingTemplate<T>(string template, T model);
 	}
 }

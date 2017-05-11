@@ -12,6 +12,7 @@ namespace FluentEmail.Core.Models
         public Address FromAddress { get; set; }
         public string Subject { get; set; }
         public string Body { get; set; }
+        public string PlaintextAlternativeBody { get; set; }
         public Priority Priority { get; set; }
 
         public bool IsHtml { get; set; }

@@ -48,6 +48,11 @@ namespace FluentEmail.Mailgun
 
             request.AddParameter(email.Data.IsHtml ? "html" : "text", email.Data.Body);
 
+            if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
+            {
+                request.AddParameter("text", email.Data.PlaintextAlternativeBody);
+            }
+
             if (email.Data.Attachments.Any())
             {
                 request.AlwaysMultipartFormData = true;
