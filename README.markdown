@@ -56,3 +56,9 @@ await email.SendAsync();
 ```
 
 <a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
+
+
+## Development and Beta Packages
+
+If you need a pre-release version, you can add the MyGet feed to your nuget package sources.  
+<https://www.myget.org/F/fluentemail/api/v3/index.json>
