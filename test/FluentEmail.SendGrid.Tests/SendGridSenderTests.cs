@@ -11,7 +11,7 @@ namespace FluentEmail.SendGrid.Tests
 {
     public class SendGridSenderTests
     {
-        const string apiKey = "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";
+        const string apiKey = "";
         const string toEmail = "fluentEmail@mailinator.com";
         const string toName = "FluentEmail Mailinator";
         const string fromEmail = "test@fluentmail.com";
