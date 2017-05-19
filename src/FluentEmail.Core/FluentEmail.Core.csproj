@@ -5,7 +5,7 @@
     <AssemblyTitle>Fluent Email</AssemblyTitle>
     <VersionPrefix>2.0.3</VersionPrefix>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <TargetFrameworks>net451;netstandard1.4</TargetFrameworks>
+    <TargetFrameworks>net451;netstandard1.6</TargetFrameworks>
     <AssemblyName>FluentEmail.Core</AssemblyName>
     <PackageId>FluentEmail.Core</PackageId>
     <PackageTags>email;razor;smtp;fluent;fluentemail</PackageTags>

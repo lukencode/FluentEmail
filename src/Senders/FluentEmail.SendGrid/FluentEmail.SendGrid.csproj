@@ -5,7 +5,7 @@
     <AssemblyTitle>Fluent Email - SendGrid</AssemblyTitle>
     <VersionPrefix>2.0.0</VersionPrefix>
     <Authors>Luke Lowrey;Ben Cull;Ricardo Santos;Github Contributors</Authors>
-    <TargetFramework>netstandard1.4</TargetFramework>
+    <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>FluentEmail.SendGrid</AssemblyName>
     <PackageId>FluentEmail.SendGrid</PackageId>
     <PackageTags>email;razor;sendgrid;fluent;fluentemail</PackageTags>
