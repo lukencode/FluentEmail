@@ -26,10 +26,10 @@ namespace FluentEmail.Mailgun.HttpHelpers
         {
             var mpContent = new MultipartFormDataContent();
 
-            var formatted = parameters.Select(x => x.Key + "=" + x.Value);
-            var stringContent = new StringContent(string.Join("&", formatted), Encoding.UTF8, "application/x-www-form-urlencoded");
-
-            mpContent.Add(stringContent);
+            parameters.ForEach(p =>
+            {
+                mpContent.Add(new StringContent(p.Value), p.Key);
+            });
 
             files.ForEach(file =>
             {

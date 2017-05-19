@@ -34,7 +34,7 @@ namespace FluentEmail.Mailgun
         {
             var client = new HttpClient()
             {
-                BaseAddress = new Uri($"https://api.mailgun.net/v3/{_domainName}")
+                BaseAddress = new Uri($"https://api.mailgun.net/v3/{_domainName}/")
             };
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
                 Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{_apiKey}")));
