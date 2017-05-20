@@ -75,11 +75,12 @@ namespace FluentEmail.Mailgun
             var response = await client.PostMultipart<MailgunResponse>("messages", parameters, files);
         
             var result = new SendResponse();
-            if (string.IsNullOrEmpty(response.Data.Id))
+            if (!response.Success)
             {
-                result.ErrorMessages.Add(response.Data.Message);
+                result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));
+                return result;
             }
-
+            
             return result;
         }
     }
