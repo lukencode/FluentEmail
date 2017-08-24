@@ -26,6 +26,7 @@ namespace FluentEmail.Smtp.Tests
             {
                 UseSsl = false
             };
+
             Email.DefaultSender = sender;
         }
 

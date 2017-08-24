@@ -5,14 +5,13 @@
     <AssemblyTitle>Fluent Email - SMTP</AssemblyTitle>
     <VersionPrefix>2.0.4</VersionPrefix>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <TargetFramework>net451</TargetFramework>
+    <TargetFrameworks>net451;netstandard2.0</TargetFrameworks>
     <AssemblyName>FluentEmail.Smtp</AssemblyName>
     <PackageId>FluentEmail.Smtp</PackageId>
     <PackageTags>email;razor;smtp;fluent;fluentemail</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
     <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
     <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
     <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
