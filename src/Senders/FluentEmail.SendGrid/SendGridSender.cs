@@ -107,16 +107,11 @@ namespace FluentEmail.SendGrid
 
         private async Task<string> GetAttachmentBase64String(Stream stream)
         {
-            string converted;
-
-            using (var sr = new StreamReader(stream))
+            using (var ms = new MemoryStream())
             {
-                var s = await sr.ReadToEndAsync();
-                var stringBytes = Encoding.Unicode.GetBytes(s);
-                converted = Convert.ToBase64String(stringBytes);
+                await stream.CopyToAsync(ms);
+                return Convert.ToBase64String(ms.ToArray());
             }
-
-            return converted;
         }
 
         private bool IsHttpSuccess(int statusCode)
