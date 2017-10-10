@@ -18,5 +18,10 @@ namespace FluentEmail.Core.Defaults
 
             return template;            
         }
+
+        public Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
+        {
+            return Task.FromResult(Parse(template, model, isHtml));
+        }
     }
 }

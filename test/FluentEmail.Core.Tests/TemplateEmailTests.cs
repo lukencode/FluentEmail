@@ -2,6 +2,7 @@
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Threading.Tasks;
 using FluentEmail.Core.Defaults;
 using FluentEmail.Core.Interfaces;
 using NUnit.Framework;
@@ -190,5 +191,10 @@ namespace FluentEmail.Core.Tests
 		{
 			return "custom template";
 		}
+
+	    public Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
+	    {
+	        return Task.FromResult(Parse(template, model, isHtml));
+	    }
 	}
 }

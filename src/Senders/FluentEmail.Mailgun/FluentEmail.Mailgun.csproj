@@ -3,21 +3,16 @@
   <PropertyGroup>
     <Description>Send emails via MailGun using their REST API</Description>
     <AssemblyTitle>Fluent Email - MailGun</AssemblyTitle>
-    <VersionPrefix>2.0.3</VersionPrefix>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <TargetFramework>netstandard1.6</TargetFramework>
     <AssemblyName>FluentEmail.Mailgun</AssemblyName>
     <PackageId>FluentEmail.Mailgun</PackageId>
     <PackageTags>email;razor;mailgun;fluent;fluentemail</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
-    <NetStandardImplicitPackageVersion>1.6.0</NetStandardImplicitPackageVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dnxcore50</PackageTargetFallback>
-    <GenerateAssemblyConfigurationAttribute>false</GenerateAssemblyConfigurationAttribute>
-    <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-    <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-    <Version>2.1.0</Version>
+
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.3.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
