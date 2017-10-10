@@ -47,29 +47,27 @@ namespace FluentEmail.SendGrid.Tests
             const string subject = "SendMail With Attachments Test";
             const string body = "This email is testing the attachment functionality of SendGrid Sender.";
 
-            var stream = new MemoryStream();
-            var sw = new StreamWriter(stream);
-            sw.WriteLine("Hey this is some text in an attachment");
-            sw.Flush();
-            stream.Seek(0, SeekOrigin.Begin);
-
-            var attachment = new Attachment()
+            using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/test-binary.xlsx"))
             {
-                Data = stream,
-                ContentType = "text/plain",
-                Filename = "sendGridTest.txt"
-            };
+                var attachment = new Attachment()
+                {
+                    Data = stream,
+                    ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+                    Filename = "test-binary.xlsx"
+                };
 
-            var email = Email
-                .From(fromEmail, fromName)
-                .To(toEmail, toName)
-                .Subject(subject)
-                .Body(body)
-                .Attach(attachment);
+                var email = Email
+                    .From(fromEmail, fromName)
+                    .To(toEmail, toName)
+                    .Subject(subject)
+                    .Body(body)
+                    .Attach(attachment);
 
-            var response = await email.SendAsync();
 
-            Assert.IsTrue(response.Successful);
+                var response = await email.SendAsync();
+
+                Assert.IsTrue(response.Successful);
+            }
         }
     }
 }
