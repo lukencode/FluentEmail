@@ -12,7 +12,7 @@ namespace FluentEmail.Razor
         {
             var project = new InMemoryRazorLightProject();
             var engine = new EngineFactory().Create(project);
-            return await engine.CompileRenderAsync<T>(template, model);
+            return await engine.CompileRenderAsync<T>(template, template, model);
         }
 
         string ITemplateRenderer.Parse<T>(string template, T model, bool isHtml)
