@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using FluentEmail.Core.Interfaces;
 using RazorLight;
 using RazorLight.Extensions;
@@ -12,7 +13,8 @@ namespace FluentEmail.Razor
         {
             var project = new InMemoryRazorLightProject();
             var engine = new EngineFactory().Create(project);
-            return await engine.CompileRenderAsync<T>(template, template, model);
+            
+            return await engine.CompileRenderAsync<T>(Guid.NewGuid().ToString(), template, model);
         }
 
         string ITemplateRenderer.Parse<T>(string template, T model, bool isHtml)
