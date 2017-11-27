@@ -63,9 +63,16 @@ namespace FluentEmail.Mailgun
             var files = new List<HttpFile>();
             email.Data.Attachments.ForEach(x =>
             {
+                string param;
+
+                if (x.IsInline)
+                    param = "inline";
+                else
+                    param = "attachment";
+
                 files.Add(new HttpFile()
                 {
-                    ParameterName = "attachment",
+                    ParameterName = param,
                     Data = x.Data,
                     Filename = x.Filename,
                     ContentType = x.ContentType
