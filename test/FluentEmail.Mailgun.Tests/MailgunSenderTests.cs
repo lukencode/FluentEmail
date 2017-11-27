@@ -74,7 +74,7 @@ namespace FluentEmail.Mailgun.Tests
 
             var attachment = new Attachment()
             {
-                //Inline = true,
+                IsInline = true,
                 Data = stream,
                 ContentType = "image/png",
                 Filename = "logotest.png"
