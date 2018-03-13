@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -14,17 +15,15 @@ namespace FluentEmail.Smtp
 {
     public class SmtpSender : ISender
     {
-        private SmtpClient _client;
-        public bool UseSsl { get; set; }
+        private Func<SmtpClient> _clientFactory;
 
-        public SmtpSender() : this(new SmtpClient())
+        public SmtpSender() : this(() => new SmtpClient())
         {
         }
 
-        public SmtpSender(SmtpClient client)
+        public SmtpSender(Func<SmtpClient> clientFactory)
         {
-            _client = client;
-            UseSsl = true;
+            _clientFactory = clientFactory;
         }
 
         public SendResponse Send(Email email, CancellationToken? token = null)
@@ -35,7 +34,6 @@ namespace FluentEmail.Smtp
         public async Task<SendResponse> SendAsync(Email email, CancellationToken? token = null)
         {
             var response = new SendResponse();
-            _client.EnableSsl = UseSsl;
 
             var message = CreateMailMessage(email);
 
@@ -45,19 +43,15 @@ namespace FluentEmail.Smtp
                 return response;
             }
 
-            await _client.SendMailAsync(message);
+            using(var client = _clientFactory()) {
+                await client.SendMailAsync(message);
+            }
 
-            Dispose();
+
             return response;
         }
 
-        /// <summary>
-        /// Releases all resources
-        /// </summary>
-        public void Dispose()
-        {
-            _client?.Dispose();
-        }
+
 
         private MailMessage CreateMailMessage(Email email)
         {
@@ -106,7 +100,7 @@ namespace FluentEmail.Smtp
             data.Attachments.ForEach(x =>
             {
                 message.Attachments.Add(new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType));
-            });                       
+            });
 
             return message;
         }

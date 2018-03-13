@@ -10,6 +10,7 @@ using Attachment = FluentEmail.Core.Models.Attachment;
 
 namespace FluentEmail.Smtp.Tests
 {
+    [NonParallelizable]
     public class SmtpSenderTests
     {
         // Warning: To pass, an smtp listener must be running on localhost:25.
@@ -19,14 +20,31 @@ namespace FluentEmail.Smtp.Tests
         const string subject = "sup dawg";
         const string body = "what be the hipitity hap?";
 
+        private readonly string tempDirectory;
+
+        public SmtpSenderTests()
+        {
+            tempDirectory = Path.Combine(Path.GetTempPath(), "EmailTest");
+        }
+
         [SetUp]
         public void SetUp()
         {
-            var sender = new SmtpSender(new SmtpClient("localhost"))
+            var sender = new SmtpSender(() => new SmtpClient("localhost")
             {
-                UseSsl = false
-            };
+                EnableSsl = false,
+                DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory,
+                PickupDirectoryLocation = tempDirectory
+            });
+
             Email.DefaultSender = sender;
+            Directory.CreateDirectory(tempDirectory);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            Directory.Delete(tempDirectory, true);
         }
 
         [Test]
@@ -39,7 +57,9 @@ namespace FluentEmail.Smtp.Tests
 
             var response = email.Send();
 
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
             Assert.IsTrue(response.Successful);
+            Assert.IsNotEmpty(files);
         }
 
         [Test]
@@ -67,7 +87,9 @@ namespace FluentEmail.Smtp.Tests
 
             var response = await email.SendAsync();
 
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
             Assert.IsTrue(response.Successful);
+            Assert.IsNotEmpty(files);
         }
     }
 }
