@@ -24,7 +24,7 @@ namespace FluentEmail.Smtp
         public SmtpSender(SmtpClient client)
         {
             _client = client;
-            UseSsl = true;
+            UseSsl = client.EnableSsl;
         }
 
         public SendResponse Send(Email email, CancellationToken? token = null)

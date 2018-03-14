@@ -69,5 +69,18 @@ namespace FluentEmail.Smtp.Tests
 
             Assert.IsTrue(response.Successful);
         }
+
+        [Test]
+        public void UseSslPropertyIsInSyncWithSmtpClient()
+        {
+            var client = new SmtpClient("localhost")
+            {
+                EnableSsl = false
+            };
+
+            var sender = new SmtpSender(client);
+
+            Assert.AreEqual(client.EnableSsl, sender.UseSsl);
+        }
     }
 }
