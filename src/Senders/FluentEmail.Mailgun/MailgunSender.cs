@@ -25,12 +25,12 @@ namespace FluentEmail.Mailgun
             _apiKey = apiKey;
         }
 
-        public SendResponse Send(Email email, CancellationToken? token = null)
+        public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
             return SendAsync(email, token).GetAwaiter().GetResult();
         }
 
-        public async Task<SendResponse> SendAsync(Email email, CancellationToken? token = null)
+        public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
             var client = new HttpClient()
             {

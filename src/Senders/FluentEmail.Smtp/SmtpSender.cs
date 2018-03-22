@@ -27,12 +27,12 @@ namespace FluentEmail.Smtp
             UseSsl = true;
         }
 
-        public SendResponse Send(Email email, CancellationToken? token = null)
+        public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
             return SendAsync(email, token).GetAwaiter().GetResult();
         }
 
-        public async Task<SendResponse> SendAsync(Email email, CancellationToken? token = null)
+        public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
             var response = new SendResponse();
             _client.EnableSsl = UseSsl;
@@ -59,7 +59,7 @@ namespace FluentEmail.Smtp
             _client?.Dispose();
         }
 
-        private MailMessage CreateMailMessage(Email email)
+        private MailMessage CreateMailMessage(IFluentEmail email)
         {
             var data = email.Data;
             var message = new MailMessage

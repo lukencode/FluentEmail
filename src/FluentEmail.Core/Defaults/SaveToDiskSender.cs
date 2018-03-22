@@ -18,19 +18,19 @@ namespace FluentEmail.Core.Defaults
             _directory = directory;
         }
 
-        public SendResponse Send(Email email, CancellationToken? token = null)
+        public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
             return SendAsync(email, token).GetAwaiter().GetResult();
         }
 
-        public async Task<SendResponse> SendAsync(Email email, CancellationToken? token = null)
+        public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
             var response = new SendResponse();
             await SaveEmailToDisk(email);
             return response;
         }
 
-        private async Task<bool> SaveEmailToDisk(Email email)
+        private async Task<bool> SaveEmailToDisk(IFluentEmail email)
         {
             var random = new Random();
             var filename = $"{_directory.TrimEnd('\\')}\\{DateTime.Now:yyyy-MM-dd_hh-mm-ss}_{random.Next(1000)}";
