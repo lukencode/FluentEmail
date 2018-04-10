@@ -62,8 +62,6 @@ namespace FluentEmail.Smtp
         private MailMessage CreateMailMessage(Email email)
         {
             var data = email.Data;
-            var message = new MailMessage
-            
             MailMessage message = null;
 
             if(data.PlaintextAlternativeBody != null)
