@@ -78,6 +78,18 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
+        /// Set the send from email address
+        /// </summary>
+        /// <param name="emailAddress">Email address of sender</param>
+        /// <param name="name">Name of sender</param>
+        /// <returns>Instance of the Email class</returns>
+        public IFluentEmail SetFrom(string emailAddress, string name = "")
+        {
+            Data.FromAddress = new Address(emailAddress, name);
+            return this;
+        }
+
+        /// <summary>
         /// Adds a reciepient to the email, Splits name and address on ';'
         /// </summary>
         /// <param name="emailAddress">Email address of recipeient</param>

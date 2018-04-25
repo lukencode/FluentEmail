@@ -23,12 +23,20 @@ namespace FluentEmail.Core
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail To(string emailAddress, string name);
 
-	    /// <summary>
-	    /// Adds a reciepient to the email
-	    /// </summary>
-	    /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
-	    /// <returns></returns>
-	    IFluentEmail To(string emailAddress);
+        /// <summary>
+        /// Set the send from email address
+        /// </summary>
+        /// <param name="emailAddress">Email address of sender</param>
+        /// <param name="name">Name of sender</param>
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail SetFrom(string emailAddress, string name);
+
+        /// <summary>
+        /// Adds a reciepient to the email
+        /// </summary>
+        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
+        /// <returns></returns>
+        IFluentEmail To(string emailAddress);
 
 	    /// <summary>
 	    /// Adds all reciepients in list to email

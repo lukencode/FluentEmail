@@ -49,8 +49,18 @@ namespace FluentEmail.Core.Tests
 			Assert.AreEqual("Fred", email.Data.ToAddresses[2].Name);
 		}
 
-		#region Refactored tests using setup through constructor.
-		[Test]
+        [Test]
+        public void SetFromAddress()
+        {
+            var email = new Email();
+            email.SetFrom("test@test.test", "test");
+
+            Assert.AreEqual("test@test.test", email.Data.FromAddress.EmailAddress);
+            Assert.AreEqual("test", email.Data.FromAddress.Name);
+        }
+
+        #region Refactored tests using setup through constructor.
+        [Test]
 		public void New_SplitAddress_Test()
 		{
 			var email = new Email()
