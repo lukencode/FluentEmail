@@ -169,7 +169,14 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
             if (message.IsSuccessStatusCode)
             {
-                response.Data = JsonConvert.DeserializeObject<T>(response.ResponseBody);
+                try
+                {
+                    response.Data = JsonConvert.DeserializeObject<T>(response.ResponseBody);
+                }
+                catch (Exception ex)
+                {
+                    response.HandleFailedCall();
+                }
             }
             else
             {
