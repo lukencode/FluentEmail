@@ -62,13 +62,32 @@ namespace FluentEmail.Smtp
         private MailMessage CreateMailMessage(Email email)
         {
             var data = email.Data;
-            var message = new MailMessage
+            MailMessage message = null;
+
+            if(data.PlaintextAlternativeBody != null)
             {
-                Subject = data.Subject,
-                Body = data.Body,
-                IsBodyHtml = data.IsHtml,
-                From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
-            };
+                message = new MailMessage
+                {
+                    Subject = data.Subject,
+                    Body = data.PlaintextAlternativeBody,
+                    IsBodyHtml = false,
+                    From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
+                };
+
+                var mimeType = new System.Net.Mime.ContentType("text/html");
+                AlternateView alternate = AlternateView.CreateAlternateViewFromString(data.Body, mimeType);
+                message.AlternateViews.Add(alternate);
+            }
+            else
+            {
+                message = new MailMessage
+                {
+                    Subject = data.Subject,
+                    Body = data.Body,
+                    IsBodyHtml = data.IsHtml,
+                    From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
+                };
+            }
 
             data.ToAddresses.ForEach(x =>
             {
