@@ -64,13 +64,14 @@ namespace FluentEmail.Smtp
             var data = email.Data;
             MailMessage message = null;
 
-            if(data.PlaintextAlternativeBody != null)
+            // Smtp seems to require the HTML version as the alternative.
+            if (!string.IsNullOrEmpty(data.PlaintextAlternativeBody))
             {
                 message = new MailMessage
                 {
                     Subject = data.Subject,
                     Body = data.PlaintextAlternativeBody,
-                    IsBodyHtml = false,
+                    IsBodyHtml = false,                
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
 
@@ -84,11 +85,11 @@ namespace FluentEmail.Smtp
                 {
                     Subject = data.Subject,
                     Body = data.Body,
-                    IsBodyHtml = data.IsHtml,
+                    IsBodyHtml = data.IsHtml,                
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
             }
-
+            
             data.ToAddresses.ForEach(x =>
             {
                 message.To.Add(new MailAddress(x.EmailAddress, x.Name));

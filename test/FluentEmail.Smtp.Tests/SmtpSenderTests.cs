@@ -34,8 +34,8 @@ namespace FluentEmail.Smtp.Tests
         {
             var email = Email
                 .From(fromEmail)
-                .To(toEmail)
-                .Body("Test");
+                .To(toEmail)                
+                .Body("<h2>Test</h2>", true);
 
             var response = email.Send();
 
@@ -66,6 +66,20 @@ namespace FluentEmail.Smtp.Tests
                 .Attach(attachment);
 
             var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public async Task CanSendHtmlAndPlaintextTogether()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Body("<h2>Test</h2><p>some body text</p>", true)
+                .PlaintextAlternativeBody("Test - Some body text");
+
+            var response = email.Send();
 
             Assert.IsTrue(response.Successful);
         }
