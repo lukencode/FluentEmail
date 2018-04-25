@@ -51,6 +51,9 @@ namespace FluentEmail.Mailgun
             email.Data.BccAddresses.ForEach(x => {
                 parameters.Add(new KeyValuePair<string, string>("bcc", $"{x.Name} <{x.EmailAddress}>"));
             });
+            email.Data.ReplyToAddresses.ForEach(x => {
+                parameters.Add(new KeyValuePair<string, string>("h:Reply-To", $"{x.Name} <{x.EmailAddress}>"));
+            });
             parameters.Add(new KeyValuePair<string, string>("subject", email.Data.Subject));
 
             parameters.Add(new KeyValuePair<string, string>(email.Data.IsHtml ? "html" : "text", email.Data.Body));
