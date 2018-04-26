@@ -1,21 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Net.Mail;
-using System.Reflection;
-using System.Threading;
-using System.Threading.Tasks;
 using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
+using System;
+using System.Net.Mail;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace FluentEmail.Smtp
 {
     public class SmtpSender : ISender
     {
         private Func<SmtpClient> _clientFactory;
+        private SmtpClient _smtpClient;
 
         public SmtpSender() : this(() => new SmtpClient())
         {
@@ -24,6 +20,11 @@ namespace FluentEmail.Smtp
         public SmtpSender(Func<SmtpClient> clientFactory)
         {
             _clientFactory = clientFactory;
+        }
+
+        public SmtpSender(SmtpClient smtpClient)
+        {
+            _smtpClient = smtpClient;
         }
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
@@ -43,15 +44,20 @@ namespace FluentEmail.Smtp
                 return response;
             }
 
-            using(var client = _clientFactory()) {
-                await client.SendMailAsync(message);
+            if (_smtpClient == null)
+            {
+                using (var client = _clientFactory())
+                {
+                    await client.SendMailAsync(message);
+                }
             }
-
+            else
+            {
+                await _smtpClient.SendMailAsync(message);
+            }
 
             return response;
         }
-
-
 
         private MailMessage CreateMailMessage(IFluentEmail email)
         {
@@ -65,7 +71,7 @@ namespace FluentEmail.Smtp
                 {
                     Subject = data.Subject,
                     Body = data.PlaintextAlternativeBody,
-                    IsBodyHtml = false,                
+                    IsBodyHtml = false,
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
 
@@ -79,11 +85,11 @@ namespace FluentEmail.Smtp
                 {
                     Subject = data.Subject,
                     Body = data.Body,
-                    IsBodyHtml = data.IsHtml,                
+                    IsBodyHtml = data.IsHtml,
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
             }
-            
+
             data.ToAddresses.ForEach(x =>
             {
                 message.To.Add(new MailAddress(x.EmailAddress, x.Name));
