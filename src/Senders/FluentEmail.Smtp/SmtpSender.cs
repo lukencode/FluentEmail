@@ -10,18 +10,29 @@ namespace FluentEmail.Smtp
 {
     public class SmtpSender : ISender
     {
-        private Func<SmtpClient> _clientFactory;
-        private SmtpClient _smtpClient;
+        private readonly Func<SmtpClient> _clientFactory;
+        private readonly SmtpClient _smtpClient;
 
+        /// <summary>
+        /// Creates a sender using the default SMTP settings.
+        /// </summary>
         public SmtpSender() : this(() => new SmtpClient())
         {
         }
 
+        /// <summary>
+        /// Creates a sender that uses the factory to create and dispose an SmtpClient with each email sent.
+        /// </summary>
+        /// <param name="clientFactory"></param>
         public SmtpSender(Func<SmtpClient> clientFactory)
         {
             _clientFactory = clientFactory;
         }
 
+        /// <summary>
+        /// Creates a sender that uses the given SmtpClient, but does not dispose it.
+        /// </summary>
+        /// <param name="smtpClient"></param>
         public SmtpSender(SmtpClient smtpClient)
         {
             _smtpClient = smtpClient;
