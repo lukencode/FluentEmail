@@ -19,4 +19,8 @@
     <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
   </Target>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.0" />
+  </ItemGroup>
+
 </Project>
