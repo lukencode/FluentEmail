@@ -27,23 +27,33 @@ namespace SampleWeb.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public async Task<IActionResult> SendMultiple([FromServices] FluentEmailFactory emailFactory)
         {
-            ViewData["Message"] = "Your application description page.";
+            var model1 = new
+            {
+                Name = "test name"
+            };
 
-            return View();
-        }
+            await emailFactory.Create()
+                .To("test1@test.test")
+                .SetFrom("sender1@test.test")
+                .Subject("test email subject")
+                .UsingTemplate(@"hi @Model.Name this is the first email @(5 + 5)!", model1)
+                .SendAsync();
 
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
+            var model2 = new
+            {
+                Name = "test2 name"
+            };
 
-            return View();
-        }
+            await emailFactory.Create()
+                .To("test1@test.test")
+                .SetFrom("sender2@test.test")
+                .Subject("test email subject")
+                .UsingTemplate(@"hi @Model.Name this is the second email @(5 + 5)!", model1)
+                .SendAsync();
 
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return Content("ok");
         }
     }
 }

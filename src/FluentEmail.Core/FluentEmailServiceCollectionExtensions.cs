@@ -18,6 +18,8 @@ namespace Microsoft.Extensions.DependencyInjection
                 new Email(x.GetService<ITemplateRenderer>(), x.GetService<ISender>(), defaultFromEmail, defaultFromName)
             ));
 
+            services.TryAddTransient<FluentEmailFactory>();
+
             return builder;
         }
     }

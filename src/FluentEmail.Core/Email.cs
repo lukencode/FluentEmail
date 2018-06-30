@@ -67,11 +67,11 @@ namespace FluentEmail.Core
         /// <param name="emailAddress">Email address to send from</param>
         /// <param name="name">Name to send from</param>
         /// <returns>Instance of the Email class</returns>
-        public static IFluentEmail From(string emailAddress, string name = "")
+        public static IFluentEmail From(string emailAddress, string name = null)
         {
             var email = new Email
             {
-                Data = {FromAddress = new Address(emailAddress, name)}
+                Data = {FromAddress = new Address(emailAddress, name ?? "")}
             };
 
             return email;
@@ -83,9 +83,9 @@ namespace FluentEmail.Core
         /// <param name="emailAddress">Email address of sender</param>
         /// <param name="name">Name of sender</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail SetFrom(string emailAddress, string name = "")
+        public IFluentEmail SetFrom(string emailAddress, string name = null)
         {
-            Data.FromAddress = new Address(emailAddress, name);
+            Data.FromAddress = new Address(emailAddress, name ?? "");
             return this;
         }
 
@@ -95,12 +95,12 @@ namespace FluentEmail.Core
         /// <param name="emailAddress">Email address of recipeient</param>
         /// <param name="name">Name of recipient</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail To(string emailAddress, string name)
+        public IFluentEmail To(string emailAddress, string name = null)
         {
             if (emailAddress.Contains(";"))
             {
                 //email address has semi-colon, try split
-                var nameSplit = name.Split(';');
+                var nameSplit = name?.Split(';') ?? new string [0];
                 var addressSplit = emailAddress.Split(';');
                 for (int i = 0; i < addressSplit.Length; i++)
                 {
