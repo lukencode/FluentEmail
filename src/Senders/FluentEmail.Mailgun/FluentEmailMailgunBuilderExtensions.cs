@@ -1,6 +1,5 @@
 ﻿using FluentEmail.Core.Interfaces;
 using FluentEmail.Mailgun;
-using FluentEmail.SendGrid;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
 using System.Collections.Generic;
