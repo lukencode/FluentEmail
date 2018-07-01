@@ -44,7 +44,7 @@ public void ConfigureServices(IServiceCollection services)
 **Using a template**
 
 ```csharp
-// Using Razor templating package
+// Using Razor templating package (or set using AddRazorRenderer in services)
 Email.DefaultRenderer = new RazorRenderer();
 
 var template = "Dear @Model.Name, You are totally @Model.Compliment.";
@@ -59,7 +59,7 @@ var email = Email
 **Sending Emails**
 
 ```csharp
-// Using Smtp Sender package
+// Using Smtp Sender package (or set using AddSmtpSender in services)
 Email.DefaultSender = new SmtpSender();
 
 //send normally
