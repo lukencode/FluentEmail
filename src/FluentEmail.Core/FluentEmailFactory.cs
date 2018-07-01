@@ -5,7 +5,7 @@ using System.Text;
 
 namespace FluentEmail.Core
 {
-    public class FluentEmailFactory
+    public class FluentEmailFactory : IFluentEmailFactory
     {
         private IServiceProvider services;
 

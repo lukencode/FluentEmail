@@ -18,7 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
                 new Email(x.GetService<ITemplateRenderer>(), x.GetService<ISender>(), defaultFromEmail, defaultFromName)
             ));
 
-            services.TryAddTransient<FluentEmailFactory>();
+            services.TryAddTransient<IFluentEmailFactory, FluentEmailFactory>();
 
             return builder;
         }

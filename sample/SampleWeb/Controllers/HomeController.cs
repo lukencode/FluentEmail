@@ -27,7 +27,7 @@ namespace SampleWeb.Controllers
             return View();
         }
 
-        public async Task<IActionResult> SendMultiple([FromServices] FluentEmailFactory emailFactory)
+        public async Task<IActionResult> SendMultiple([FromServices] IFluentEmailFactory emailFactory)
         {
             var model1 = new
             {

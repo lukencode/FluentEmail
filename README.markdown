@@ -28,7 +28,7 @@ var email = Email
 
 
 **Dependency Injection**
-You can configure FluentEmail in startup.cs with these helper methods. This will by default inject IFluentEmail (send a single email) and FluentEmailFactory (used to send multiple emails in a single context) with the 
+You can configure FluentEmail in startup.cs with these helper methods. This will by default inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
 ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
 
 ```csharp
