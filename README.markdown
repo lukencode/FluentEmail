@@ -15,10 +15,6 @@ Send email from .NET or .NET Core. A bunch of useful extension packages make thi
 
 [FluentEmail.SendGrid](src/Senders/FluentEmail.Sendgrid) - Send email via the SendGrid API.
 
-## Usage
-
-You can choose which renderer and sender you would like to use, or build your own inheriting from ITemplateRenderer and ISender.
-
 **Basic Usage**
 
 ```csharp
@@ -30,10 +26,25 @@ var email = Email
 		.Send();
 ```
 
+
+**Dependency Injection**
+You can configure FluentEmail in startup.cs with these helper methods. This will by default inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
+ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+	services
+		.AddFluentEmail("fromemail@test.test")
+		.AddRazorRenderer()
+		.AddSmtpSender("localhost", 25);
+}
+```
+
 **Using a template**
 
 ```csharp
-// Using Razor templating package
+// Using Razor templating package (or set using AddRazorRenderer in services)
 Email.DefaultRenderer = new RazorRenderer();
 
 var template = "Dear @Model.Name, You are totally @Model.Compliment.";
@@ -48,7 +59,7 @@ var email = Email
 **Sending Emails**
 
 ```csharp
-// Using Smtp Sender package
+// Using Smtp Sender package (or set using AddSmtpSender in services)
 Email.DefaultSender = new SmtpSender();
 
 //send normally
@@ -87,7 +98,7 @@ var email = new Email("bob@hotmail.com")
 
 **More Info**
 
-<a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
+<a href="http://lukencode.com/2018/07/01/send-email-in-dotnet-core-with-fluent-email/">Sending email in .NET Core with FluentEmail</a>
 
 
 ## Development and Beta Packages

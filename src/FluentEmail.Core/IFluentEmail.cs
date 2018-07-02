@@ -21,7 +21,7 @@ namespace FluentEmail.Core
 	    /// <param name="emailAddress">Email address of recipeient</param>
 	    /// <param name="name">Name of recipient</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail To(string emailAddress, string name);
+	    IFluentEmail To(string emailAddress, string name = null);
 
         /// <summary>
         /// Set the send from email address
@@ -29,7 +29,7 @@ namespace FluentEmail.Core
         /// <param name="emailAddress">Email address of sender</param>
         /// <param name="name">Name of sender</param>
         /// <returns>Instance of the Email class</returns>
-        IFluentEmail SetFrom(string emailAddress, string name);
+        IFluentEmail SetFrom(string emailAddress, string name = null);
 
         /// <summary>
         /// Adds a reciepient to the email
