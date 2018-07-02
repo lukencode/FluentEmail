@@ -98,7 +98,7 @@ var email = new Email("bob@hotmail.com")
 
 **More Info**
 
-<a href="http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/">http://lukencode.com/2011/04/30/fluent-email-now-supporting-razor-syntax-for-templates/</a>
+<a href="http://lukencode.com/2018/07/01/send-email-in-dotnet-core-with-fluent-email/">Sending email in .NET Core with FluentEmail</a>
 
 
 ## Development and Beta Packages

@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.5.0-beta</Version>
+    <Version>2.5.0</Version>
   </PropertyGroup>
 
   <Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
