@@ -474,6 +474,18 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
+        /// Adds tag to the Email. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging"/>
+        /// </summary>
+        /// <param name="tag">Tag name, max 128 characters, ASCII only</param>
+        /// <returns>Instance of the Email class</returns>
+        public IFluentEmail Tag(string tag)
+        {
+            Data.Tags.Add(tag);
+
+            return this;
+        }
+
+        /// <summary>
         /// Sends email synchronously
         /// </summary>
         /// <returns>Instance of the Email class</returns>

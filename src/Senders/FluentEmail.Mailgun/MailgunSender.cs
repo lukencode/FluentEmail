@@ -63,6 +63,11 @@ namespace FluentEmail.Mailgun
                 parameters.Add(new KeyValuePair<string, string>("text", email.Data.PlaintextAlternativeBody));
             }
 
+            email.Data.Tags.ForEach(x =>
+            {
+                parameters.Add(new KeyValuePair<string, string>("o:tag", x));
+            });
+
             var files = new List<HttpFile>();
             email.Data.Attachments.ForEach(x =>
             {
