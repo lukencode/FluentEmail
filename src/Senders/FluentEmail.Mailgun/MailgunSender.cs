@@ -18,11 +18,19 @@ namespace FluentEmail.Mailgun
     {
         private readonly string _apiKey;
         private readonly string _domainName;
+        private HttpClient _httpClient;
 
         public MailgunSender(string domainName, string apiKey)
         {
             _domainName = domainName;
             _apiKey = apiKey;
+
+            _httpClient = new HttpClient()
+            {
+                BaseAddress = new Uri($"https://api.mailgun.net/v3/{_domainName}/")
+            };
+
+            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{_apiKey}")));
         }
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
@@ -32,13 +40,6 @@ namespace FluentEmail.Mailgun
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
-            var client = new HttpClient()
-            {
-                BaseAddress = new Uri($"https://api.mailgun.net/v3/{_domainName}/")
-            };
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic",
-                Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{_apiKey}")));
-
             var parameters = new List<KeyValuePair<string, string>>();
 
             parameters.Add(new KeyValuePair<string, string>("from", $"{email.Data.FromAddress.Name} <{email.Data.FromAddress.EmailAddress}>"));
@@ -87,9 +88,10 @@ namespace FluentEmail.Mailgun
                 });
             });
 
-            var response = await client.PostMultipart<MailgunResponse>("messages", parameters, files);
+            var response = await _httpClient.PostMultipart<MailgunResponse>("messages", parameters, files).ConfigureAwait(false);
         
             var result = new SendResponse();
+
             if (!response.Success)
             {
                 result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));

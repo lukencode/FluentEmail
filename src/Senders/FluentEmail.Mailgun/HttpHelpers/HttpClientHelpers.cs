@@ -76,7 +76,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
         public static async Task<ApiResponse<T>> PostMultipart<T>(this HttpClient client, string url, List<KeyValuePair<string, string>> parameters, List<HttpFile> files)
         {
-            var response = await client.PostAsync(url, HttpClientHelpers.GetMultipartFormDataContentBody(parameters, files));
+            var response = await client.PostAsync(url, HttpClientHelpers.GetMultipartFormDataContentBody(parameters, files)).ConfigureAwait(false);
             var qr = await QuickResponse<T>.FromMessage(response);
             return qr.ToApiResponse();
         }
