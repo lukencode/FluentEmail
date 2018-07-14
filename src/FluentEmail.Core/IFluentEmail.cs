@@ -227,5 +227,12 @@ namespace FluentEmail.Core
 	    /// <param name="model">Model for the template</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail PlaintextAlternativeUsingTemplate<T>(string template, T model);
+
+	    /// <summary>
+	    /// Adds tag to the Email. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging"/>
+	    /// </summary>
+	    /// <param name="tag">Tag name, max 128 characters, ASCII only</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail Tag(string tag);
 	}
 }

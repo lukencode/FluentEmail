@@ -36,6 +36,21 @@ namespace FluentEmail.Mailgun.Tests
         }
 
         [Test]
+        public async Task CanSendEmailWithTag()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body)
+                .Tag("test");
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
         public async Task CanSendEmailWithAttachments()
         {
             var stream = new MemoryStream();

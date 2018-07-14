@@ -14,6 +14,7 @@ namespace FluentEmail.Core.Models
         public string Body { get; set; }
         public string PlaintextAlternativeBody { get; set; }
         public Priority Priority { get; set; }
+        public List<string> Tags { get; set; }
 
         public bool IsHtml { get; set; }
 
@@ -24,6 +25,7 @@ namespace FluentEmail.Core.Models
             BccAddresses = new List<Address>();
             ReplyToAddresses = new List<Address>();
             Attachments = new List<Attachment>();
+            Tags = new List<string>();
         }
     }
 }
