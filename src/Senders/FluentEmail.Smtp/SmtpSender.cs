@@ -40,7 +40,9 @@ namespace FluentEmail.Smtp
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
-            return SendAsync(email, token).GetAwaiter().GetResult();
+            // Uses task.run to negate Synchronisation Context
+            // see: https://stackoverflow.com/questions/28333396/smtpclient-sendmailasync-causes-deadlock-when-throwing-a-specific-exception/28445791#28445791
+            return Task.Run(() => SendAsync(email, token)).Result;
         }
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
@@ -59,12 +61,12 @@ namespace FluentEmail.Smtp
             {
                 using (var client = _clientFactory())
                 {
-                    await client.SendMailAsync(message);
+                    await client.SendMailExAsync(message);                    
                 }
             }
             else
             {
-                await _smtpClient.SendMailAsync(message);
+                await _smtpClient.SendMailExAsync(message);
             }
 
             return response;
@@ -140,6 +142,63 @@ namespace FluentEmail.Smtp
             });
 
             return message;
+        }
+    }
+
+    // Taken from https://stackoverflow.com/questions/28333396/smtpclient-sendmailasync-causes-deadlock-when-throwing-a-specific-exception/28445791#28445791
+    // SmtpClient causes deadlock when throwing exceptions. This fixes that.
+    public static class SendMailEx
+    {
+        public static Task SendMailExAsync(
+            this System.Net.Mail.SmtpClient @this,
+            System.Net.Mail.MailMessage message,
+            CancellationToken token = default(CancellationToken))
+        {
+            // use Task.Run to negate SynchronizationContext
+            return Task.Run(() => SendMailExImplAsync(@this, message, token));
+        }
+
+        private static async Task SendMailExImplAsync(
+            System.Net.Mail.SmtpClient client, 
+            System.Net.Mail.MailMessage message, 
+            CancellationToken token)
+        {
+            token.ThrowIfCancellationRequested();
+
+            var tcs = new TaskCompletionSource<bool>();
+            System.Net.Mail.SendCompletedEventHandler handler = null;
+            Action unsubscribe = () => client.SendCompleted -= handler;
+
+            handler = async (s, e) =>
+            {
+                unsubscribe();
+
+                // a hack to complete the handler asynchronously
+                await Task.Yield(); 
+
+                if (e.UserState != tcs)
+                    tcs.TrySetException(new InvalidOperationException("Unexpected UserState"));
+                else if (e.Cancelled)
+                    tcs.TrySetCanceled();
+                else if (e.Error != null)
+                    tcs.TrySetException(e.Error);
+                else
+                    tcs.TrySetResult(true);
+            };
+
+            client.SendCompleted += handler;
+            try
+            {
+                client.SendAsync(message, tcs);
+                using (token.Register(() => client.SendAsyncCancel(), useSynchronizationContext: false))
+                {
+                    await tcs.Task;
+                }
+            }
+            finally
+            {
+                unsubscribe();
+            }
         }
     }
 }
