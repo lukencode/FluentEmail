@@ -40,7 +40,7 @@ namespace FluentEmail.Smtp
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
-            return SendAsync(email, token).GetAwaiter().GetResult();
+            return Task.Run(() => SendAsync(email, token)).Result;
         }
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
