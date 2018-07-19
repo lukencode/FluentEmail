@@ -3,6 +3,7 @@ using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using System;
 using System.Net.Mail;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -88,7 +89,7 @@ namespace FluentEmail.Smtp
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
 
-                var mimeType = new System.Net.Mime.ContentType("text/html");
+                var mimeType = new System.Net.Mime.ContentType("text/html; charset=UTF-8");
                 AlternateView alternate = AlternateView.CreateAlternateViewFromString(data.Body, mimeType);
                 message.AlternateViews.Add(alternate);
             }
@@ -99,6 +100,8 @@ namespace FluentEmail.Smtp
                     Subject = data.Subject,
                     Body = data.Body,
                     IsBodyHtml = data.IsHtml,
+                    BodyEncoding = Encoding.UTF8,
+                    SubjectEncoding = Encoding.UTF8,
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
             }
