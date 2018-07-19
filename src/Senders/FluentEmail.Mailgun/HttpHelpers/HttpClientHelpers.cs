@@ -138,9 +138,9 @@ namespace FluentEmail.Mailgun.HttpHelpers
                     });
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                Errors.Add(new ApiError()
+                Errors.Add(new ApiError
                 {
                     ErrorMessage = !string.IsNullOrEmpty(ResponseBody) ? ResponseBody : Message.StatusCode.ToString()
                 });
@@ -173,7 +173,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
                 {
                     response.Data = JsonConvert.DeserializeObject<T>(response.ResponseBody);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     response.HandleFailedCall();
                 }
