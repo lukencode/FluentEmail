@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using Microsoft.Extensions.DependencyInjection.Extensions;

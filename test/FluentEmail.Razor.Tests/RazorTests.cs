@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using FluentEmail.Core;
+﻿using FluentEmail.Core;
 using NUnit.Framework;
 
 namespace FluentEmail.Razor.Tests

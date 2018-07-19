@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using FluentEmail.Core.Interfaces;
 using RazorLight;
-using RazorLight.Extensions;
-using RazorLight.Razor;
 
 namespace FluentEmail.Razor
 {

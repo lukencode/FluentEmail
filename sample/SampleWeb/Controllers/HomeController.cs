@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentEmail.Core;
 using Microsoft.AspNetCore.Mvc;
-using SampleWeb.Models;
 
 namespace SampleWeb.Controllers
 {

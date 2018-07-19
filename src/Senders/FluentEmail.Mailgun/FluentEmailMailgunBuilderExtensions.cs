@@ -1,10 +1,6 @@
 ﻿using FluentEmail.Core.Interfaces;
 using FluentEmail.Mailgun;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Net.Mail;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
