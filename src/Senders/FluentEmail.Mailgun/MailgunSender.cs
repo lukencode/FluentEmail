@@ -20,14 +20,26 @@ namespace FluentEmail.Mailgun
         private readonly string _domainName;
         private HttpClient _httpClient;
 
-        public MailgunSender(string domainName, string apiKey)
+        public MailgunSender(string domainName, string apiKey, MailGunRegion mailGunRegion = MailGunRegion.USA)
         {
             _domainName = domainName;
             _apiKey = apiKey;
+            string url = string.Empty;
+            switch(mailGunRegion)
+            {
+                case MailGunRegion.USA:
+                    url = $"https://api.mailgun.net/v3/{_domainName}/";
+                    break;
+                case MailGunRegion.EU:
+                    url = $"https://api.eu.mailgun.net/v3/{_domainName}/";
+                    break;
 
+                default:
+                    throw new ArgumentException($"'{mailGunRegion}' is not a valid value for {nameof(mailGunRegion)}");
+            }
             _httpClient = new HttpClient()
             {
-                BaseAddress = new Uri($"https://api.mailgun.net/v3/{_domainName}/")
+                BaseAddress = new Uri(url)
             };
 
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{_apiKey}")));
