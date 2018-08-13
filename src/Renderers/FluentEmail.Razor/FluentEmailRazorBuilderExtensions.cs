@@ -1,9 +1,6 @@
 ﻿using FluentEmail.Core.Interfaces;
 using FluentEmail.Razor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Microsoft.Extensions.DependencyInjection
 {

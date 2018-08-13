@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Net.Mail;
 using System.Threading.Tasks;
 using FluentEmail.Core;
@@ -52,7 +49,7 @@ namespace FluentEmail.Smtp.Tests
         {
             var email = Email
                 .From(fromEmail)
-                .To(toEmail)                
+                .To(toEmail)
                 .Body("<h2>Test</h2>", true);
 
             var response = email.Send();
@@ -93,7 +90,21 @@ namespace FluentEmail.Smtp.Tests
         }
 
         [Test]
-        public async Task CanSendHtmlAndPlaintextTogether()
+        public async Task CanSendAsyncHtmlAndPlaintextTogether()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Body("<h2>Test</h2><p>some body text</p>", true)
+                .PlaintextAlternativeBody("Test - Some body text");
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public void CanSendHtmlAndPlaintextTogether()
         {
             var email = Email
                 .From(fromEmail)

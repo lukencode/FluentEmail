@@ -1,25 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using FluentEmail.Core;
-using FluentEmail.Core.Models;
 using NUnit.Framework;
+using Attachment = FluentEmail.Core.Models.Attachment;
 
 namespace FluentEmail.SendGrid.Tests
 {
     public class SendGridSenderTests
     {
-        const string apiKey = "";
-        const string toEmail = "fluentEmail@mailinator.com";
-        const string toName = "FluentEmail Mailinator";
-        const string fromEmail = "test@fluentmail.com";
-        const string fromName = "SendGridSender Test";
+        const string apiKey    = ""; // TODO: Put your API key here
+
+        const string toEmail   = "fluentEmail@mailinator.com";
+        const string toName    = "FluentEmail Mailinator"    ;
+        const string fromEmail = "test@fluentmail.com"       ;
+        const string fromName  = "SendGridSender Test"       ;
 
         [SetUp]
         public void SetUp()
         {
+            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentException("SendGrid Api Key need to be supplied");
+
             var sender = new SendGridSender(apiKey, true);
             Email.DefaultSender = sender;
         }

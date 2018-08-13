@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Threading;
 using System.Threading.Tasks;
 using FluentEmail.Core.Defaults;
 using FluentEmail.Core.Interfaces;
