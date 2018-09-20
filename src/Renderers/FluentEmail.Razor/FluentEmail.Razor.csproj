@@ -13,9 +13,13 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <Version>2.5.0</Version>
   </PropertyGroup>
+  
+  <PropertyGroup>
+    <PreserveCompilationContext>true</PreserveCompilationContext>
+  </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="RazorLight" Version="2.0.0-alpha3" />
+    <PackageReference Include="RazorLight" Version="2.0.0-beta1" />
   </ItemGroup>
 
   <ItemGroup>
