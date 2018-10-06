@@ -101,7 +101,7 @@ namespace FluentEmail.Mailgun
 
             var response = await _httpClient.PostMultipart<MailgunResponse>("messages", parameters, files).ConfigureAwait(false);
         
-            var result = new SendResponse();
+            var result = new SendResponse<MailgunResponse>();
 
             if (!response.Success)
             {
@@ -109,6 +109,8 @@ namespace FluentEmail.Mailgun
                 return result;
             }
             
+            result.Data = response.Data;
+
             return result;
         }
     }
