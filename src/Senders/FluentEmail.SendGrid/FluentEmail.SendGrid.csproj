@@ -12,7 +12,7 @@
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.5.0</Version>
+    <Version>2.6.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sendgrid" Version="9.2.0" />
+    <PackageReference Include="Sendgrid" Version="9.10.0" />
   </ItemGroup>
 
   <Target Name="PostcompileScript" AfterTargets="Build">
