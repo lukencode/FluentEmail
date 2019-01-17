@@ -233,5 +233,13 @@ namespace FluentEmail.Core
 	    /// <param name="tag">Tag name, max 128 characters, ASCII only</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail Tag(string tag);
-	}
+
+	    /// <summary>
+	    /// Adds header to the Email.
+	    /// </summary>
+	    /// <param name="header">Header name, only printable ASCII allowed.</param>
+	    /// <param name="body">value of the header</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail Header(string header, string body);
+    }
 }

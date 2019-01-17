@@ -4,6 +4,7 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using NUnit.Framework;
 using System.Reflection;
+using Newtonsoft.Json;
 
 namespace FluentEmail.Mailgun.Tests
 {
@@ -44,6 +45,21 @@ namespace FluentEmail.Mailgun.Tests
                 .Subject(subject)
                 .Body(body)
                 .Tag("test");
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public async Task CanSendEmailWithVariables()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body)
+                .Header("X-Mailgun-Variables", JsonConvert.SerializeObject(new Variable { Var1 = "Test"}));
 
             var response = await email.SendAsync();
 
@@ -106,6 +122,11 @@ namespace FluentEmail.Mailgun.Tests
             var response = await email.SendAsync();
 
             Assert.IsTrue(response.Successful);
+        }
+
+        class Variable
+        {
+            public string Var1 { get; set; }
         }
     }
 }

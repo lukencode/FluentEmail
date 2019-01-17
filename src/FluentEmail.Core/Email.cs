@@ -485,6 +485,13 @@ namespace FluentEmail.Core
             return this;
         }
 
+        public IFluentEmail Header(string header, string body)
+        {
+            Data.Headers.Add(header, body);
+
+            return this;
+        }
+
         /// <summary>
         /// Sends email synchronously
         /// </summary>
