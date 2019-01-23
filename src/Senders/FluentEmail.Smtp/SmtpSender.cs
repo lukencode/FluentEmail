@@ -147,7 +147,11 @@ namespace FluentEmail.Smtp
 
             data.Attachments.ForEach(x =>
             {
-                message.Attachments.Add(new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType));
+                System.Net.Mail.Attachment a = new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType);
+
+                a.ContentId = x.ContentId;
+
+                message.Attachments.Add(a);
             });
 
             return message;
