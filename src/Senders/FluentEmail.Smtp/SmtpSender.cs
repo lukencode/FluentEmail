@@ -2,6 +2,7 @@ using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using System;
+using System.Collections.Specialized;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
@@ -104,6 +105,11 @@ namespace FluentEmail.Smtp
                     SubjectEncoding = Encoding.UTF8,
                     From = new MailAddress(data.FromAddress.EmailAddress, data.FromAddress.Name)
                 };
+            }
+
+            foreach (var header in data.Headers)
+            {
+                message.Headers.Add(header.Key, header.Value);
             }
 
             data.ToAddresses.ForEach(x =>

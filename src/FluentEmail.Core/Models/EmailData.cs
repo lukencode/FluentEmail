@@ -17,6 +17,7 @@ namespace FluentEmail.Core.Models
         public List<string> Tags { get; set; }
 
         public bool IsHtml { get; set; }
+        public Dictionary<string, string> Headers { get; set; }
 
         public EmailData()
         {
@@ -26,6 +27,7 @@ namespace FluentEmail.Core.Models
             ReplyToAddresses = new List<Address>();
             Attachments = new List<Attachment>();
             Tags = new List<string>();
+            Headers = new Dictionary<string, string>();
         }
     }
 }

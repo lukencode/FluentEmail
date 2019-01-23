@@ -47,6 +47,11 @@ namespace FluentEmail.SendGrid
 
             mailMessage.SetSubject(email.Data.Subject);
 
+            if (email.Data.Headers.Any())
+            {
+                mailMessage.AddHeaders(email.Data.Headers);
+            }
+
             if (email.Data.IsHtml)
             {
                 mailMessage.HtmlContent = email.Data.Body;

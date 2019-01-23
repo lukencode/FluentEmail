@@ -42,6 +42,10 @@ namespace FluentEmail.Core.Defaults
                 sw.WriteLine($"Bcc: {string.Join(",", email.Data.BccAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
                 sw.WriteLine($"ReplyTo: {string.Join(",", email.Data.ReplyToAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
                 sw.WriteLine($"Subject: {email.Data.Subject}");
+                foreach (var dataHeader in email.Data.Headers)
+                {
+                    sw.WriteLine($"{dataHeader.Key}:{dataHeader.Value}");
+                }
                 sw.WriteLine();
                 await sw.WriteAsync(email.Data.Body);
             }
