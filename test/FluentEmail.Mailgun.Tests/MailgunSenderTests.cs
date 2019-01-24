@@ -37,6 +37,21 @@ namespace FluentEmail.Mailgun.Tests
         }
 
         [Test]
+        public async Task GetMessageIdInResponse()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body);
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+            Assert.IsNotEmpty(response.MessageId);
+        }
+
+        [Test]
         public async Task CanSendEmailWithTag()
         {
             var email = Email
