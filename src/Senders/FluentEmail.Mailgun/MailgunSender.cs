@@ -19,17 +19,17 @@ namespace FluentEmail.Mailgun
         private readonly string _domainName;
         private HttpClient _httpClient;
 
-        public MailgunSender(string domainName, string apiKey, MailGunRegion mailGunRegion = MailGunRegion.USA)
+        public MailgunSender(string domainName, string apiKey, MailgunRegion mailGunRegion = MailgunRegion.USA)
         {
             _domainName = domainName;
             _apiKey = apiKey;
             string url = string.Empty;
             switch(mailGunRegion)
             {
-                case MailGunRegion.USA:
+                case MailgunRegion.USA:
                     url = $"https://api.mailgun.net/v3/{_domainName}/";
                     break;
-                case MailGunRegion.EU:
+                case MailgunRegion.EU:
                     url = $"https://api.eu.mailgun.net/v3/{_domainName}/";
                     break;
 
