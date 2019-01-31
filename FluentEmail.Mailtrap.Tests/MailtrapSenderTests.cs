@@ -17,12 +17,27 @@ namespace FluentEmail.Mailtrap.Tests
         [SetUp]
         public void SetUp()
         {
-            var sender = new MailtrapSender("smtp.mailtrap.io", 2525, "", "");
+            var sender = new MailtrapSender("smtp.mailtrap.io", 2525, "[smtp.username]", "[smtp.password]");
             Email.DefaultSender = sender;
         }
 
         [Test]
-        public async Task CanSendEmail()
+        public void CanSendEmail()
+        {
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body);
+
+            var response = email.Send();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+
+        [Test]
+        public async Task CanSendEmailAsync()
         {
             var email = Email
                 .From(fromEmail)
