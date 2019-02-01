@@ -1,6 +1,7 @@
-﻿using System;
-using FluentEmail.Core.Interfaces;
+﻿using FluentEmail.Core.Interfaces;
 using RazorLight;
+using RazorLight.Razor;
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -11,11 +12,27 @@ namespace FluentEmail.Razor
 	public class RazorRenderer : ITemplateRenderer
     {
 	    private readonly RazorLightEngine _engine;
-	    public RazorRenderer(string root = null)
+
+	    public RazorRenderer()
+	    {
+		    _engine = new RazorLightEngineBuilder()
+			    .UseMemoryCachingProvider()
+			    .Build();      
+	    }
+
+	    public RazorRenderer(string root)
 	    {
 		    _engine = new RazorLightEngineBuilder()
 			    .UseFilesystemProject(root ?? Directory.GetCurrentDirectory())
 			    .UseMemoryCachingProvider()
+			    .Build();      
+	    }
+
+	    public RazorRenderer(RazorLightProject project)
+	    {
+		    _engine = new RazorLightEngineBuilder()
+			    .UseProject(project)
+				.UseMemoryCachingProvider()
 			    .Build();      
 	    }
 
@@ -29,7 +46,7 @@ namespace FluentEmail.Razor
 
 	    public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
 	    {            
-		    dynamic viewBag = (model as IHaveViewBag)?.ViewBag;
+		    dynamic viewBag = (model as IViewBagModel)?.ViewBag;
 		    return await _engine.CompileRenderAsync<T>(GetHashString(template), template, model, viewBag);
 	    }
 

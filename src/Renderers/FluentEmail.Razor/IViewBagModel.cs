@@ -2,7 +2,7 @@
 
 namespace FluentEmail.Razor
 {
-	public interface IHaveViewBag
+	public interface IViewBagModel
 	{
 		ExpandoObject ViewBag { get; }
 	}

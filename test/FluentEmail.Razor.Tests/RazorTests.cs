@@ -1,11 +1,11 @@
-﻿using System.Dynamic;
-using System.IO;
-using FluentEmail.Core;
+﻿using FluentEmail.Core;
 using NUnit.Framework;
+using System.Dynamic;
+using System.IO;
 
 namespace FluentEmail.Razor.Tests
 {
-    public class RazorTests
+	public class RazorTests
     {
         const string toEmail = "bob@test.com";
         const string fromEmail = "johno@test.com";
@@ -14,8 +14,7 @@ namespace FluentEmail.Razor.Tests
         [SetUp]
         public void SetUp()
         {
-			var templateRoot = Directory.GetCurrentDirectory();
-            Email.DefaultRenderer = new RazorRenderer(templateRoot);
+            Email.DefaultRenderer = new RazorRenderer();
         }
 
         [Test]
@@ -112,6 +111,9 @@ namespace FluentEmail.Razor.Tests
 	    [Test]
 	    public void Should_be_able_to_use_project_layout_with_viewbag()
 	    {
+		    var projectRoot = Directory.GetCurrentDirectory();
+		    Email.DefaultRenderer = new RazorRenderer(projectRoot);
+
 		    string template = @"
 @{
 	Layout = ""./Shared/_Layout.cshtml"";
@@ -131,6 +133,7 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 	    [Test]
 	    public void Should_be_able_to_use_embedded_layout_with_viewbag()
 	    {
+		    
 		    Email.DefaultRenderer = new RazorRenderer(typeof(RazorTests));
 		    string template = @"
 @{
@@ -149,7 +152,7 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 	    }
     }
 
-	public class ViewModelWithViewBag : IHaveViewBag
+	public class ViewModelWithViewBag : IViewBagModel
 	{
 		public ExpandoObject ViewBag { get; set;}
 		public string Name {get;set;}
