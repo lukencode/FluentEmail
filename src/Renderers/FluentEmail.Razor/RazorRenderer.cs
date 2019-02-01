@@ -1,4 +1,5 @@
-﻿using FluentEmail.Core.Interfaces;
+﻿using System;
+using FluentEmail.Core.Interfaces;
 using RazorLight;
 using System.IO;
 using System.Security.Cryptography;
@@ -14,6 +15,14 @@ namespace FluentEmail.Razor
 	    {
 		    _engine = new RazorLightEngineBuilder()
 			    .UseFilesystemProject(root ?? Directory.GetCurrentDirectory())
+			    .UseMemoryCachingProvider()
+			    .Build();      
+	    }
+
+	    public RazorRenderer(Type embeddedResRootType)
+	    {
+		    _engine = new RazorLightEngineBuilder()
+			    .UseEmbeddedResourcesProject(embeddedResRootType)
 			    .UseMemoryCachingProvider()
 			    .Build();      
 	    }
