@@ -17,7 +17,7 @@ namespace FluentEmail.Mailtrap.Tests
         [SetUp]
         public void SetUp()
         {
-            var sender = new MailtrapSender("smtp.mailtrap.io", 2525, "[smtp.username]", "[smtp.password]");
+            var sender = new MailtrapSender("[smtp.username]", "[smtp.password]");
             Email.DefaultSender = sender;
         }
 
