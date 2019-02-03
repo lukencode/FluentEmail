@@ -1,9 +1,11 @@
 ﻿using FluentEmail.Core;
 using NUnit.Framework;
+using System.Dynamic;
+using System.IO;
 
 namespace FluentEmail.Razor.Tests
 {
-    public class RazorTests
+	public class RazorTests
     {
         const string toEmail = "bob@test.com";
         const string fromEmail = "johno@test.com";
@@ -104,5 +106,56 @@ namespace FluentEmail.Razor.Tests
                 Assert.AreEqual("sup " + i + " this is the second template", email2.Data.Body);
             }
         }
+
+
+	    [Test]
+	    public void Should_be_able_to_use_project_layout_with_viewbag()
+	    {
+		    var projectRoot = Directory.GetCurrentDirectory();
+		    Email.DefaultRenderer = new RazorRenderer(projectRoot);
+
+		    string template = @"
+@{
+	Layout = ""./Shared/_Layout.cshtml"";
+}
+sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+
+			dynamic viewBag = new ExpandoObject();
+			viewBag.Title = "Hello!";
+		    var email = new Email(fromEmail)
+			    .To(toEmail)
+			    .Subject(subject)
+			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
+
+		    Assert.AreEqual("<h1>Hello!</h1>\r\n<div>\r\nsup LUKE here is a list 123</div>", email.Data.Body);
+	    }
+
+	    [Test]
+	    public void Should_be_able_to_use_embedded_layout_with_viewbag()
+	    {
+		    
+		    Email.DefaultRenderer = new RazorRenderer(typeof(RazorTests));
+		    string template = @"
+@{
+	Layout = ""_EmbeddedLayout.cshtml"";
+}
+sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
+
+		    dynamic viewBag = new ExpandoObject();
+		    viewBag.Title = "Hello!";
+		    var email = new Email(fromEmail)
+			    .To(toEmail)
+			    .Subject(subject)
+			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
+
+		    Assert.AreEqual("<h2>Hello!</h2>\r\n<div>\r\nsup LUKE here is a list 123</div>", email.Data.Body);
+	    }
     }
+
+	public class ViewModelWithViewBag : IViewBagModel
+	{
+		public ExpandoObject ViewBag { get; set;}
+		public string Name {get;set;}
+		public string[] Numbers {get;set;}
+	}
 }

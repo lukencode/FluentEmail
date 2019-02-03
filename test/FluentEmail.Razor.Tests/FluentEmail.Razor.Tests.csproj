@@ -8,6 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Shared\_Layout.cshtml" />
+    <None Remove="_EmbeddedLayout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Shared\_Layout.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="_EmbeddedLayout.cshtml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
     <ProjectReference Include="..\..\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.csproj" />
   </ItemGroup>
