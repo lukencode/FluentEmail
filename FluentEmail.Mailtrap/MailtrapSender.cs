@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading;
@@ -16,6 +17,7 @@ namespace FluentEmail.Mailtrap
     public class MailtrapSender : ISender
     {
         private readonly SmtpClient _smtpClient;
+        private static readonly int[] ValidPorts = {25, 465, 2525};
 
         /// <summary>
         /// Creates a sender that uses the given Mailtrap credentials, but does not dispose it.
@@ -32,7 +34,7 @@ namespace FluentEmail.Mailtrap
             if (string.IsNullOrWhiteSpace(password))
                 throw new ArgumentException("Mailtrap Password needs to be supplied", nameof(password));
 
-            if (port != 25 && port != 465 && port != 2525)
+            if (!ValidPorts.Contains(port))
                 throw new ArgumentException("Mailtrap Port needs to be either 25, 465 or 2525", nameof(port));
             
             _smtpClient = new SmtpClient(host, port)

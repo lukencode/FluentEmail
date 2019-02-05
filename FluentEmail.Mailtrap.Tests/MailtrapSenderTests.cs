@@ -13,11 +13,13 @@ namespace FluentEmail.Mailtrap.Tests
         const string fromEmail = "testfrom.fluentemail@mailinator.com";
         const string subject = "Mailtrap Email Test";
         const string body = "This email is testing the functionality of mailtrap.";
+        const string username = "username"; // Mailtrap SMTP inbox username
+        const string password = "password"; // Mailtrap SMTP inbox password
 
         [SetUp]
         public void SetUp()
         {
-            var sender = new MailtrapSender("[smtp.username]", "[smtp.password]");
+            var sender = new MailtrapSender(username, password);
             Email.DefaultSender = sender;
         }
 
