@@ -13,8 +13,8 @@ namespace FluentEmail.Mailtrap.Tests
         const string fromEmail = "testfrom.fluentemail@mailinator.com";
         const string subject = "Mailtrap Email Test";
         const string body = "This email is testing the functionality of mailtrap.";
-        const string username = "username"; // Mailtrap SMTP inbox username
-        const string password = "password"; // Mailtrap SMTP inbox password
+        const string username = ""; // Mailtrap SMTP inbox username
+        const string password = ""; // Mailtrap SMTP inbox password
 
         [SetUp]
         public void SetUp()
@@ -50,21 +50,6 @@ namespace FluentEmail.Mailtrap.Tests
             var response = await email.SendAsync();
 
             Assert.IsTrue(response.Successful);
-        }
-
-        [Test]
-        public async Task GetMessageIdInResponse()
-        {
-            var email = Email
-                .From(fromEmail)
-                .To(toEmail)
-                .Subject(subject)
-                .Body(body);
-
-            var response = await email.SendAsync();
-
-            Assert.IsTrue(response.Successful);
-            Assert.IsNotEmpty(response.MessageId);
         }
 
         [Test]
