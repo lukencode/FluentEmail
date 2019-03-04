@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
+    <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
   </ItemGroup>
 
 </Project>

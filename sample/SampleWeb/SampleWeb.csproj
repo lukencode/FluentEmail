@@ -13,7 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
     <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
     <ProjectReference Include="..\..\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj" />
