@@ -1,6 +1,6 @@
 namespace FluentEmail.Mailgun
 {
-    public enum MailgunRegion
+    public enum MailGunRegion
     {
         USA,
         EU
