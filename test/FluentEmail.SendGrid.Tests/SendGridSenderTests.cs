@@ -19,7 +19,7 @@ namespace FluentEmail.SendGrid.Tests
         [SetUp]
         public void SetUp()
         {
-            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentException("SendGrid Api Key need to be supplied");
+            if (string.IsNullOrWhiteSpace(apiKey)) throw new ArgumentException("SendGrid Api Key needs to be supplied");
 
             var sender = new SendGridSender(apiKey, true);
             Email.DefaultSender = sender;

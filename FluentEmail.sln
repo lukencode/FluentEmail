@@ -40,9 +40,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.SendGrid.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailgun.Tests", "test\FluentEmail.Mailgun.Tests\FluentEmail.Mailgun.Tests.csproj", "{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWeb", "sample\SampleWeb\SampleWeb.csproj", "{DF255DEF-AC5E-4670-B915-6B457A51B5FE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeb", "sample\SampleWeb\SampleWeb.csproj", "{DF255DEF-AC5E-4670-B915-6B457A51B5FE}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{361467ED-E13F-45C7-8182-21A62D5F7B47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap.Tests", "test\FluentEmail.Mailtrap.Tests\FluentEmail.Mailtrap.Tests.csproj", "{62DB7C68-A7D8-486F-9550-B5E789A7B878}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap", "src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj", "{FD858CCC-4CF3-4899-B72F-F93C13832174}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,6 +98,14 @@ Global
 		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD858CCC-4CF3-4899-B72F-F93C13832174}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD858CCC-4CF3-4899-B72F-F93C13832174}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD858CCC-4CF3-4899-B72F-F93C13832174}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD858CCC-4CF3-4899-B72F-F93C13832174}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -114,6 +126,8 @@ Global
 		{4636C06B-60ED-48AC-9833-02B8F4EB75F9} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{DF255DEF-AC5E-4670-B915-6B457A51B5FE} = {361467ED-E13F-45C7-8182-21A62D5F7B47}
+		{62DB7C68-A7D8-486F-9550-B5E789A7B878} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
+		{FD858CCC-4CF3-4899-B72F-F93C13832174} = {926C0980-31D9-4449-903F-3C756044C28A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23736554-5288-4B30-9710-B4D9880BCF0B}
