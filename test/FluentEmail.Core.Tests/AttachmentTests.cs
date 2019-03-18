@@ -45,5 +45,18 @@ namespace FluentEmail.Core.Tests
 
             Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
         }
+
+        [Test]
+        public void Attachment_from_filename_AttachmentName_Is_set()
+        {
+            var attachmentName = "attachment.txt";
+            var email = Email.From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .AttachFromFilename($"{Directory.GetCurrentDirectory()}/Test.txt", "text/plain", attachmentName);
+
+            Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
+            Assert.AreEqual(attachmentName, email.Data.Attachments.First().Filename);
+        }
     }
 }

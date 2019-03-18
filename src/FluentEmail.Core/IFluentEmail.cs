@@ -183,7 +183,7 @@ namespace FluentEmail.Core
         /// <returns></returns>
 	    Task<SendResponse> SendAsync(CancellationToken? token = null);
 
-	    IFluentEmail AttachFromFilename(string filename, string contentType = null);
+	    IFluentEmail AttachFromFilename(string filename,  string contentType = null, string attachmentName = null);
 
 	    /// <summary>
 	    /// Adds a Plaintext alternative Body to the Email. Used in conjunction with an HTML email,
