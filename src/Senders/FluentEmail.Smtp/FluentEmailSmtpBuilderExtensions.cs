@@ -16,6 +16,9 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static FluentEmailServicesBuilder AddSmtpSender(this FluentEmailServicesBuilder builder, string host, int port) => AddSmtpSender(builder, new SmtpClient(host, port));
 
+        public static FluentEmailServicesBuilder AddSmtpSender(this FluentEmailServicesBuilder builder, string host, int port, string username, string password) => AddSmtpSender(builder,
+             new SmtpClient(host, port) { EnableSsl = true, Credentials = new NetworkCredential (username, password) });
+        
         public static FluentEmailServicesBuilder AddSmtpSender(this FluentEmailServicesBuilder builder, Func<SmtpClient> clientFactory)
         {
             builder.Services.TryAdd(ServiceDescriptor.Scoped<ISender>(x => new SmtpSender(clientFactory)));
