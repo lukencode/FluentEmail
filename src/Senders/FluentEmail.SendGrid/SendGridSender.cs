@@ -61,6 +61,32 @@ namespace FluentEmail.SendGrid
                 mailMessage.PlainTextContent = email.Data.Body;
             }
 
+            switch (email.Data.Priority)
+            {
+                case Priority.High:
+                    // https://stackoverflow.com/questions/23230250/set-email-priority-with-sendgrid-api
+                    mailMessage.AddHeader("Priority", "Urgent");
+                    mailMessage.AddHeader("Importance", "High");
+                    // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcmail/2bb19f1b-b35e-4966-b1cb-1afd044e83ab
+                    mailMessage.AddHeader("X-Priority", "1");
+                    mailMessage.AddHeader("X-MSMail-Priority", "High");
+                    break;
+
+                case Priority.Normal:
+                    // Do not set anything.
+                    // Leave default values. It means Normal Priority.
+                    break;
+
+                case Priority.Low:
+                    // https://stackoverflow.com/questions/23230250/set-email-priority-with-sendgrid-api
+                    mailMessage.AddHeader("Priority", "Non-Urgent");
+                    mailMessage.AddHeader("Importance", "Low");
+                    // https://docs.microsoft.com/en-us/openspecs/exchange_server_protocols/ms-oxcmail/2bb19f1b-b35e-4966-b1cb-1afd044e83ab
+                    mailMessage.AddHeader("X-Priority", "5");
+                    mailMessage.AddHeader("X-MSMail-Priority", "Low");
+                    break;
+            }
+
             if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
             {
                 mailMessage.PlainTextContent = email.Data.PlaintextAlternativeBody;
