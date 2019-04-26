@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sendgrid" Version="9.10.0" />
+    <PackageReference Include="Sendgrid" Version="9.11.0" />
   </ItemGroup>
 
   <Target Name="PostcompileScript" AfterTargets="Build">
