@@ -1,50 +1,21 @@
 ﻿using FluentEmail.Core.Interfaces;
 using RazorLight;
-using RazorLight.Razor;
-using System;
-using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FluentEmail.Razor
 {
-	public class RazorRenderer : ITemplateRenderer
+    public class RazorRenderer : ITemplateRenderer
     {
-	    private readonly RazorLightEngine _engine;
+	    private readonly IRazorLightEngine _engine;
 
-	    public RazorRenderer()
-	    {
-		    _engine = new RazorLightEngineBuilder()
-			    .UseMemoryCachingProvider()
-			    .Build();      
-	    }
+        public RazorRenderer(IRazorLightEngine engine)
+        {
+            _engine = engine;
+        }
 
-	    public RazorRenderer(string root)
-	    {
-		    _engine = new RazorLightEngineBuilder()
-			    .UseFilesystemProject(root ?? Directory.GetCurrentDirectory())
-			    .UseMemoryCachingProvider()
-			    .Build();      
-	    }
-
-	    public RazorRenderer(RazorLightProject project)
-	    {
-		    _engine = new RazorLightEngineBuilder()
-			    .UseProject(project)
-				.UseMemoryCachingProvider()
-			    .Build();      
-	    }
-
-	    public RazorRenderer(Type embeddedResRootType)
-	    {
-		    _engine = new RazorLightEngineBuilder()
-			    .UseEmbeddedResourcesProject(embeddedResRootType)
-			    .UseMemoryCachingProvider()
-			    .Build();      
-	    }
-
-	    public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
+        public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
 	    {            
 		    dynamic viewBag = (model as IViewBagModel)?.ViewBag;
 		    return await _engine.CompileRenderAsync<T>(GetHashString(template), template, model, viewBag);

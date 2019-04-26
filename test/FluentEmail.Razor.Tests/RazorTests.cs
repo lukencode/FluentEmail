@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Dynamic;
 using System.IO;
+using FluentEmail.Razor;
 
 namespace FluentEmail.Razor.Tests
 {
@@ -14,7 +15,8 @@ namespace FluentEmail.Razor.Tests
         [SetUp]
         public void SetUp()
         {
-            Email.DefaultRenderer = new RazorRenderer();
+            var engine = RazorLightEngineFactory.Create();
+            Email.DefaultRenderer = new RazorRenderer(engine);
         }
 
         [Test]
@@ -112,7 +114,8 @@ namespace FluentEmail.Razor.Tests
 	    public void Should_be_able_to_use_project_layout_with_viewbag()
 	    {
 		    var projectRoot = Directory.GetCurrentDirectory();
-		    Email.DefaultRenderer = new RazorRenderer(projectRoot);
+            var engine = RazorLightEngineFactory.Create(projectRoot);
+            Email.DefaultRenderer = new RazorRenderer(engine);
 
 		    string template = @"
 @{
@@ -133,8 +136,8 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 	    [Test]
 	    public void Should_be_able_to_use_embedded_layout_with_viewbag()
 	    {
-		    
-		    Email.DefaultRenderer = new RazorRenderer(typeof(RazorTests));
+            var engine = RazorLightEngineFactory.Create(typeof(RazorTests));
+            Email.DefaultRenderer = new RazorRenderer(engine);
 		    string template = @"
 @{
 	Layout = ""_EmbeddedLayout.cshtml"";
