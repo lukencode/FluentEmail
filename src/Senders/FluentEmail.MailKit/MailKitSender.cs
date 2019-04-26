@@ -4,6 +4,7 @@ using FluentEmail.Core.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
 using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -44,6 +45,12 @@ namespace FluentEmail.MailKitSmtp
 
             try
             {
+                if (_smtpClientOptions.UsePickupDirectory)
+                {
+                    this.SaveToPickupDirectory(message, _smtpClientOptions.MailPickupDirectory).Wait();
+                    return response;
+                }
+
                 using (var client = new SmtpClient())
                 {
                     client.Connect(
@@ -89,6 +96,12 @@ namespace FluentEmail.MailKitSmtp
 
             try
             {
+                if(_smtpClientOptions.UsePickupDirectory)
+                {
+                    await this.SaveToPickupDirectory(message, _smtpClientOptions.MailPickupDirectory);
+                    return response;
+                }
+
                 using (var client = new SmtpClient())
                 {
                     await client.ConnectAsync(
@@ -116,6 +129,35 @@ namespace FluentEmail.MailKitSmtp
         }
 
         /// <summary>
+        /// Saves email to a pickup directory.
+        /// </summary>
+        /// <param name="message">Message to save for pickup.</param>
+        /// <param name="pickupDirectory">Pickup directory.</param>
+        private async Task SaveToPickupDirectory(MimeMessage message, string pickupDirectory)
+        {
+            // Note: this will require that you know where the specified pickup directory is.
+            var path = Path.Combine(pickupDirectory, Guid.NewGuid().ToString() + ".eml");
+
+            if (File.Exists(path))
+                return;
+
+            try
+            {
+                using (var stream = new FileStream(path, FileMode.CreateNew))
+                {
+                    await message.WriteToAsync(stream);
+                    return;
+                }
+            }
+            catch (IOException)
+            {
+                // The file may have been created between our File.Exists() check and
+                // our attempt to create the stream.
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Create a MimMessage so MailKit can send it
         /// </summary>
         /// <returns>The mail message.</returns>
@@ -126,7 +168,7 @@ namespace FluentEmail.MailKitSmtp
 
             MimeMessage message = new MimeMessage
             {
-                Subject = data.Subject
+                Subject = data.Subject ?? string.Empty
             };
 
             message.From.Add(new MailboxAddress(data.FromAddress.Name, data.FromAddress.EmailAddress));

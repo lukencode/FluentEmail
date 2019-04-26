@@ -11,5 +11,7 @@ namespace FluentEmail.MailKitSmtp
         public bool UseSsl { get; set; } = false;
         public bool RequiresAuthentication { get; set; } = false;
         public string PreferredEncoding { get; set; } = string.Empty;
+        public bool UsePickupDirectory { get; set; } = false;
+        public string MailPickupDirectory { get; set; } = string.Empty;
     }
 }
