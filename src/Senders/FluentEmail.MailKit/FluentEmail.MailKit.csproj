@@ -1,18 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Send emails via SendGrid using their REST API</Description>
-    <AssemblyTitle>Fluent Email - SendGrid</AssemblyTitle>
-    <Authors>Luke Lowrey;Ben Cull;Ricardo Santos;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.SendGrid</AssemblyName>
-    <PackageId>FluentEmail.SendGrid</PackageId>
-    <PackageTags>email;razor;sendgrid;fluent;fluentemail</PackageTags>
+    <Description>Send emails via MailKit. The SmtpClient has been deprecated and Microsoft recommends using MailKit instead.</Description>
+    <AssemblyTitle>Fluent Email - MailKit</AssemblyTitle>
+    <Authors>Luke Lowrey;Ben Cull;Matt Rutledge;Github Contributors</Authors>
+    <AssemblyName>FluentEmail.MailKit</AssemblyName>
+    <PackageId>FluentEmail.MailKit</PackageId>
+    <PackageTags>email;razor;smtp;mailkit;fluent;fluentemail</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.6.0</Version>
+    <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,11 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sendgrid" Version="9.11.0" />
+    <PackageReference Include="MailKit" Version="2.1.4" />
   </ItemGroup>
-
   <Target Name="PostcompileScript" AfterTargets="Build">
     <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
   </Target>
-
 </Project>
