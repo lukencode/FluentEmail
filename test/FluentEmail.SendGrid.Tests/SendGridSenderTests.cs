@@ -70,5 +70,41 @@ namespace FluentEmail.SendGrid.Tests
                 Assert.IsTrue(response.Successful);
             }
         }
+
+        [Test]
+        public async Task CanSendHighPriorityEmail()
+        {
+            const string subject = "SendMail Test";
+            const string body = "This email is testing send mail functionality of SendGrid Sender.";
+
+            var email = Email
+                .From(fromEmail, fromName)
+                .To(toEmail, toName)
+                .Subject(subject)
+                .Body(body)
+                .HighPriority();
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public async Task CanSendLowPriorityEmail()
+        {
+            const string subject = "SendMail Test";
+            const string body = "This email is testing send mail functionality of SendGrid Sender.";
+
+            var email = Email
+                .From(fromEmail, fromName)
+                .To(toEmail, toName)
+                .Subject(subject)
+                .Body(body)
+                .LowPriority();
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
     }
 }
