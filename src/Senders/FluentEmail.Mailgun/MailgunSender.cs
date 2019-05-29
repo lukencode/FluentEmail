@@ -112,7 +112,7 @@ namespace FluentEmail.Mailgun
 
             var response = await _httpClient.PostMultipart<MailgunResponse>("messages", parameters, files).ConfigureAwait(false);
 
-            var result = new SendResponse {MessageId = response.Data.Id};
+            var result = new SendResponse {MessageId = response.Data?.Id};
             if (!response.Success)
             {
                 result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));
