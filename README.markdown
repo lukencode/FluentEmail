@@ -15,7 +15,7 @@ Send email from .NET or .NET Core. A bunch of useful extension packages make thi
 
 [FluentEmail.Mailgun](src/Senders/FluentEmail.Mailgun) - Send emails via MailGun's REST API.
 
-[FluentEmail.SendGrid](src/Senders/FluentEmail.Sendgrid) - Send email via the SendGrid API.
+[FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
 
 **Basic Usage**
 
