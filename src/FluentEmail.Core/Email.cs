@@ -114,7 +114,7 @@ namespace FluentEmail.Core
             }
             else
             {
-                Data.ToAddresses.Add(new Address(emailAddress.Trim(), name.Trim()));
+                Data.ToAddresses.Add(new Address(emailAddress.Trim(), name?.Trim()));
             }
             return this;
         }
