@@ -1,5 +1,6 @@
 ﻿using FluentEmail.Core;
 using NUnit.Framework;
+using System;
 using System.Dynamic;
 using System.IO;
 
@@ -127,7 +128,7 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 			    .Subject(subject)
 			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
 
-		    Assert.AreEqual("<h1>Hello!</h1>\r\n<div>\r\nsup LUKE here is a list 123</div>", email.Data.Body);
+		    Assert.AreEqual($"<h1>Hello!</h1>{Environment.NewLine}<div>{Environment.NewLine}sup LUKE here is a list 123</div>", email.Data.Body);
 	    }
 
 	    [Test]
@@ -148,7 +149,7 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 			    .Subject(subject)
 			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
 
-		    Assert.AreEqual("<h2>Hello!</h2>\r\n<div>\r\nsup LUKE here is a list 123</div>", email.Data.Body);
+		    Assert.AreEqual($"<h2>Hello!</h2>{Environment.NewLine}<div>{Environment.NewLine}sup LUKE here is a list 123</div>", email.Data.Body);
 	    }
     }
 
