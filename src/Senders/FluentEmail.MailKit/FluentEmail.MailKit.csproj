@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <Description>Send emails via MailKit. The SmtpClient has been deprecated and Microsoft recommends using MailKit instead.</Description>
@@ -13,6 +13,7 @@
 
     <TargetFramework>netstandard2.0</TargetFramework>
     <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
+    <Version>2.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

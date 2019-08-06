@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>2.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
   </ItemGroup>
+
+  <Target Name="PostcompileScript" AfterTargets="Build">
+    <Exec Command="dotnet pack --no-build --configuration $(Configuration)" />
+  </Target>
 
 </Project>

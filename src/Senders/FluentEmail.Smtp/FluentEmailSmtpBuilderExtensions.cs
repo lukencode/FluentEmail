@@ -2,6 +2,7 @@
 using FluentEmail.Smtp;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using System;
+using System.Net;
 using System.Net.Mail;
 
 namespace Microsoft.Extensions.DependencyInjection
