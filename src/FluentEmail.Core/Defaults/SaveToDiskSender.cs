@@ -32,7 +32,7 @@ namespace FluentEmail.Core.Defaults
         private async Task<bool> SaveEmailToDisk(IFluentEmail email)
         {
             var random = new Random();
-            var filename = $"{_directory.TrimEnd('\\')}\\{DateTime.Now:yyyy-MM-dd_HH-mm-ss}_{random.Next(1000)}";
+            var filename = Path.Combine(_directory, $"{DateTime.Now:yyyy-MM-dd_HH-mm-ss}_{random.Next(1000)}");
 
             using (var sw = new StreamWriter(File.OpenWrite(filename)))
             {
