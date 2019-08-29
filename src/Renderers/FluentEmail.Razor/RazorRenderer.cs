@@ -16,14 +16,15 @@ namespace FluentEmail.Razor
 	    public RazorRenderer()
 	    {
 		    _engine = new RazorLightEngineBuilder()
+                .UseProject(new InMemoryRazorLightProject()) // RazorLight dies if project is null
 			    .UseMemoryCachingProvider()
-			    .Build();      
+			    .Build();
 	    }
 
 	    public RazorRenderer(string root)
 	    {
 		    _engine = new RazorLightEngineBuilder()
-			    .UseFilesystemProject(root ?? Directory.GetCurrentDirectory())
+                .UseFileSystemProject(root ?? Directory.GetCurrentDirectory())
 			    .UseMemoryCachingProvider()
 			    .Build();      
 	    }
@@ -47,7 +48,7 @@ namespace FluentEmail.Razor
 	    public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
 	    {            
 		    dynamic viewBag = (model as IViewBagModel)?.ViewBag;
-		    return await _engine.CompileRenderAsync<T>(GetHashString(template), template, model, viewBag);
+		    return await _engine.CompileRenderStringAsync<T>(GetHashString(template), template, model, viewBag);
 	    }
 
 	    string ITemplateRenderer.Parse<T>(string template, T model, bool isHtml)
