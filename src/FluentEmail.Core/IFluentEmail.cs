@@ -241,5 +241,13 @@ namespace FluentEmail.Core
 	    /// <param name="body">value of the header</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail Header(string header, string body);
+
+        /// <summary>
+        /// Adds template id and template data. This is now only supported by SendGrid and uses the Transactional templates. <see href="https://github.com/sendgrid/sendgrid-csharp/blob/master/USE_CASES.md#with-mail-helper-class"/>
+        /// </summary>
+        /// <param name="templateId"></param>
+        /// <param name="templateData"></param>
+        /// <returns></returns>
+        IFluentEmail SetTemplateData(string templateId, object templateData);
     }
 }
