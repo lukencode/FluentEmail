@@ -1,4 +1,4 @@
-﻿using System;
+﻿using MailKit.Security;
 
 namespace FluentEmail.MailKitSmtp
 {
@@ -13,5 +13,6 @@ namespace FluentEmail.MailKitSmtp
         public string PreferredEncoding { get; set; } = string.Empty;
         public bool UsePickupDirectory { get; set; } = false;
         public string MailPickupDirectory { get; set; } = string.Empty;
+        public SecureSocketOptions? SocketOptions { get; set; }
     }
 }
