@@ -4,16 +4,8 @@
     <Description>Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the RazorLight project under the hood.</Description>
     <AssemblyTitle>Fluent Email - Razor</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.Razor</AssemblyName>
-    <PackageId>FluentEmail.Razor</PackageId>
     <PackageTags>email;razor;smtp;fluent;fluentemail</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.7.0</Version>
-    <AssemblyVersion>2.7.0.0</AssemblyVersion>
-    <FileVersion>2.7.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>

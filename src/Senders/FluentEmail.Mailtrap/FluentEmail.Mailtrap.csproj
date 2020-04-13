@@ -4,15 +4,9 @@
     <Description>Send emails to Mailtrap. Uses FluentEmail.Smtp for delivery.</Description>
     <AssemblyTitle>Fluent Email - MailTrap</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Anthony Zigenbine;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.Mailtrap</AssemblyName>
-    <PackageId>FluentEmail.Mailtrap</PackageId>
     <PackageTags>email;razor;smtp;fluent;fluentemail;mailtrap</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

@@ -3,16 +3,11 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
-    <AssemblyName>FluentEmail.Razor.Tests</AssemblyName>
-    <PackageId>FluentEmail.Razor.Tests</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Shared\_Layout.cshtml" />
     <None Remove="_EmbeddedLayout.cshtml" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Shared\_Layout.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -2,15 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>FluentEmail.Smtp.Tests</AssemblyName>
-    <PackageId>FluentEmail.Smtp.Tests</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="*.txt" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
   </ItemGroup>
 

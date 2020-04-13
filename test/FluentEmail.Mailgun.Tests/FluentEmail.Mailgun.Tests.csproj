@@ -2,15 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>FluentEmail.Mailgun.Tests</AssemblyName>
-    <PackageId>FluentEmail.Mailgun.Tests</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="logotest.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="logotest.png" />
   </ItemGroup>
 

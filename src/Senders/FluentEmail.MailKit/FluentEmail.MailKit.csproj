@@ -4,16 +4,9 @@
     <Description>Send emails via MailKit. The SmtpClient has been deprecated and Microsoft recommends using MailKit instead.</Description>
     <AssemblyTitle>Fluent Email - MailKit</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Matt Rutledge;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.MailKit</AssemblyName>
-    <PackageId>FluentEmail.MailKit</PackageId>
     <PackageTags>email;razor;smtp;mailkit;fluent;fluentemail</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
-    <Version>2.7.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

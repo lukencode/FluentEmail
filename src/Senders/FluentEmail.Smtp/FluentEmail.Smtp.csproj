@@ -4,15 +4,9 @@
     <Description>Now we're talking. Send emails via SMTP.</Description>
     <AssemblyTitle>Fluent Email - SMTP</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.Smtp</AssemblyName>
-    <PackageId>FluentEmail.Smtp</PackageId>
     <PackageTags>email;razor;smtp;fluent;fluentemail</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
 
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.7.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

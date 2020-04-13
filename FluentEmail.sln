@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30001.183
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC215BD-05EF-49A6-ADBE-8AE399952EEC}"
 EndProject
@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Senders", "Senders", "{926C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B3C8C77-C54A-4F9E-A241-676AC01E49BB}"
 	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
 		README.markdown = README.markdown
 	EndProjectSection
 EndProject
@@ -48,9 +49,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap", "src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj", "{FD858CCC-4CF3-4899-B72F-F93C13832174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.MailKit", "src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj", "{AEC98399-8C63-4362-B307-0DFB25FFC948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.MailKit", "src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj", "{AEC98399-8C63-4362-B307-0DFB25FFC948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.MailKit.Tests", "test\FluentEmail.MailKit.Tests\FluentEmail.MailKit.Tests.csproj", "{57718ED0-6B5D-419F-A5C5-1884BE3529A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.MailKit.Tests", "test\FluentEmail.MailKit.Tests\FluentEmail.MailKit.Tests.csproj", "{57718ED0-6B5D-419F-A5C5-1884BE3529A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

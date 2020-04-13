@@ -2,8 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>FluentEmail.SendGrid.Tests</AssemblyName>
-    <PackageId>FluentEmail.SendGrid.Tests</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
