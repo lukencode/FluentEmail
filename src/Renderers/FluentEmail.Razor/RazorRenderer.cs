@@ -44,10 +44,10 @@ namespace FluentEmail.Razor
 			    .Build();      
 	    }
 
-	    public async Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
-	    {            
+	    public Task<string> ParseAsync<T>(string template, T model, bool isHtml = true)
+	    {
 		    dynamic viewBag = (model as IViewBagModel)?.ViewBag;
-		    return await _engine.CompileRenderAsync<T>(GetHashString(template), template, model, viewBag);
+		    return _engine.CompileRenderAsync<T>(GetHashString(template), template, model, viewBag);
 	    }
 
 	    string ITemplateRenderer.Parse<T>(string template, T model, bool isHtml)

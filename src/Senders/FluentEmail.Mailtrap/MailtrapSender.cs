@@ -50,10 +50,10 @@ namespace FluentEmail.Mailtrap
             return smtpSender.Send(email, token);
         }
 
-        public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
+        public Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
             var smtpSender = new SmtpSender(_smtpClient);
-            return await smtpSender.SendAsync(email, token);
+            return smtpSender.SendAsync(email, token);
         }
     }
 }
