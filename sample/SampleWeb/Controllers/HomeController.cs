@@ -45,7 +45,7 @@ namespace SampleWeb.Controllers
                 .To("test1@test.test")
                 .SetFrom("sender2@test.test")
                 .Subject("test email subject")
-                .UsingTemplate(@"hi @Model.Name this is the second email @(5 + 5)!", model1)
+                .UsingTemplate(@"hi @Model.Name this is the second email @(5 + 5)!", model2)
                 .SendAsync();
 
             return Content("ok");
