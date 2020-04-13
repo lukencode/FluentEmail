@@ -153,7 +153,6 @@ namespace FluentEmail.MailKitSmtp
             {
                 // The file may have been created between our File.Exists() check and
                 // our attempt to create the stream.
-                throw;
             }
         }
 
