@@ -41,7 +41,7 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="emailAddress">Email address to send from</param>
         /// <param name="name">Name to send from</param>
-        public Email(string emailAddress, string name = "") 
+        public Email(string emailAddress, string name = "")
             : this(DefaultRenderer, DefaultSender, emailAddress, name) { }
 
         /// <summary>
@@ -90,9 +90,9 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds a reciepient to the email, Splits name and address on ';'
+        /// Adds a recipient to the email, Splits name and address on ';'
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient</param>
+        /// <param name="emailAddress">Email address of recipient</param>
         /// <param name="name">Name of recipient</param>
         /// <returns>Instance of the Email class</returns>
         public IFluentEmail To(string emailAddress, string name = null)
@@ -120,9 +120,9 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds a reciepient to the email
+        /// Adds a recipient to the email
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
+        /// <param name="emailAddress">Email address of recipient (allows multiple splitting on ';')</param>
         /// <returns></returns>
         public IFluentEmail To(string emailAddress)
         {
@@ -142,7 +142,7 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds all reciepients in list to email
+        /// Adds all recipients in list to email
         /// </summary>
         /// <param name="mailAddresses">List of recipients</param>
         /// <returns>Instance of the Email class</returns>
@@ -253,8 +253,8 @@ namespace FluentEmail.Core
             Data.IsHtml = isHtml;
             Data.Body = body;
             return this;
-        }        
-        
+        }
+
         /// <summary>
         /// Adds a Plaintext alternative Body to the Email. Used in conjunction with an HTML email,
         /// this allows for email readers without html capability, and also helps avoid spam filters.

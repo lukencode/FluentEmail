@@ -15,9 +15,9 @@ namespace FluentEmail.Core
 	    ISender Sender { get; set; }
 
 	    /// <summary>
-	    /// Adds a reciepient to the email, Splits name and address on ';'
+	    /// Adds a recipient to the email, Splits name and address on ';'
 	    /// </summary>
-	    /// <param name="emailAddress">Email address of recipeient</param>
+	    /// <param name="emailAddress">Email address of recipient</param>
 	    /// <param name="name">Name of recipient</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail To(string emailAddress, string name = null);
@@ -31,14 +31,14 @@ namespace FluentEmail.Core
         IFluentEmail SetFrom(string emailAddress, string name = null);
 
         /// <summary>
-        /// Adds a reciepient to the email
+        /// Adds a recipient to the email
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
+        /// <param name="emailAddress">Email address of recipient (allows multiple splitting on ';')</param>
         /// <returns></returns>
         IFluentEmail To(string emailAddress);
 
 	    /// <summary>
-	    /// Adds all reciepients in list to email
+	    /// Adds all recipients in list to email
 	    /// </summary>
 	    /// <param name="mailAddresses">List of recipients</param>
 	    /// <returns>Instance of the Email class</returns>
