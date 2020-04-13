@@ -58,11 +58,15 @@ namespace FluentEmail.Razor
 	    public static string GetHashString(string inputString)
 	    {
 		    var sb = new StringBuilder();
-		    var hashbytes = SHA256.Create().ComputeHash(Encoding.UTF8.GetBytes(inputString));
-		    foreach (byte b in hashbytes)
-		    {
-			    sb.Append(b.ToString("X2"));
-		    }
+            using (var sha256 = SHA256.Create())
+            {
+                var hashbytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(inputString));
+
+                foreach (byte b in hashbytes)
+                {
+                    sb.Append(b.ToString("X2"));
+                }
+            }
 
 		    return sb.ToString();
 	    }
