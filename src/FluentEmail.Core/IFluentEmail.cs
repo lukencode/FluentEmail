@@ -234,6 +234,13 @@ namespace FluentEmail.Core
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail Tag(string tag);
 
+		/// <summary>
+		/// Turns test mode on or off. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#sending-in-test-mode"/>
+		/// </summary>
+		/// <param name="testMode">Whether the test mode should be active</param>
+		/// <returns>Instance of the Email class</returns>
+		IFluentEmail TestMode(bool testMode = true);
+
 	    /// <summary>
 	    /// Adds header to the Email.
 	    /// </summary>
