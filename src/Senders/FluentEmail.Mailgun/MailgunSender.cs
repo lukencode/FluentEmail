@@ -80,6 +80,11 @@ namespace FluentEmail.Mailgun
                 parameters.Add(new KeyValuePair<string, string>("o:tag", x));
             });
 
+            foreach (var item in email.Data.Variables)
+            {
+                parameters.Add(new KeyValuePair<string, string>($"v:{item.Key}", item.Value));
+            }
+
             foreach (var emailHeader in email.Data.Headers)
             {
                 var key = emailHeader.Key;

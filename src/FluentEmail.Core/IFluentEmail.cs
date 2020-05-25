@@ -234,6 +234,14 @@ namespace FluentEmail.Core
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail Tag(string tag);
 
+		/// <summary>
+		/// Adds variables to the Email. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#attaching-data-to-messages"/>
+		/// </summary>
+		/// <param name="key">Variable name</param>
+		/// /// <param name="value">Variable value</param>
+		/// <returns>Instance of the Email class</returns>
+		IFluentEmail Variable(string key, string value);
+
 	    /// <summary>
 	    /// Adds header to the Email.
 	    /// </summary>
