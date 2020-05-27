@@ -3,6 +3,8 @@
 # FluentEmail - All in one email sender for .NET and .NET Core
 Send email from .NET or .NET Core. A bunch of useful extension packages make this dead simple and very powerful.
 
+**[The future of FluentEmail](https://lukelowrey.com/fluentemail-future/)**
+
 ## Packages
 
 [FluentEmail.Core](src/FluentEmail.Core) - Just the domain model. Includes very basic defaults, but is also included with every other package here.
