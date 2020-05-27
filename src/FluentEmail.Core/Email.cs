@@ -41,8 +41,10 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="emailAddress">Email address to send from</param>
         /// <param name="name">Name to send from</param>
-        public Email(string emailAddress, string name = "") 
-            : this(DefaultRenderer, DefaultSender, emailAddress, name) { }
+        public Email(string emailAddress, string name = "")
+            : this(DefaultRenderer, DefaultSender, emailAddress, name)
+        {
+        }
 
         /// <summary>
         ///  Creates a new Email instance using the given engines and mailing address.
@@ -57,6 +59,7 @@ namespace FluentEmail.Core
             {
                 FromAddress = new Address() {EmailAddress = emailAddress, Name = name}
             };
+
             Renderer = renderer;
             Sender = sender;
         }
@@ -86,6 +89,7 @@ namespace FluentEmail.Core
         public IFluentEmail SetFrom(string emailAddress, string name = null)
         {
             Data.FromAddress = new Address(emailAddress, name ?? "");
+
             return this;
         }
 
@@ -102,13 +106,16 @@ namespace FluentEmail.Core
                 //email address has semi-colon, try split
                 var nameSplit = name?.Split(';') ?? new string [0];
                 var addressSplit = emailAddress.Split(';');
+
                 for (int i = 0; i < addressSplit.Length; i++)
                 {
                     var currentName = string.Empty;
+
                     if ((nameSplit.Length - 1) >= i)
                     {
                         currentName = nameSplit[i];
                     }
+
                     Data.ToAddresses.Add(new Address(addressSplit[i].Trim(), currentName.Trim()));
                 }
             }
@@ -116,6 +123,7 @@ namespace FluentEmail.Core
             {
                 Data.ToAddresses.Add(new Address(emailAddress.Trim(), name?.Trim()));
             }
+
             return this;
         }
 
@@ -152,6 +160,7 @@ namespace FluentEmail.Core
             {
                 Data.ToAddresses.Add(address);
             }
+
             return this;
         }
 
@@ -164,6 +173,7 @@ namespace FluentEmail.Core
         public IFluentEmail CC(string emailAddress, string name = "")
         {
             Data.CcAddresses.Add(new Address(emailAddress, name));
+
             return this;
         }
 
@@ -178,6 +188,7 @@ namespace FluentEmail.Core
             {
                 Data.CcAddresses.Add(address);
             }
+
             return this;
         }
 
@@ -190,6 +201,7 @@ namespace FluentEmail.Core
         public IFluentEmail BCC(string emailAddress, string name = "")
         {
             Data.BccAddresses.Add(new Address(emailAddress, name));
+
             return this;
         }
 
@@ -204,6 +216,7 @@ namespace FluentEmail.Core
             {
                 Data.BccAddresses.Add(address);
             }
+
             return this;
         }
 
@@ -240,6 +253,7 @@ namespace FluentEmail.Core
         public IFluentEmail Subject(string subject)
         {
             Data.Subject = subject;
+
             return this;
         }
 
@@ -252,9 +266,10 @@ namespace FluentEmail.Core
         {
             Data.IsHtml = isHtml;
             Data.Body = body;
+
             return this;
-        }        
-        
+        }
+
         /// <summary>
         /// Adds a Plaintext alternative Body to the Email. Used in conjunction with an HTML email,
         /// this allows for email readers without html capability, and also helps avoid spam filters.
@@ -263,6 +278,7 @@ namespace FluentEmail.Core
         public IFluentEmail PlaintextAlternativeBody(string body)
         {
             Data.PlaintextAlternativeBody = body;
+
             return this;
         }
 
@@ -272,6 +288,7 @@ namespace FluentEmail.Core
         public IFluentEmail HighPriority()
         {
             Data.Priority = Priority.High;
+
             return this;
         }
 
@@ -281,6 +298,7 @@ namespace FluentEmail.Core
         public IFluentEmail LowPriority()
         {
             Data.Priority = Priority.Low;
+
             return this;
         }
 
@@ -290,6 +308,7 @@ namespace FluentEmail.Core
         public IFluentEmail UsingTemplateEngine(ITemplateRenderer renderer)
         {
             Renderer = renderer;
+
             return this;
         }
 
@@ -328,7 +347,6 @@ namespace FluentEmail.Core
 
             return this;
         }
-
 
         /// <summary>
         /// Adds the template file to the email
@@ -385,6 +403,7 @@ namespace FluentEmail.Core
         public IFluentEmail UsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture, bool isHtml = true)
         {
             var cultureFile = GetCultureFileName(filename, culture);
+
             return UsingTemplateFromFile(cultureFile, model, isHtml);
         }
 
@@ -398,6 +417,7 @@ namespace FluentEmail.Core
         public IFluentEmail PlaintextAlternativeUsingCultureTemplateFromFile<T>(string filename, T model, CultureInfo culture)
         {
             var cultureFile = GetCultureFileName(filename, culture);
+
             return PlaintextAlternativeUsingTemplateFromFile(cultureFile, model);
         }
 
@@ -457,18 +477,22 @@ namespace FluentEmail.Core
             {
                 Data.Attachments.Add(attachment);
             }
+
             return this;
         }
 
-        public IFluentEmail AttachFromFilename(string filename,  string contentType = null, string attachmentName = null)
+        public IFluentEmail AttachFromFilename(string filename, string contentType = null, string attachmentName = null)
         {
             var stream = File.OpenRead(filename);
-            Attach(new Attachment()
-            {
-                Data = stream,
-                Filename = attachmentName ?? filename,
-                ContentType = contentType
-            });
+
+            Attach(
+                new Attachment()
+                {
+                    Data = stream,
+                    Filename = attachmentName ?? filename,
+                    ContentType = contentType
+                }
+            );
 
             return this;
         }
@@ -488,6 +512,30 @@ namespace FluentEmail.Core
         public IFluentEmail Header(string header, string body)
         {
             Data.Headers.Add(header, body);
+
+            return this;
+        }
+
+        public IFluentEmail MailGunTemplate(string mailGunTemplate)
+        {
+            Data.MailGunTemplate = mailGunTemplate;
+
+            return this;
+        }
+
+        public IFluentEmail MailGunTemplateVar(string key, string value)
+        {
+            Data.MailGunTemplateVars.Add(key, value);
+
+            return this;
+        }
+
+        public IFluentEmail MailGunTemplateVar(Dictionary<string, string> vars)
+        {
+            foreach (var var in vars)
+            {
+                Data.MailGunTemplateVars.Add(var.Key, var.Value);
+            }
 
             return this;
         }
@@ -512,6 +560,7 @@ namespace FluentEmail.Core
             var cultureExtension = string.Format("{0}{1}", culture.Name, extension);
 
             var cultureFile = Path.ChangeExtension(fileName, cultureExtension);
+
             if (File.Exists(cultureFile))
                 return cultureFile;
             else

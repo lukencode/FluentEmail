@@ -241,5 +241,27 @@ namespace FluentEmail.Core
 	    /// <param name="body">value of the header</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail Header(string header, string body);
-    }
+
+	    /// <summary>
+	    /// Define mailgun template to use. Use this option, cause ignore body defined.
+	    /// </summary>
+	    /// <param name="mailGunTemplate">Name of template to use.</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail MailGunTemplate(string mailGunTemplate);
+
+	    /// <summary>
+	    /// Adds mailgun template vars.
+	    /// </summary>
+	    /// <param name="key">Name of template var.</param>
+	    /// <param name="value">Value of template var.</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail MailGunTemplateVar(string key, string value);
+
+	    /// <summary>
+	    /// Adds mailgun template vars.
+	    /// </summary>
+	    /// <param name="vars">List of template vars.</param>
+	    /// <returns>Instance of the Email class</returns>
+	    IFluentEmail MailGunTemplateVar(Dictionary<string, string> vars);
+	}
 }
