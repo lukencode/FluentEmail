@@ -4,6 +4,7 @@
 Send email from .NET or .NET Core. A bunch of useful extension packages make this dead simple and very powerful.
 
 **[The future of FluentEmail](https://lukelowrey.com/fluentemail-future/)**
+Looking for collaborators, discussion and hoping to keep improving the library!
 
 ## Packages
 
