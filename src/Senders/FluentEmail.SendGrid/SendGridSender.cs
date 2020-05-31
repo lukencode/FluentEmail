@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -105,6 +106,13 @@ namespace FluentEmail.SendGrid
             var sendGridResponse = await sendGridClient.SendEmailAsync(mailMessage, token.GetValueOrDefault());
 
             var sendResponse = new SendResponse();
+
+            if (sendGridResponse.Headers.TryGetValues(
+                "X-Message-ID",
+                out IEnumerable<string> messageIds))
+            {
+                sendResponse.MessageId = messageIds.FirstOrDefault();
+            }
 
             if (IsHttpSuccess((int)sendGridResponse.StatusCode)) return sendResponse;
 
