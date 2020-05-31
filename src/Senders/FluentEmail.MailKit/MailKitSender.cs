@@ -166,10 +166,12 @@ namespace FluentEmail.MailKitSmtp
         {
             var data = email.Data;
 
-            MimeMessage message = new MimeMessage
+            var message = new MimeMessage
             {
                 Subject = data.Subject ?? string.Empty
             };
+            message.Headers.Add(HeaderId.Subject, Encoding.UTF8, data.Subject ?? string.Empty);
+            message.Headers.Add(HeaderId.Encoding, Encoding.UTF8.EncodingName);
 
             message.From.Add(new MailboxAddress(data.FromAddress.Name, data.FromAddress.EmailAddress));
 
