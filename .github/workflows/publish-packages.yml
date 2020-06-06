@@ -25,5 +25,5 @@ jobs:
           # Filepath of the project to be packaged, relative to root of repository
           PROJECT_FILE_PATH: src/FluentEmail.Core/FluentEmail.Core.csproj
           # VERSION_REGEX: <Version>(.*)<\/Version>
-          # NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          # NUGET_SOURCE: https://api.nuget.org
+          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+          NUGET_SOURCE: https://api.nuget.org
