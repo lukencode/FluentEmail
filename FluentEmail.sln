@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26403.7
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC215BD-05EF-49A6-ADBE-8AE399952EEC}"
 EndProject
@@ -40,17 +40,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.SendGrid.Tests"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailgun.Tests", "test\FluentEmail.Mailgun.Tests\FluentEmail.Mailgun.Tests.csproj", "{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleWeb", "sample\SampleWeb\SampleWeb.csproj", "{DF255DEF-AC5E-4670-B915-6B457A51B5FE}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sample", "sample", "{361467ED-E13F-45C7-8182-21A62D5F7B47}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap.Tests", "test\FluentEmail.Mailtrap.Tests\FluentEmail.Mailtrap.Tests.csproj", "{62DB7C68-A7D8-486F-9550-B5E789A7B878}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailtrap", "src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj", "{FD858CCC-4CF3-4899-B72F-F93C13832174}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.MailKit", "src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj", "{AEC98399-8C63-4362-B307-0DFB25FFC948}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.MailKit", "src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj", "{AEC98399-8C63-4362-B307-0DFB25FFC948}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.MailKit.Tests", "test\FluentEmail.MailKit.Tests\FluentEmail.MailKit.Tests.csproj", "{57718ED0-6B5D-419F-A5C5-1884BE3529A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.MailKit.Tests", "test\FluentEmail.MailKit.Tests\FluentEmail.MailKit.Tests.csproj", "{57718ED0-6B5D-419F-A5C5-1884BE3529A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -98,10 +94,6 @@ Global
 		{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF255DEF-AC5E-4670-B915-6B457A51B5FE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{62DB7C68-A7D8-486F-9550-B5E789A7B878}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -137,7 +129,6 @@ Global
 		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{4636C06B-60ED-48AC-9833-02B8F4EB75F9} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{53A1FC1E-E7A5-4C51-9AFB-DDBB9B35BA42} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
-		{DF255DEF-AC5E-4670-B915-6B457A51B5FE} = {361467ED-E13F-45C7-8182-21A62D5F7B47}
 		{62DB7C68-A7D8-486F-9550-B5E789A7B878} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{FD858CCC-4CF3-4899-B72F-F93C13832174} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{AEC98399-8C63-4362-B307-0DFB25FFC948} = {926C0980-31D9-4449-903F-3C756044C28A}
