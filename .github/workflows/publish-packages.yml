@@ -40,7 +40,7 @@ jobs:
     - name: Publish FluentEmail.MailTrap
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.MailTrap/FluentEmail.MailTrap.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.Mailtrap/FluentEmail.Mailtrap.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.MailKit
