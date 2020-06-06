@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>FluentEmail.Core.Tests</AssemblyName>
     <PackageId>FluentEmail.Core.Tests</PackageId>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>

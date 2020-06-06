@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AssemblyName>FluentEmail.Mailgun.Tests</AssemblyName>
     <PackageId>FluentEmail.Mailgun.Tests</PackageId>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
