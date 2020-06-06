@@ -5,6 +5,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -170,6 +171,7 @@ namespace FluentEmail.MailKitSmtp
             {
                 Subject = data.Subject ?? string.Empty
             };
+
             message.Headers.Add(HeaderId.Subject, Encoding.UTF8, data.Subject ?? string.Empty);
             message.Headers.Add(HeaderId.Encoding, Encoding.UTF8.EncodingName);
 
