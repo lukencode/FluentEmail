@@ -9,7 +9,7 @@ namespace FluentEmail.SendGrid.Tests
 {
     public class SendGridSenderTests
     {
-        const string apiKey = ""; // TODO: Put your API key here
+        const string apiKey = "missing-credentials"; // TODO: Put your API key here
 
         const string toEmail = "fluentEmail@mailinator.com";
         const string toName = "FluentEmail Mailinator";
@@ -25,7 +25,7 @@ namespace FluentEmail.SendGrid.Tests
             Email.DefaultSender = sender;
         }
 
-        [Test]
+        [Test, Ignore("No sendgrid credentials")]
         public async Task CanSendEmail()
         {
             const string subject = "SendMail Test";
@@ -42,7 +42,7 @@ namespace FluentEmail.SendGrid.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("No sendgrid credentials")]
         public async Task CanSendEmailWithAttachments()
         {
             const string subject = "SendMail With Attachments Test";
@@ -71,7 +71,7 @@ namespace FluentEmail.SendGrid.Tests
             }
         }
 
-        [Test]
+        [Test, Ignore("No sendgrid credentials")]
         public async Task CanSendHighPriorityEmail()
         {
             const string subject = "SendMail Test";
@@ -89,7 +89,7 @@ namespace FluentEmail.SendGrid.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("No sendgrid credentials")]
         public async Task CanSendLowPriorityEmail()
         {
             const string subject = "SendMail Test";
