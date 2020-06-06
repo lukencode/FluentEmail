@@ -8,7 +8,7 @@ The easiest way to send email from .NET and .NET Core. Use Razor for email templ
 
 [FluentEmail.Core](src/FluentEmail.Core) - Just the domain model. Includes very basic defaults, but is also included with every other package here.
 
-[FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) - Now we're talking. Send emails via SMTP.
+[FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) - Send email via SMTP server.
 
 [FluentEmail.Razor](src/Renderers/FluentEmail.Razor) - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight](https://github.com/toddams/RazorLight) project under the hood. 
 
@@ -17,6 +17,8 @@ The easiest way to send email from .NET and .NET Core. Use Razor for email templ
 [FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
 
 [FluentEmail.Mailtrap](src/Senders/FluentEmail.Mailtrap) - Send emails to Mailtrap. Uses [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) for delivery.
+
+[FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
 
 **Basic Usage**
 ```csharp
@@ -30,6 +32,7 @@ var email = await Email
 
 
 **Dependency Injection**
+
 Configure FluentEmail in startup.cs with these helper methods. This will inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
 ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
 
