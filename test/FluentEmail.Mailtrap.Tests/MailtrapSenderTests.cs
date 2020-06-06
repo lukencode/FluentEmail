@@ -23,7 +23,7 @@ namespace FluentEmail.Mailtrap.Tests
             Email.DefaultSender = sender;
         }
 
-        [Test]
+        [Test, Ignore("No mailtrap credentials")]
         public void CanSendEmail()
         {
             var email = Email
@@ -38,7 +38,7 @@ namespace FluentEmail.Mailtrap.Tests
         }
 
 
-        [Test]
+        [Test, Ignore("No mailtrap credentials")]
         public async Task CanSendEmailAsync()
         {
             var email = Email
@@ -52,7 +52,7 @@ namespace FluentEmail.Mailtrap.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("No mailtrap credentials")]
         public async Task CanSendEmailWithAttachments()
         {
             var stream = new MemoryStream();
@@ -80,7 +80,7 @@ namespace FluentEmail.Mailtrap.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("No mailtrap credentials")]
         public async Task CanSendEmailWithInlineImages()
         {
             var assembly = Assembly.GetExecutingAssembly();
