@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 2.2.0
+        dotnet-version: netcoreapp2.2
     - name: Install dependencies
       run: dotnet restore
     - name: Build
