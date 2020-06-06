@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <AssemblyName>FluentEmail.SendGrid.Tests</AssemblyName>
     <PackageId>FluentEmail.SendGrid.Tests</PackageId>
+    <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
