@@ -28,36 +28,36 @@ jobs:
     - name: Publish FluentEmail.Smtp
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/senders/FluentEmail.Smtp/FluentEmail.Smtp.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.Smtp/FluentEmail.Smtp.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.Sendgrid
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/senders/FluentEmail.Sendgrid/FluentEmail.Sendgrid.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.Sendgrid/FluentEmail.Sendgrid.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.MailTrap
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/senders/FluentEmail.MailTrap/FluentEmail.MailTrap.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.MailTrap/FluentEmail.MailTrap.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.MailKit
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/senders/FluentEmail.MailKit/FluentEmail.MailKit.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.MailKit/FluentEmail.MailKit.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.Mailgun
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/senders/FluentEmail.Mailgun/FluentEmail.Mailgun.csproj
+          PROJECT_FILE_PATH: src/Senders/FluentEmail.Mailgun/FluentEmail.Mailgun.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
     - name: Publish FluentEmail.Razor
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
-          PROJECT_FILE_PATH: src/renderers/FluentEmail.Razor/FluentEmail.Razor.csproj
+          PROJECT_FILE_PATH: src/Renderers/FluentEmail.Razor/FluentEmail.Razor.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
