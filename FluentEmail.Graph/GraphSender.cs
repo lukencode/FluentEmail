@@ -7,7 +7,6 @@ using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,6 +17,7 @@ namespace FluentEmail.Graph
         private readonly string _appId;
         private readonly string _tenantId;
         private readonly string _graphSecret;
+        private bool _saveSent;
 
         private ClientCredentialProvider _authProvider;
         private GraphServiceClient _graphClient;
@@ -26,11 +26,13 @@ namespace FluentEmail.Graph
         public GraphSender(
             string GraphEmailAppId,
             string GraphEmailTenantId,
-            string GraphEmailSecret)
+            string GraphEmailSecret,
+            bool SaveSentItems)
         {
             _appId = GraphEmailAppId;
             _tenantId = GraphEmailTenantId;
             _graphSecret = GraphEmailSecret;
+            _saveSent = SaveSentItems;
 
             _clientApp = ConfidentialClientApplicationBuilder
                 .Create(_appId)
@@ -131,10 +133,26 @@ namespace FluentEmail.Graph
                 });
             }
 
+            switch(email.Data.Priority)
+            {
+                case Priority.High:
+                    message.Importance = Importance.High;
+                    break;
+                case Priority.Normal:
+                    message.Importance = Importance.Normal;
+                    break;
+                case Priority.Low:
+                    message.Importance = Importance.Low;
+                    break;
+                default:
+                    message.Importance = Importance.Normal;
+                    break;
+            }
+
             try
             {
                 await _graphClient.Users[email.Data.FromAddress.EmailAddress]
-                    .SendMail(message, false)
+                    .SendMail(message, _saveSent)
                     .Request()
                     .PostAsync();
 
