@@ -14,8 +14,7 @@ namespace FluentEmail.Graph.Tests
         const string tenantId = ""; //Add your AAD Tenant ID here
         const string graphSecret = ""; //Add your AAD Graph Client Secret here
         const string senderEmail = ""; //Add a sender email address from your Office 365 tenant
-        const string toEmail = "fluentEmail@mailinator.com";
-        const string toName = "FluentEmail Mailinator";
+        const string toEmail = "fluentemail@mailinator.com"; //change this if you like
         private bool saveSent = false;
 
         [SetUp]
@@ -50,7 +49,7 @@ namespace FluentEmail.Graph.Tests
             var email = Email
                 .From(senderEmail)
                 .To(toEmail)
-                .Subject("Test Email")
+                .Subject("Test Async Email")
                 .Body("Test email from Graph sender unit test");
 
             var response = await email.SendAsync();
@@ -76,7 +75,7 @@ namespace FluentEmail.Graph.Tests
             var email = Email
                 .From(senderEmail)
                 .To(toEmail)
-                .Subject("Test Email")
+                .Subject("Test Email with Attachments")
                 .Body("Test email from Graph sender unit test")
                 .Attach(attachment);
 
@@ -90,7 +89,7 @@ namespace FluentEmail.Graph.Tests
             var email = Email
                 .From(senderEmail)
                 .To(toEmail)
-                .Subject("Test Email")
+                .Subject("Test High Priority Email")
                 .Body("Test email from Graph sender unit test")
                 .HighPriority();
 

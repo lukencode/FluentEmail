@@ -7,6 +7,7 @@ using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -120,6 +121,8 @@ namespace FluentEmail.Graph
 
             if(email.Data.Attachments != null && email.Data.Attachments.Count > 0)
             {
+                message.Attachments = new MessageAttachmentsCollectionPage();
+
                 email.Data.Attachments.ForEach(a =>
                 {
                     var attachment = new FileAttachment
