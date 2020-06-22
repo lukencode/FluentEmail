@@ -30,7 +30,7 @@ namespace FluentEmail.Graph.Tests
             Email.DefaultSender = sender;
         }
 
-        [Test]
+        [Test, Ignore("Missing Graph credentials")]
         public void CanSendEmail()
         {
             var email = Email
@@ -43,7 +43,7 @@ namespace FluentEmail.Graph.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("Missing Graph credentials")]
         public async Task CanSendEmailAsync()
         {
             var email = Email
@@ -56,7 +56,7 @@ namespace FluentEmail.Graph.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("Missing Graph credentials")]
         public async Task CanSendEmailWithAttachments()
         {
             var stream = new MemoryStream();
@@ -83,7 +83,7 @@ namespace FluentEmail.Graph.Tests
             Assert.IsTrue(response.Successful);
         }
 
-        [Test]
+        [Test, Ignore("Missing Graph credentials")]
         public async Task CanSendHighPriorityEmail()
         {
             var email = Email
