@@ -17,7 +17,7 @@ namespace FluentEmail.Core.Tests
         [Test]
         public void Attachment_from_stream_Is_set()
         {
-            using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/Test.txt"))
+            using (var stream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}"))
             {
                 var attachment = new Attachment()
                 {
@@ -41,7 +41,7 @@ namespace FluentEmail.Core.Tests
             var email = Email.From(fromEmail)
                 .To(toEmail)
                 .Subject(subject)
-                .AttachFromFilename($"{Directory.GetCurrentDirectory()}/Test.txt", "text/plain");
+                .AttachFromFilename($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}", "text/plain");
 
             Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
         }
@@ -53,7 +53,7 @@ namespace FluentEmail.Core.Tests
             var email = Email.From(fromEmail)
                 .To(toEmail)
                 .Subject(subject)
-                .AttachFromFilename($"{Directory.GetCurrentDirectory()}/Test.txt", "text/plain", attachmentName);
+                .AttachFromFilename($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}", "text/plain", attachmentName);
 
             Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
             Assert.AreEqual(attachmentName, email.Data.Attachments.First().Filename);
