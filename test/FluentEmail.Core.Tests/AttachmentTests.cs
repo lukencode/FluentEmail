@@ -17,7 +17,7 @@ namespace FluentEmail.Core.Tests
         [Test]
         public void Attachment_from_stream_Is_set()
         {
-            using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/Test.txt"))
+            using (var stream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}"))
             {
                 var attachment = new Attachment()
                 {
@@ -41,7 +41,7 @@ namespace FluentEmail.Core.Tests
             var email = Email.From(fromEmail)
                 .To(toEmail)
                 .Subject(subject)
-                .AttachFromFilename($"{Directory.GetCurrentDirectory()}/Test.txt", "text/plain");
+                .AttachFromFilename($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}", "text/plain");
 
             Assert.AreEqual(20, email.Data.Attachments.First().Data.Length);
         }
@@ -49,18 +49,6 @@ namespace FluentEmail.Core.Tests
         [Test]
         public void Attachment_from_filename_AttachmentName_Is_set()
         {
-
-            // THis is the first failing tests - the test is unable to locat the text.txt file.
-            System.Console.WriteLine($" MMH : {Directory.GetCurrentDirectory()}" );
-            System.Console.WriteLine($" MH : { Directory.GetCurrentDirectory()}/Test.txt");
-            var attachmentExists = File.Exists($"{Directory.GetCurrentDirectory()}/Test.txt");
-            System.Console.WriteLine($" MH : File exists : {attachmentExists}");
-            System.Console.WriteLine($" MH : { Directory.GetCurrentDirectory()}/Test.txt");
-            System.Console.WriteLine($" MH : File exists : {File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "Test.txt"))}");
-            System.Console.WriteLine($" MH : File exists : {File.Exists(Path.Combine(Directory.GetCurrentDirectory(), "test.txt"))}");
-
-
-
             var attachmentName = "attachment.txt";
             var email = Email.From(fromEmail)
                 .To(toEmail)
