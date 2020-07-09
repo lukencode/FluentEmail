@@ -2,9 +2,9 @@ name: Build & Test
 
 on:
   push:
-    branches: [ master ]
+    branches: [ FixTestFail ]
   pull_request:
-    branches: [ master ]
+    branches: [ FixTestFail ]
 
 jobs:
   build:
