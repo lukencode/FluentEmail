@@ -16,6 +16,8 @@ namespace FluentEmail.SendGrid.Tests
         const string fromEmail = "test@fluentmail.com";
         const string fromName = "SendGridSender Test";
 
+        private const string templateId = ""; // TODO: PUT YOUR TEMPLATE ID HERE
+
         [SetUp]
         public void SetUp()
         {
@@ -100,6 +102,23 @@ namespace FluentEmail.SendGrid.Tests
                 .To(toEmail, toName)
                 .Subject(subject)
                 .Body(body)
+                .LowPriority();
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public async Task CanSendEmailWithTemplate()
+        {
+            var email = Email
+                .From(fromEmail, fromName)
+                .To(toEmail, toName)
+                .SetTemplateData(templateId, new
+                {
+                    //put your template data here
+                })
                 .LowPriority();
 
             var response = await email.SendAsync();

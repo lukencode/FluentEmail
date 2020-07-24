@@ -492,6 +492,13 @@ namespace FluentEmail.Core
             return this;
         }
 
+        public IFluentEmail SetTemplateData(string templateId, object templateData)
+        {
+            Data.TemplateId = templateId;
+            Data.TemplateData = templateData;
+            return this;
+        }
+
         /// <summary>
         /// Sends email synchronously
         /// </summary>
