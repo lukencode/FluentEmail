@@ -43,6 +43,24 @@ namespace FluentEmail.SendGrid.Tests
         }
 
         [Test, Ignore("No sendgrid credentials")]
+        public async Task CanSendEmailWithReplyTo()
+        {
+            const string subject = "SendMail Test";
+            const string body = "This email is testing send mail with ReplyTo functionality of SendGrid Sender.";
+
+            var email = Email
+                .From(fromEmail, fromName)
+                .To(toEmail, toName)
+                .ReplyTo(toEmail, toName)
+                .Subject(subject)
+                .Body(body);
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+        }
+
+        [Test, Ignore("No sendgrid credentials")]
         public async Task CanSendEmailWithAttachments()
         {
             const string subject = "SendMail With Attachments Test";
