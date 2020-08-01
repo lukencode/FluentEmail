@@ -103,15 +103,15 @@ namespace FluentEmail.Mailgun
             {
                 var builder = new StringBuilder();
 
-                builder.Append("{");
-
                 foreach (var var in email.Data.MailGunTemplateVars)
                 {
                     builder.Append($"\"{var.Key}\":\"{var.Value}\"");
+                    builder.Append(",");
                 }
 
-                builder.Append("}");
-                parameters.Add(new KeyValuePair<string, string>("h:X-Mailgun-Variables", builder.ToString()));
+                var variables = $"{{{builder.ToString().Trim(',')}}}";
+                
+                parameters.Add(new KeyValuePair<string, string>("h:X-Mailgun-Variables", variables));
             }
 
             var files = new List<HttpFile>();
