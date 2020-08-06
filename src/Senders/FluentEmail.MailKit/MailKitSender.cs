@@ -54,12 +54,23 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
-                    client.Connect(
-                        _smtpClientOptions.Server,
-                        _smtpClientOptions.Port,
-                        _smtpClientOptions.UseSsl, 
-                        token.GetValueOrDefault());
-                        
+                    if (_smtpClientOptions.SocketOptions.HasValue)
+                    {
+                        client.Connect(
+                            _smtpClientOptions.Server,
+                            _smtpClientOptions.Port,
+                            _smtpClientOptions.SocketOptions.Value,
+                            token.GetValueOrDefault());
+                    }
+                    else
+                    {
+                        client.Connect(
+                            _smtpClientOptions.Server,
+                            _smtpClientOptions.Port,
+                            _smtpClientOptions.UseSsl,
+                            token.GetValueOrDefault());
+                    }
+
                     // Note: only needed if the SMTP server requires authentication
                     if (_smtpClientOptions.RequiresAuthentication)
                     {
@@ -105,11 +116,22 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
-                    await client.ConnectAsync(
-                        _smtpClientOptions.Server,
-                        _smtpClientOptions.Port,
-                        _smtpClientOptions.UseSsl,
-                        token.GetValueOrDefault());
+                    if (_smtpClientOptions.SocketOptions.HasValue)
+                    {
+                        client.Connect(
+                            _smtpClientOptions.Server,
+                            _smtpClientOptions.Port,
+                            _smtpClientOptions.SocketOptions.Value,
+                            token.GetValueOrDefault());
+                    }
+                    else
+                    {
+                        client.Connect(
+                            _smtpClientOptions.Server,
+                            _smtpClientOptions.Port,
+                            _smtpClientOptions.UseSsl,
+                            token.GetValueOrDefault());
+                    }
 
                     // Note: only needed if the SMTP server requires authentication
                     if (_smtpClientOptions.RequiresAuthentication)
