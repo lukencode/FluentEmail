@@ -11,7 +11,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 {
     public class HttpClientHelpers
     {
-        public static HttpContent GetPostBody(Dictionary<string, string> parameters)
+        public static HttpContent GetPostBody(IEnumerable<KeyValuePair<string, string>> parameters)
         {
             var formatted = parameters.Select(x => x.Key + "=" + x.Value);
             return new StringContent(string.Join("&", formatted), Encoding.UTF8, "application/x-www-form-urlencoded");
@@ -22,7 +22,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
             return new StringContent(JsonConvert.SerializeObject(value), Encoding.UTF8, "application/json");
         }
 
-        public static HttpContent GetMultipartFormDataContentBody(List<KeyValuePair<string, string>> parameters, List<HttpFile> files)
+        public static HttpContent GetMultipartFormDataContentBody(IEnumerable<KeyValuePair<string, string>> parameters, IEnumerable<HttpFile> files)
         {
             var mpContent = new MultipartFormDataContent();
 
@@ -60,7 +60,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
             return qr.ToApiResponse();
         }
 
-        public static async Task<ApiResponse<T>> Post<T>(this HttpClient client, string url, Dictionary<string, string> parameters)
+        public static async Task<ApiResponse<T>> Post<T>(this HttpClient client, string url, IEnumerable<KeyValuePair<string, string>> parameters)
         {
             var response = await client.PostAsync(url, HttpClientHelpers.GetPostBody(parameters));
             var qr = await QuickResponse<T>.FromMessage(response);
@@ -74,7 +74,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
             return qr.ToApiResponse();
         }
 
-        public static async Task<ApiResponse<T>> PostMultipart<T>(this HttpClient client, string url, List<KeyValuePair<string, string>> parameters, List<HttpFile> files)
+        public static async Task<ApiResponse<T>> PostMultipart<T>(this HttpClient client, string url, IEnumerable<KeyValuePair<string, string>> parameters, IEnumerable<HttpFile> files)
         {
             var response = await client.PostAsync(url, HttpClientHelpers.GetMultipartFormDataContentBody(parameters, files)).ConfigureAwait(false);
             var qr = await QuickResponse<T>.FromMessage(response);
@@ -95,7 +95,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
         public string ResponseBody { get; set; }
 
-        public List<ApiError> Errors { get; set; }
+        public IList<ApiError> Errors { get; set; }
 
         public QuickResponse()
         {
