@@ -3,16 +3,8 @@
   <PropertyGroup>
     <Description>Send emails very easily. Use razor templates, smtp, embedded files, all without hassle. This is a Base Package and includes just the domain model, very basic defaults, and is also included with every other Fluent Email package here.</Description>
     <AssemblyTitle>Fluent Email</AssemblyTitle>
-    <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
-    <AssemblyName>FluentEmail.Core</AssemblyName>
-    <PackageId>FluentEmail.Core</PackageId>
-    <PackageTags>email;razor;smtp;fluent;fluentemail</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
-
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.8.0</Version>
+    <AssetsDirectory>../../assets</AssetsDirectory>
   </PropertyGroup>
 
   <!--<Target Name="PostcompileScript" AfterTargets="Build" Condition=" '$(IsCrossTargetingBuild)' != 'true' ">
