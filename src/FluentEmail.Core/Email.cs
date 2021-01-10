@@ -23,7 +23,6 @@ namespace FluentEmail.Core
         /// <summary>
         /// Creates a new email instance with default settings.
         /// </summary>
-        /// <param name="client">Smtp client to send from</param>
         public Email() : this(DefaultRenderer, DefaultSender) { }
 
         /// <summary>
@@ -90,9 +89,9 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds a reciepient to the email, Splits name and address on ';'
+        /// Adds a recipient to the email, Splits name and address on ';'
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient</param>
+        /// <param name="emailAddress">Email address of recipient</param>
         /// <param name="name">Name of recipient</param>
         /// <returns>Instance of the Email class</returns>
         public IFluentEmail To(string emailAddress, string name = null)
@@ -120,9 +119,9 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds a reciepient to the email
+        /// Adds a recipient to the email
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
+        /// <param name="emailAddress">Email address of recipient (allows multiple splitting on ';')</param>
         /// <returns></returns>
         public IFluentEmail To(string emailAddress)
         {
@@ -142,11 +141,11 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds all reciepients in list to email
+        /// Adds all recipients in list to email
         /// </summary>
         /// <param name="mailAddresses">List of recipients</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail To(IList<Address> mailAddresses)
+        public IFluentEmail To(IEnumerable<Address> mailAddresses)
         {
             foreach (var address in mailAddresses)
             {
@@ -172,7 +171,7 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="mailAddresses">List of recipients to CC</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail CC(IList<Address> mailAddresses)
+        public IFluentEmail CC(IEnumerable<Address> mailAddresses)
         {
             foreach (var address in mailAddresses)
             {
@@ -198,7 +197,7 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="mailAddresses">List of recipients to BCC</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail BCC(IList<Address> mailAddresses)
+        public IFluentEmail BCC(IEnumerable<Address> mailAddresses)
         {
             foreach (var address in mailAddresses)
             {
@@ -451,7 +450,7 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="attachments">The List of Attachments to add</param>
         /// <returns>Instance of the Email class</returns>
-        public IFluentEmail Attach(IList<Attachment> attachments)
+        public IFluentEmail Attach(IEnumerable<Attachment> attachments)
         {
             foreach (var attachment in attachments.Where(attachment => !Data.Attachments.Contains(attachment)))
             {

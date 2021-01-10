@@ -15,9 +15,9 @@ namespace FluentEmail.Core
 	    ISender Sender { get; set; }
 
 	    /// <summary>
-	    /// Adds a reciepient to the email, Splits name and address on ';'
+	    /// Adds a recipient to the email, Splits name and address on ';'
 	    /// </summary>
-	    /// <param name="emailAddress">Email address of recipeient</param>
+	    /// <param name="emailAddress">Email address of recipient</param>
 	    /// <param name="name">Name of recipient</param>
 	    /// <returns>Instance of the Email class</returns>
 	    IFluentEmail To(string emailAddress, string name = null);
@@ -31,18 +31,18 @@ namespace FluentEmail.Core
         IFluentEmail SetFrom(string emailAddress, string name = null);
 
         /// <summary>
-        /// Adds a reciepient to the email
+        /// Adds a recipient to the email
         /// </summary>
-        /// <param name="emailAddress">Email address of recipeient (allows multiple splitting on ';')</param>
+        /// <param name="emailAddress">Email address of recipient (allows multiple splitting on ';')</param>
         /// <returns></returns>
         IFluentEmail To(string emailAddress);
 
 	    /// <summary>
-	    /// Adds all reciepients in list to email
+	    /// Adds all recipients in list to email
 	    /// </summary>
 	    /// <param name="mailAddresses">List of recipients</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail To(IList<Address> mailAddresses);
+	    IFluentEmail To(IEnumerable<Address> mailAddresses);
 
 	    /// <summary>
 	    /// Adds a Carbon Copy to the email
@@ -57,7 +57,7 @@ namespace FluentEmail.Core
 	    /// </summary>
 	    /// <param name="mailAddresses">List of recipients to CC</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail CC(IList<Address> mailAddresses);
+	    IFluentEmail CC(IEnumerable<Address> mailAddresses);
 
 	    /// <summary>
 	    /// Adds a blind carbon copy to the email
@@ -72,7 +72,7 @@ namespace FluentEmail.Core
 	    /// </summary>
 	    /// <param name="mailAddresses">List of recipients to BCC</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail BCC(IList<Address> mailAddresses);
+	    IFluentEmail BCC(IEnumerable<Address> mailAddresses);
 
 	    /// <summary>
 	    /// Sets the ReplyTo address on the email
@@ -168,7 +168,7 @@ namespace FluentEmail.Core
 	    /// </summary>
 	    /// <param name="attachments">The List of Attachments to add</param>
 	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail Attach(IList<Attachment> attachments);
+	    IFluentEmail Attach(IEnumerable<Attachment> attachments);
 
 	    /// <summary>
 	    /// Sends email synchronously
