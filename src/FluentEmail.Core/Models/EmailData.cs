@@ -16,8 +16,12 @@ namespace FluentEmail.Core.Models
         public Priority Priority { get; set; }
         public List<string> Tags { get; set; }
 
+        public string MailGunTemplate { get; set; }
+
         public bool IsHtml { get; set; }
         public Dictionary<string, string> Headers { get; set; }
+
+        public Dictionary<string, string> MailGunTemplateVars { get; set; }
 
         public EmailData()
         {
@@ -28,6 +32,8 @@ namespace FluentEmail.Core.Models
             Attachments = new List<Attachment>();
             Tags = new List<string>();
             Headers = new Dictionary<string, string>();
+            MailGunTemplate = string.Empty;
+            MailGunTemplateVars = new Dictionary<string, string>();
         }
     }
 }
