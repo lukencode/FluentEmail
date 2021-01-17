@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Generate emails using Liquid templates. Uses the Fluid project under the hood.</Description>
+    <AssemblyTitle>Fluent Email - Liquid</AssemblyTitle>
+    <PackageTags>$(PackageTags);liquid</PackageTags>
+    <Version>2.9.0</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <AssetsDirectory>../../../assets</AssetsDirectory>
+    <NoWarn>NU5104</NoWarn>
+    <RootNamespace>FluentEmail.Liquid</RootNamespace>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fluid.Core" Version="1.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />
+  </ItemGroup>
+
+</Project>
