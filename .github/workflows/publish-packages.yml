@@ -61,9 +61,10 @@ jobs:
           PROJECT_FILE_PATH: src/Renderers/FluentEmail.Razor/FluentEmail.Razor.csproj
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
-    - name: Publish FluentEmail.Graph
-      uses: brandedoutcast/publish-nuget@v2.5.2
-      with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.Graph/FluentEmail.Graph.csproj
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
+    # This is currently maintained separately
+    #- name: Publish FluentEmail.Graph
+    #  uses: brandedoutcast/publish-nuget@v2.5.2
+    #  with:
+    #      PROJECT_FILE_PATH: src/Senders/FluentEmail.Graph/FluentEmail.Graph.csproj
+    #      NUGET_KEY: ${{secrets.NUGET_API_KEY}}
+    #      NUGET_SOURCE: https://api.nuget.org
