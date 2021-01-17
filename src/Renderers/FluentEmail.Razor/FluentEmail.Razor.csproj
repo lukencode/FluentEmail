@@ -4,6 +4,7 @@
     <Description>Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the RazorLight project under the hood.</Description>
     <AssemblyTitle>Fluent Email - Razor</AssemblyTitle>
     <PackageTags>$(PackageTags);razor</PackageTags>
+    <Version>2.9.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssetsDirectory>../../../assets</AssetsDirectory>
     <NoWarn>NU5104</NoWarn>
