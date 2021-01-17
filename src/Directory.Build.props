@@ -1,0 +1,40 @@
+<Project>
+
+  <PropertyGroup>
+
+    <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
+    <PackageTags>email;smtp;fluent;fluentemail</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
+    <PackageIcon>fluentemail_logo_64x64.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+
+    <Version>2.8.0</Version>
+
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugSymbols>true</DebugSymbols>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <IsPackable>true</IsPackable>
+
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <WarningsAsErrors>true</WarningsAsErrors>
+
+    <CLSCompliant>true</CLSCompliant>
+    <ComVisible>false</ComVisible>
+
+    <AssetsDirectory>../../../assets</AssetsDirectory>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(AssetsDirectory)/fluentemail_logo_64x64.png" Pack="true" Visible="false" PackagePath=""/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="all"/>
+  </ItemGroup>
+
+</Project>

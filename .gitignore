@@ -242,3 +242,5 @@ ModelManifest.xml
 # FAKE - F# Make
 .fake/
 .vs
+.idea
+

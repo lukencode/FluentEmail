@@ -5,14 +5,8 @@
     <AssemblyTitle>Fluent Email - SendGrid</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Ricardo Santos;Github Contributors</Authors>
     <AssemblyName>FluentEmail.SendGrid</AssemblyName>
-    <PackageId>FluentEmail.SendGrid</PackageId>
-    <PackageTags>email;razor;sendgrid;fluent;fluentemail</PackageTags>
-    <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
-    <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
-
+    <PackageTags>$(PackageTags);sendgrid</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>2.8.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
