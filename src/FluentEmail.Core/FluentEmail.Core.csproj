@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Description>Send emails very easily. Use razor templates, smtp, embedded files, all without hassle. This is a Base Package and includes just the domain model, very basic defaults, and is also included with every other Fluent Email package here.</Description>
     <AssemblyTitle>Fluent Email</AssemblyTitle>
+    <Version>2.9.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssetsDirectory>../../assets</AssetsDirectory>
   </PropertyGroup>
