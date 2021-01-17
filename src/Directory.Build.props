@@ -10,7 +10,6 @@
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
 
-    <Version>2.8.0</Version>
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

@@ -1,4 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <Description>Send emails via Microsoft Graph API</Description>
+    <AssemblyTitle>Fluent Email - Graph</AssemblyTitle>
+    <PackageTags>$(PackageTags);graph</PackageTags>
+    <Version>2.9.0</Version>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
