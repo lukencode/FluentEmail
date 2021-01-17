@@ -33,8 +33,8 @@ namespace FluentEmail.Exchange
                 return response;
             }
 
-            await message.Save();
-            await message.SendAndSaveCopy();
+            message.Save();
+            message.SendAndSaveCopy();
 
             return response;
         }
