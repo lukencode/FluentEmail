@@ -2,6 +2,7 @@
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Razor;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using RazorLight;
 using RazorLight.Razor;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -14,13 +15,13 @@ namespace Microsoft.Extensions.DependencyInjection
 		    return builder;
 	    }
 
-	    /// <summary>
-	    /// Add razor renderer with project views and layouts
-	    /// </summary>
-	    /// <param name="builder"></param>
-	    /// <param name="templateRootFolder"></param>
-	    /// <returns></returns>
-	    public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, string templateRootFolder)
+		/// <summary>
+		/// Add razor renderer with project views and layouts
+		/// </summary>
+		/// <param name="builder"></param>
+		/// <param name="templateRootFolder"></param>
+		/// <returns></returns>
+		public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, string templateRootFolder)
         {
             builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer(templateRootFolder)));
             return builder;
@@ -49,5 +50,17 @@ namespace Microsoft.Extensions.DependencyInjection
 		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer(razorLightProject)));
 		    return builder;
 	    }
-    }
+
+		/// <summary>
+		/// Add razor renderer with project views and layouts
+		/// </summary>
+		/// <param name="builder"></param>
+		/// <param name="razorLightEngine"></param>
+		/// <returns></returns>
+		public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, RazorLightEngine razorLightEngine)
+		{
+			builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer(razorLightEngine)));
+			return builder;
+		}
+	}
 }

@@ -13,6 +13,11 @@ namespace FluentEmail.Razor
 	{
 		private readonly RazorLightEngine _engine;
 
+		public RazorRenderer(RazorLightEngine engine)
+		{
+			_engine = engine;
+		}
+
 		public RazorRenderer(string root = null)
 		{
 			_engine = new RazorLightEngineBuilder()
