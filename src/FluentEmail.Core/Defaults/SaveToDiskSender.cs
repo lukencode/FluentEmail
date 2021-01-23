@@ -36,17 +36,17 @@ namespace FluentEmail.Core.Defaults
 
             using (var sw = new StreamWriter(File.OpenWrite(filename)))
             {
-                sw.WriteLine($"From: {email.Data.FromAddress.Name} <{email.Data.FromAddress.EmailAddress}>");
-                sw.WriteLine($"To: {string.Join(",", email.Data.ToAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
-                sw.WriteLine($"Cc: {string.Join(",", email.Data.CcAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
-                sw.WriteLine($"Bcc: {string.Join(",", email.Data.BccAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
-                sw.WriteLine($"ReplyTo: {string.Join(",", email.Data.ReplyToAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
-                sw.WriteLine($"Subject: {email.Data.Subject}");
+                await sw.WriteLineAsync($"From: {email.Data.FromAddress.Name} <{email.Data.FromAddress.EmailAddress}>");
+                await sw.WriteLineAsync($"To: {string.Join(",", email.Data.ToAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
+                await sw.WriteLineAsync($"Cc: {string.Join(",", email.Data.CcAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
+                await sw.WriteLineAsync($"Bcc: {string.Join(",", email.Data.BccAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
+                await sw.WriteLineAsync($"ReplyTo: {string.Join(",", email.Data.ReplyToAddresses.Select(x => $"{x.Name} <{x.EmailAddress}>"))}");
+                await sw.WriteLineAsync($"Subject: {email.Data.Subject}");
                 foreach (var dataHeader in email.Data.Headers)
                 {
-                    sw.WriteLine($"{dataHeader.Key}:{dataHeader.Value}");
+                    await sw.WriteLineAsync($"{dataHeader.Key}:{dataHeader.Value}");
                 }
-                sw.WriteLine();
+                await sw.WriteLineAsync();
                 await sw.WriteAsync(email.Data.Body);
             }
 
