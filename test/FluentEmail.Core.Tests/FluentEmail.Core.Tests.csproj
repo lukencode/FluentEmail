@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsTestProject>true</IsTestProject>
-	  <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,25 +11,12 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-	<ItemGroup>
-		<None Remove="Shared\_Layout.cshtml" />
-		<None Remove="_EmbeddedLayout.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Content Include="Shared\_Layout.cshtml">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</Content>
-		<EmbeddedResource Include="_EmbeddedLayout.cshtml">
-		</EmbeddedResource>
-	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Graph\FluentEmail.Graph.csproj" />
-    <ProjectReference Include="..\..\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
