@@ -500,9 +500,9 @@ namespace FluentEmail.Core
             return Sender.Send(this, token);
         }
 
-        public virtual async Task<SendResponse> SendAsync(CancellationToken? token = null)
+        public virtual Task<SendResponse> SendAsync(CancellationToken? token = null)
         {
-            return await Sender.SendAsync(this, token);
+            return Sender.SendAsync(this, token);
         }
 
         private static string GetCultureFileName(string fileName, CultureInfo culture)
