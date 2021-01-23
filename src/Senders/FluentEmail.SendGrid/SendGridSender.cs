@@ -54,7 +54,7 @@ namespace FluentEmail.SendGrid
 
             if (email.Data.Headers.Any())
             {
-                mailMessage.AddHeaders(email.Data.Headers);
+                mailMessage.AddHeaders(email.Data.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
             }
 
             if (email.Data.IsHtml)

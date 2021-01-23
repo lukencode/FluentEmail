@@ -6,7 +6,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
     public class ApiResponse
     {
         public bool Success => !Errors.Any();
-        public List<ApiError> Errors { get; set; }
+        public IList<ApiError> Errors { get; set; }
 
         public ApiResponse()
         {
