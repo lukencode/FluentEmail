@@ -13,8 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Senders", "Senders", "{926C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7B3C8C77-C54A-4F9E-A241-676AC01E49BB}"
 	ProjectSection(SolutionItems) = preProject
-		README.markdown = README.markdown
 		src\Directory.Build.props = src\Directory.Build.props
+		README.markdown = README.markdown
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Renderers", "Renderers", "{47CB89AC-9615-4FA8-90DE-2D849935C36D}"
@@ -30,8 +30,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Smtp", "src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj", "{3808D62F-9F8A-4644-A965-361968770CFB}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Razor.Tests", "test\FluentEmail.Razor.Tests\FluentEmail.Razor.Tests.csproj", "{F54586BA-31F0-4EF4-B965-90007C9AA04C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Smtp.Tests", "test\FluentEmail.Smtp.Tests\FluentEmail.Smtp.Tests.csproj", "{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Mailgun", "src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj", "{EFB250E1-92D2-476D-88A5-372B08D73C49}"
 EndProject
@@ -51,11 +49,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.MailKit.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Graph", "src\Senders\FluentEmail.Graph\FluentEmail.Graph.csproj", "{0C7819AD-BC76-465D-9B2A-BE2DA75042F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Graph.Tests", "test\FluentEmail.Graph.Tests\FluentEmail.Graph.Tests.csproj", "{A180EE2A-CD37-4762-8AC7-ADAC828FB4A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Graph.Tests", "test\FluentEmail.Graph.Tests\FluentEmail.Graph.Tests.csproj", "{A180EE2A-CD37-4762-8AC7-ADAC828FB4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Liquid", "src\Renderers\FluentEmail.Liquid\FluentEmail.Liquid.csproj", "{17100F47-A555-4756-A25F-4F05EDAFA74E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid", "src\Renderers\FluentEmail.Liquid\FluentEmail.Liquid.csproj", "{17100F47-A555-4756-A25F-4F05EDAFA74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.Liquid.Tests", "test\FluentEmail.Liquid.Tests\FluentEmail.Liquid.Tests.csproj", "{C8063CBA-D8F3-467A-A75C-63843F0DE862}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid.Tests", "test\FluentEmail.Liquid.Tests\FluentEmail.Liquid.Tests.csproj", "{C8063CBA-D8F3-467A-A75C-63843F0DE862}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,10 +81,6 @@ Global
 		{F54586BA-31F0-4EF4-B965-90007C9AA04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F54586BA-31F0-4EF4-B965-90007C9AA04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F54586BA-31F0-4EF4-B965-90007C9AA04C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EFB250E1-92D2-476D-88A5-372B08D73C49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{EFB250E1-92D2-476D-88A5-372B08D73C49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFB250E1-92D2-476D-88A5-372B08D73C49}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -149,7 +143,6 @@ Global
 		{72D765E8-81DE-4E18-92C5-ED5BDD65324F} = {6DC215BD-05EF-49A6-ADBE-8AE399952EEC}
 		{3808D62F-9F8A-4644-A965-361968770CFB} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{F54586BA-31F0-4EF4-B965-90007C9AA04C} = {47CB89AC-9615-4FA8-90DE-2D849935C36D}
-		{3FF90BAA-3273-42D7-A9A3-B176FEC81E11} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}
 		{EFB250E1-92D2-476D-88A5-372B08D73C49} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{03FFB5B9-54C9-45A3-8E13-3D4B972704F8} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{4636C06B-60ED-48AC-9833-02B8F4EB75F9} = {4DADBE55-BD91-4D14-92EA-1BD0D1545145}

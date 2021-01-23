@@ -9,7 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
   </ItemGroup>
 
 </Project>
