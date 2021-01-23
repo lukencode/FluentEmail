@@ -108,7 +108,7 @@ namespace FluentEmail.MailKitSmtp
 
             try
             {
-                if(_smtpClientOptions.UsePickupDirectory)
+                if (_smtpClientOptions.UsePickupDirectory)
                 {
                     await this.SaveToPickupDirectory(message, _smtpClientOptions.MailPickupDirectory);
                     return response;
@@ -189,12 +189,15 @@ namespace FluentEmail.MailKitSmtp
         {
             var data = email.Data;
 
-            var message = new MimeMessage
-            {
-                Subject = data.Subject ?? string.Empty
-            };
+            var message = new MimeMessage();
 
-            message.Headers.Add(HeaderId.Subject, Encoding.UTF8, data.Subject ?? string.Empty);
+            // fixes https://github.com/lukencode/FluentEmail/issues/228
+            // if for any reason, subject header is not added, add it else update it.
+            if (!message.Headers.Contains(HeaderId.Subject))
+                message.Headers.Add(HeaderId.Subject, Encoding.UTF8, data.Subject ?? string.Empty);
+            else
+                message.Headers[HeaderId.Subject] = data.Subject ?? string.Empty;
+
             message.Headers.Add(HeaderId.Encoding, Encoding.UTF8.EncodingName);
 
             message.From.Add(new MailboxAddress(data.FromAddress.Name, data.FromAddress.EmailAddress));
@@ -205,7 +208,7 @@ namespace FluentEmail.MailKitSmtp
                 builder.TextBody = data.PlaintextAlternativeBody;
                 builder.HtmlBody = data.Body;
             }
-            else if(!data.IsHtml)
+            else if (!data.IsHtml)
             {
                 builder.TextBody = data.Body;
             }
