@@ -5,6 +5,7 @@
     <AssemblyTitle>Fluent Email - SMTP</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
     <PackageTags>$(PackageTags);smtp</PackageTags>
+    <Version>2.9.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
