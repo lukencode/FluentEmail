@@ -6,7 +6,7 @@
     <Authors>Luke Lowrey;Ben Cull;Ricardo Santos;Github Contributors</Authors>
     <AssemblyName>FluentEmail.SendGrid</AssemblyName>
     <PackageTags>$(PackageTags);sendgrid</PackageTags>
-    <Version>2.9.0</Version>
+    <Version>3.0.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
