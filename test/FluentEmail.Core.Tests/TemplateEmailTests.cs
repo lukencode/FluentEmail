@@ -29,7 +29,7 @@ namespace FluentEmail.Core.Tests
 		}
 
 		[Test]
-		public void Using_Template_From_Not_Existing_Culture_File_Using_Defualt_Template()
+		public void Using_Template_From_Not_Existing_Culture_File_Using_Default_Template()
 		{
 			var culture = new CultureInfo("fr-FR");
 			var email = Email
@@ -122,7 +122,7 @@ namespace FluentEmail.Core.Tests
 		}
 
 		[Test]
-		public void New_Using_Template_From_Not_Existing_Culture_File_Using_Defualt_Template()
+		public void New_Using_Template_From_Not_Existing_Culture_File_Using_Default_Template()
 		{
 			var culture = new CultureInfo("fr-FR");
 			var email = new Email(fromEmail)
