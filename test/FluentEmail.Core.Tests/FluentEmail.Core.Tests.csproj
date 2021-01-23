@@ -16,6 +16,7 @@
     <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj" />
+    <ProjectReference Include="..\..\src\Senders\FluentEmail.Graph\FluentEmail.Graph.csproj" />
   </ItemGroup>
 
   <ItemGroup>
