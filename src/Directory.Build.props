@@ -26,6 +26,8 @@
 
     <AssetsDirectory>../../../assets</AssetsDirectory>
 
+    <LangVersion>latest</LangVersion>
+
   </PropertyGroup>
 
   <ItemGroup>
