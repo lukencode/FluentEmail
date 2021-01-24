@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsTestProject>true</IsTestProject>
-	  <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
 
@@ -21,8 +20,6 @@
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj" />
-    <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
-    <ProjectReference Include="..\..\src\Renderers\FluentEmail.Razor\FluentEmail.Razor.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -40,10 +37,6 @@
     <None Update="test-binary.xlsx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-	  <Content Include="Shared\_Layout.cshtml">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-	  </Content>
-	  <EmbeddedResource Include="_EmbeddedLayout.cshtml" />
   </ItemGroup>
 
 </Project>
