@@ -68,7 +68,7 @@ namespace FluentEmail.SendGrid.Tests
 
             using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/test-binary.xlsx"))
             {
-                var attachment = new Attachment()
+                var attachment = new Attachment
                 {
                     Data = stream,
                     ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",

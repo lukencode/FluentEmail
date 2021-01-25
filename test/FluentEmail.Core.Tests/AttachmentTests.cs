@@ -19,7 +19,7 @@ namespace FluentEmail.Core.Tests
         {
             using (var stream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "test.txt")}"))
             {
-                var attachment = new Attachment()
+                var attachment = new Attachment
                 {
                     Data = stream,
                     Filename = "Test.txt",

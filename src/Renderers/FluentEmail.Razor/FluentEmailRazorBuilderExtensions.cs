@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
 	    public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder)
 	    {
-		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer()));
+		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(_ => new RazorRenderer()));
 		    return builder;
 	    }
 
@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <returns></returns>
 	    public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, string templateRootFolder)
         {
-            builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer(templateRootFolder)));
+            builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(_ => new RazorRenderer(templateRootFolder)));
             return builder;
         }
 
@@ -34,10 +34,10 @@ namespace Microsoft.Extensions.DependencyInjection
 		/// <returns></returns>
 	    public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, Type embeddedResourceRootType)
 	    {
-		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer( embeddedResourceRootType)));
+		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(_ => new RazorRenderer( embeddedResourceRootType)));
 		    return builder;
 	    }
-	    
+
 	    /// <summary>
 	    /// Add razor renderer with a RazorLightProject to support views and layouts
 	    /// </summary>
@@ -46,7 +46,7 @@ namespace Microsoft.Extensions.DependencyInjection
 	    /// <returns></returns>
 	    public static FluentEmailServicesBuilder AddRazorRenderer(this FluentEmailServicesBuilder builder, RazorLightProject razorLightProject)
 	    {
-		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(sp => new RazorRenderer(razorLightProject)));
+		    builder.Services.TryAdd(ServiceDescriptor.Singleton<ITemplateRenderer, RazorRenderer>(_ => new RazorRenderer(razorLightProject)));
 		    return builder;
 	    }
     }

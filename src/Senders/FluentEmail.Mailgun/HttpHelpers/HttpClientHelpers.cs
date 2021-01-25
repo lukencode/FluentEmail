@@ -105,7 +105,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
         public ApiResponse ToApiResponse()
         {
-            return new ApiResponse()
+            return new ApiResponse
             {
                 Errors = Errors
             };
@@ -133,7 +133,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
                 if (!Errors.Any())
                 {
-                    Errors.Add(new ApiError()
+                    Errors.Add(new ApiError
                     {
                         ErrorMessage = !string.IsNullOrEmpty(ResponseBody) ? ResponseBody : Message.StatusCode.ToString()
                     });
@@ -155,7 +155,7 @@ namespace FluentEmail.Mailgun.HttpHelpers
 
         public new ApiResponse<T> ToApiResponse()
         {
-            return new ApiResponse<T>()
+            return new ApiResponse<T>
             {
                 Errors = Errors,
                 Data = Data

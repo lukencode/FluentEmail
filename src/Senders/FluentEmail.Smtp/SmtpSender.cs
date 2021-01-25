@@ -2,7 +2,6 @@ using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using System;
-using System.Collections.Specialized;
 using System.Net.Mail;
 using System.Text;
 using System.Threading;
@@ -63,7 +62,7 @@ namespace FluentEmail.Smtp
             {
                 using (var client = _clientFactory())
                 {
-                    await client.SendMailExAsync(message);                    
+                    await client.SendMailExAsync(message);
                 }
             }
             else
@@ -163,8 +162,8 @@ namespace FluentEmail.Smtp
     public static class SendMailEx
     {
         public static Task SendMailExAsync(
-            this System.Net.Mail.SmtpClient @this,
-            System.Net.Mail.MailMessage message,
+            this SmtpClient @this,
+            MailMessage message,
             CancellationToken token = default(CancellationToken))
         {
             // use Task.Run to negate SynchronizationContext
@@ -172,22 +171,22 @@ namespace FluentEmail.Smtp
         }
 
         private static async Task SendMailExImplAsync(
-            System.Net.Mail.SmtpClient client, 
-            System.Net.Mail.MailMessage message, 
+            SmtpClient client,
+            MailMessage message,
             CancellationToken token)
         {
             token.ThrowIfCancellationRequested();
 
             var tcs = new TaskCompletionSource<bool>();
-            System.Net.Mail.SendCompletedEventHandler handler = null;
+            SendCompletedEventHandler handler = null;
             Action unsubscribe = () => client.SendCompleted -= handler;
 
-            handler = async (s, e) =>
+            handler = async (_, e) =>
             {
                 unsubscribe();
 
                 // a hack to complete the handler asynchronously
-                await Task.Yield(); 
+                await Task.Yield();
 
                 if (e.UserState != tcs)
                     tcs.TrySetException(new InvalidOperationException("Unexpected UserState"));
