@@ -12,19 +12,15 @@ namespace FluentEmail.Razor.Tests
         const string fromEmail = "johno@test.com";
         const string subject = "sup dawg";
 
-        [SetUp]
-        public void SetUp()
-        {
-            Email.DefaultRenderer = new RazorRenderer();
-        }
-
         [Test]
         public void Anonymous_Model_With_List_Template_Matches()
         {
             string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
-            var email = Email
-                .From(fromEmail)
+            var email = new Email(fromEmail)
+                {
+                    Renderer = new RazorRenderer()
+                }
                 .To(toEmail)
                 .Subject(subject)
                 .UsingTemplate(template, new { Name = "LUKE", Numbers = new string[] { "1", "2", "3" } });
@@ -40,16 +36,20 @@ namespace FluentEmail.Razor.Tests
 
             for (var i = 0; i < 10; i++)
             {
-                var email = Email
-                    .From(fromEmail)
+                var email = new Email(fromEmail)
+                    {
+                        Renderer = new RazorRenderer()
+                    }
                     .To(toEmail)
                     .Subject(subject)
                     .UsingTemplate(template, new { Name = i, Numbers = new string[] { "1", "2", "3" } });
 
                 Assert.AreEqual("sup " + i + " here is a list 123", email.Data.Body);
 
-                var email2 = Email
-                    .From(fromEmail)
+                var email2 = new Email(fromEmail)
+                    {
+                        Renderer = new RazorRenderer()
+                    }
                     .To(toEmail)
                     .Subject(subject)
                     .UsingTemplate(template2, new { Name = i });
@@ -64,6 +64,9 @@ namespace FluentEmail.Razor.Tests
             string template = "sup @Model.Name";
 
             var email = new Email(fromEmail)
+                {
+                    Renderer = new RazorRenderer()
+                }
                 .To(toEmail)
                 .Subject(subject)
                 .UsingTemplate(template, new { Name = "LUKE" });
@@ -77,6 +80,9 @@ namespace FluentEmail.Razor.Tests
             string template = "sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
             var email = new Email(fromEmail)
+                {
+                    Renderer = new RazorRenderer()
+                }
                 .To(toEmail)
                 .Subject(subject)
                 .UsingTemplate(template, new { Name = "LUKE", Numbers = new string[] { "1", "2", "3" } });
@@ -93,6 +99,9 @@ namespace FluentEmail.Razor.Tests
             for (var i = 0; i < 10; i++)
             {
                 var email = new Email(fromEmail)
+                    {
+                        Renderer = new RazorRenderer()
+                    }
                     .To(toEmail)
                     .Subject(subject)
                     .UsingTemplate(template, new { Name = i, Numbers = new string[] { "1", "2", "3" } });
@@ -100,6 +109,9 @@ namespace FluentEmail.Razor.Tests
                 Assert.AreEqual("sup " + i + " here is a list 123", email.Data.Body);
 
                 var email2 = new Email(fromEmail)
+                    {
+                        Renderer = new RazorRenderer()
+                    }
                     .To(toEmail)
                     .Subject(subject)
                     .UsingTemplate(template2, new { Name = i });
@@ -123,7 +135,10 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
 			dynamic viewBag = new ExpandoObject();
 			viewBag.Title = "Hello!";
-		    var email = new Email(fromEmail)
+            var email = new Email(fromEmail)
+                {
+                    Renderer = new RazorRenderer()
+                }
 			    .To(toEmail)
 			    .Subject(subject)
 			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
@@ -134,8 +149,6 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 	    [Test]
 	    public void Should_be_able_to_use_embedded_layout_with_viewbag()
 	    {
-		    
-		    Email.DefaultRenderer = new RazorRenderer(typeof(RazorTests));
 		    string template = @"
 @{
 	Layout = ""_EmbeddedLayout.cshtml"";
@@ -144,7 +157,10 @@ sup @Model.Name here is a list @foreach(var i in Model.Numbers) { @i }";
 
 		    dynamic viewBag = new ExpandoObject();
 		    viewBag.Title = "Hello!";
-		    var email = new Email(fromEmail)
+            var email = new Email(fromEmail)
+                {
+                    Renderer = new RazorRenderer(typeof(RazorTests))
+                }
 			    .To(toEmail)
 			    .Subject(subject)
 			    .UsingTemplate(template, new ViewModelWithViewBag{ Name = "LUKE", Numbers = new[] { "1", "2", "3" }, ViewBag = viewBag});
