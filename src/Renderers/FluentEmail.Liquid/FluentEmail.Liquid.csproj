@@ -4,11 +4,9 @@
     <Description>Generate emails using Liquid templates. Uses the Fluid project under the hood.</Description>
     <AssemblyTitle>Fluent Email - Liquid</AssemblyTitle>
     <PackageTags>$(PackageTags);liquid</PackageTags>
-    <Version>3.0.0</Version>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssetsDirectory>../../../assets</AssetsDirectory>
     <NoWarn>NU5104</NoWarn>
-    <RootNamespace>FluentEmail.Liquid</RootNamespace>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
