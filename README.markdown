@@ -3,7 +3,7 @@
 # FluentEmail - All in one email sender for .NET and .NET Core
 The easiest way to send email from .NET and .NET Core. Use Razor for email templates and send using SendGrid, MailGun, SMTP and more.
 
-Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter.com/lukencode)** for updates.
+Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter.com/lukencode)** for updates. See my blog for a detailed guide [A complete guide to send email in .NET](https://lukelowrey.com/dotnet-email-guide-2021/) 
 
 
 ## Nuget Packages
@@ -141,11 +141,3 @@ var email = new Email("bob@hotmail.com")
 		TypeFromYourEmbeddedAssembly.GetType().GetTypeInfo().Assembly);
 ```
 
-## More Info
-
-<a href="http://lukencode.com/2018/07/01/send-email-in-dotnet-core-with-fluent-email/">Sending email in .NET Core with FluentEmail</a>
-
-
-## [The future of FluentEmail](https://lukelowrey.com/fluentemail-future/)**
-
-Looking for collaborators, discussion and hoping to keep improving the library!
