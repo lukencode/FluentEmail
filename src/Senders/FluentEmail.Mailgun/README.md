@@ -1,4 +1,4 @@
-﻿# Fluent Email - MailGun  
+# Fluent Email - MailGun  
 
 Send email via the MailGun REST API.
 

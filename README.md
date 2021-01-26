@@ -26,7 +26,10 @@ Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter
 * [FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
 
 ## Basic Usage
-```csharp
+
+<!-- snippet: BasicUsage -->
+<a id='snippet-basicusage'></a>
+```cs
 var email = await Email
     .From("john@email.com")
     .To("bob@email.com", "bob")
@@ -34,6 +37,8 @@ var email = await Email
     .Body("yo bob, long time no see!")
     .SendAsync();
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L62-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-basicusage' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 
 ## Dependency Injection
@@ -53,7 +58,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ## Using a Razor template
 
-```csharp
+<!-- snippet: RazorTemplate -->
+<a id='snippet-razortemplate'></a>
+```cs
 // Using Razor templating package (or set using AddRazorRenderer in services)
 Email.DefaultRenderer = new RazorRenderer();
 
@@ -63,8 +70,10 @@ var email = Email
     .From("bob@hotmail.com")
     .To("somedude@gmail.com")
     .Subject("woo nuget")
-    .UsingTemplate(template, new { Name = "Luke", Compliment = "Awesome" });
+    .UsingTemplate(template, new {Name = "Luke", Compliment = "Awesome"});
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L76-L89' title='Snippet source file'>snippet source</a> | <a href='#snippet-razortemplate' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## Using a Liquid template
 
@@ -77,7 +86,9 @@ Model properties are exposed directly as properties in Liquid templates so they 
 
 See [Fluid samples](https://github.com/sebastienros/fluid) for more examples.
 
-```csharp
+<!-- snippet: LiquidTemplate -->
+<a id='snippet-liquidtemplate'></a>
+```cs
 // Using Liquid templating package (or set using AddLiquidRenderer in services)
 
 // file provider is used to resolve layout files if they are in use
@@ -98,12 +109,16 @@ var email = Email
     .From("bob@hotmail.com")
     .To("somedude@gmail.com")
     .Subject("woo nuget")
-    .UsingTemplate(template, new ViewModel { Name = "Luke", Compliment = "Awesome" });
+    .UsingTemplate(template, new ViewModel {Name = "Luke", Compliment = "Awesome"});
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L94-L118' title='Snippet source file'>snippet source</a> | <a href='#snippet-liquidtemplate' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## Sending Emails
 
-```csharp
+<!-- snippet: SendingEmails -->
+<a id='snippet-sendingemails'></a>
+```cs
 // Using Smtp Sender package (or set using AddSmtpSender in services)
 Email.DefaultSender = new SmtpSender();
 
@@ -113,16 +128,22 @@ email.Send();
 //send asynchronously
 await email.SendAsync();
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L46-L57' title='Snippet source file'>snippet source</a> | <a href='#snippet-sendingemails' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## Template File from Disk
 
-```csharp
+<!-- snippet: TemplateFileFromDisk -->
+<a id='snippet-templatefilefromdisk'></a>
+```cs
 var email = Email
     .From("bob@hotmail.com")
     .To("somedude@gmail.com")
     .Subject("woo nuget")
     .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Mytemplate.cshtml", new { Name = "Rad Dude" });
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L33-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-templatefilefromdisk' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## Embedded Template File
 
@@ -132,14 +153,19 @@ var email = Email
 <MvcRazorExcludeRefAssembliesFromPublish>false</MvcRazorExcludeRefAssembliesFromPublish>
 ```
 
-```csharp
+<!-- snippet: EmbeddedTemplateFile -->
+<a id='snippet-embeddedtemplatefile'></a>
+```cs
 var email = new Email("bob@hotmail.com")
-	.To("benwholikesbeer@twitter.com")
-	.Subject("Hey cool name!")
-	.UsingTemplateFromEmbedded("Example.Project.Namespace.template-name.cshtml", 
-		new { Name = "Bob" }, 
-		TypeFromYourEmbeddedAssembly.GetType().GetTypeInfo().Assembly);
+    .To("benwholikesbeer@twitter.com")
+    .Subject("Hey cool name!")
+    .UsingTemplateFromEmbedded(
+        "Example.Project.Namespace.template-name.cshtml",
+        new { Name = "Bob" },
+        typeof(MyType).Assembly);
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L18-L28' title='Snippet source file'>snippet source</a> | <a href='#snippet-embeddedtemplatefile' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## More Info
 
