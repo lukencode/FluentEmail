@@ -37,7 +37,7 @@ var email = await Email
     .Body("yo bob, long time no see!")
     .SendAsync();
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L62-L71' title='Snippet source file'>snippet source</a> | <a href='#snippet-basicusage' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L78-L87' title='Snippet source file'>snippet source</a> | <a href='#snippet-basicusage' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 
@@ -46,7 +46,9 @@ var email = await Email
 Configure FluentEmail in startup.cs with these helper methods. This will inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
 ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
 
-```csharp
+<!-- snippet: ConfigureServices -->
+<a id='snippet-configureservices'></a>
+```cs
 public void ConfigureServices(IServiceCollection services)
 {
     services
@@ -55,6 +57,8 @@ public void ConfigureServices(IServiceCollection services)
         .AddSmtpSender("localhost", 25);
 }
 ```
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L48-L58' title='Snippet source file'>snippet source</a> | <a href='#snippet-configureservices' title='Start of snippet'>anchor</a></sup>
+<!-- endSnippet -->
 
 ## Using a Razor template
 
@@ -72,7 +76,7 @@ var email = Email
     .Subject("woo nuget")
     .UsingTemplate(template, new {Name = "Luke", Compliment = "Awesome"});
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L76-L89' title='Snippet source file'>snippet source</a> | <a href='#snippet-razortemplate' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L92-L105' title='Snippet source file'>snippet source</a> | <a href='#snippet-razortemplate' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Using a Liquid template
@@ -111,7 +115,7 @@ var email = Email
     .Subject("woo nuget")
     .UsingTemplate(template, new ViewModel {Name = "Luke", Compliment = "Awesome"});
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L94-L118' title='Snippet source file'>snippet source</a> | <a href='#snippet-liquidtemplate' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L110-L134' title='Snippet source file'>snippet source</a> | <a href='#snippet-liquidtemplate' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Sending Emails
@@ -128,7 +132,7 @@ email.Send();
 //send asynchronously
 await email.SendAsync();
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L46-L57' title='Snippet source file'>snippet source</a> | <a href='#snippet-sendingemails' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L62-L73' title='Snippet source file'>snippet source</a> | <a href='#snippet-sendingemails' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Template File from Disk
@@ -140,9 +144,9 @@ var email = Email
     .From("bob@hotmail.com")
     .To("somedude@gmail.com")
     .Subject("woo nuget")
-    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Mytemplate.cshtml", new { Name = "Rad Dude" });
+    .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Mytemplate.cshtml", new {Name = "Rad Dude"});
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L33-L41' title='Snippet source file'>snippet source</a> | <a href='#snippet-templatefilefromdisk' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L37-L45' title='Snippet source file'>snippet source</a> | <a href='#snippet-templatefilefromdisk' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## Embedded Template File
@@ -161,10 +165,10 @@ var email = new Email("bob@hotmail.com")
     .Subject("Hey cool name!")
     .UsingTemplateFromEmbedded(
         "Example.Project.Namespace.template-name.cshtml",
-        new { Name = "Bob" },
+        new {Name = "Bob"},
         typeof(MyType).Assembly);
 ```
-<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L18-L28' title='Snippet source file'>snippet source</a> | <a href='#snippet-embeddedtemplatefile' title='Start of snippet'>anchor</a></sup>
+<sup><a href='/test/FluentEmail.Core.Tests/Snippets.cs#L22-L32' title='Snippet source file'>snippet source</a> | <a href='#snippet-embeddedtemplatefile' title='Start of snippet'>anchor</a></sup>
 <!-- endSnippet -->
 
 ## More Info

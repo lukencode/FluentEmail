@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using FluentEmail.Liquid;
 using FluentEmail.Razor;
 using FluentEmail.Smtp;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
@@ -12,7 +13,10 @@ namespace FluentEmail.Core.Tests
     [TestFixture]
     public class Snippets
     {
-        class MyType{}
+        class MyType
+        {
+        }
+
         void EmbeddedTemplateFile()
         {
             #region EmbeddedTemplateFile
@@ -22,7 +26,7 @@ namespace FluentEmail.Core.Tests
                 .Subject("Hey cool name!")
                 .UsingTemplateFromEmbedded(
                     "Example.Project.Namespace.template-name.cshtml",
-                    new { Name = "Bob" },
+                    new {Name = "Bob"},
                     typeof(MyType).Assembly);
 
             #endregion
@@ -36,10 +40,22 @@ namespace FluentEmail.Core.Tests
                 .From("bob@hotmail.com")
                 .To("somedude@gmail.com")
                 .Subject("woo nuget")
-                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Mytemplate.cshtml", new { Name = "Rad Dude" });
+                .UsingTemplateFromFile($"{Directory.GetCurrentDirectory()}/Mytemplate.cshtml", new {Name = "Rad Dude"});
 
             #endregion
         }
+
+        #region ConfigureServices
+
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services
+                .AddFluentEmail("fromemail@test.test")
+                .AddRazorRenderer()
+                .AddSmtpSender("localhost", 25);
+        }
+
+        #endregion
 
         async Task SendingEmails(Email email)
         {
