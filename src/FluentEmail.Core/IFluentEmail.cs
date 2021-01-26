@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Globalization;
 using System.Reflection;
 using System.Threading;
@@ -13,6 +14,9 @@ namespace FluentEmail.Core
 	    EmailData Data { get; set; }
 	    ITemplateRenderer Renderer { get; set; }
 	    ISender Sender { get; set; }
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        IDictionary<string, object> Context { get; set; }
 
 	    /// <summary>
 	    /// Adds a recipient to the email, Splits name and address on ';'

@@ -34,6 +34,10 @@ namespace FluentEmail.SendGrid
 
             var mailMessage = new SendGridMessage();
             mailMessage.SetSandBoxMode(_sandBoxMode);
+            if (email.ClickTrackingDisabled())
+            {
+                mailMessage.SetClickTracking(false, false);
+            }
 
             mailMessage.SetFrom(ConvertAddress(email.Data.FromAddress));
 

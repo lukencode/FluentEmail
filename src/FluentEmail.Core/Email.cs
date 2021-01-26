@@ -16,6 +16,7 @@ namespace FluentEmail.Core
         public EmailData Data { get; set; }
         public ITemplateRenderer Renderer { get; set; }
         public ISender Sender { get; set; }
+        public IDictionary<string, object> Context { get; set; } = new Dictionary<string, object>();
 
         public static ITemplateRenderer DefaultRenderer = new ReplaceRenderer();
         public static ISender DefaultSender = new SaveToDiskSender("/");
