@@ -153,7 +153,7 @@ namespace FluentEmail.Liquid.Tests
 	    [Test]
 	    public void Should_be_able_to_use_project_layout()
 	    {
-            SetupRenderer(new PhysicalFileProvider(Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory.FullName, "EmailTemplates")));
+            SetupRenderer(new PhysicalFileProvider(Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory!.FullName, "EmailTemplates")));
 
 		    const string template = @"
 {% layout '_layout.liquid' %}

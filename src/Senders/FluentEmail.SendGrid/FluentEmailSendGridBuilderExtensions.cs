@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static FluentEmailServicesBuilder AddSendGridSender(this FluentEmailServicesBuilder builder, string apiKey, bool sandBoxMode = false)
         {
-            builder.Services.TryAdd(ServiceDescriptor.Singleton<ISender>(x => new SendGridSender(apiKey, sandBoxMode)));
+            builder.Services.TryAdd(ServiceDescriptor.Singleton<ISender>(_ => new SendGridSender(apiKey, sandBoxMode)));
             return builder;
         }
     }

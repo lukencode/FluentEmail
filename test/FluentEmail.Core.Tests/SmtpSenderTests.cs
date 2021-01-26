@@ -68,7 +68,7 @@ namespace FluentEmail.Smtp.Tests
             sw.Flush();
             stream.Seek(0, SeekOrigin.Begin);
 
-            var attachment = new Attachment()
+            var attachment = new Attachment
             {
                 Data = stream,
                 ContentType = "text/plain",

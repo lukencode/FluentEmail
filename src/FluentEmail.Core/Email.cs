@@ -40,7 +40,7 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="emailAddress">Email address to send from</param>
         /// <param name="name">Name to send from</param>
-        public Email(string emailAddress, string name = "") 
+        public Email(string emailAddress, string name = "")
             : this(DefaultRenderer, DefaultSender, emailAddress, name) { }
 
         /// <summary>
@@ -52,9 +52,9 @@ namespace FluentEmail.Core
         /// <param name="name">Name to send from</param>
         public Email(ITemplateRenderer renderer, ISender sender, string emailAddress, string name = "")
         {
-            Data = new EmailData()
+            Data = new EmailData
             {
-                FromAddress = new Address() {EmailAddress = emailAddress, Name = name}
+                FromAddress = new Address {EmailAddress = emailAddress, Name = name}
             };
             Renderer = renderer;
             Sender = sender;
@@ -252,8 +252,8 @@ namespace FluentEmail.Core
             Data.IsHtml = isHtml;
             Data.Body = body;
             return this;
-        }        
-        
+        }
+
         /// <summary>
         /// Adds a Plaintext alternative Body to the Email. Used in conjunction with an HTML email,
         /// this allows for email readers without html capability, and also helps avoid spam filters.
@@ -462,7 +462,7 @@ namespace FluentEmail.Core
         public IFluentEmail AttachFromFilename(string filename,  string contentType = null, string attachmentName = null)
         {
             var stream = File.OpenRead(filename);
-            Attach(new Attachment()
+            Attach(new Attachment
             {
                 Data = stream,
                 Filename = attachmentName ?? filename,

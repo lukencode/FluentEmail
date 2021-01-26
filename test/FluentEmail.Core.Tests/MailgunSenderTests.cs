@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using NUnit.Framework;
-using System.Reflection;
 using Newtonsoft.Json;
 
 namespace FluentEmail.Mailgun.Tests
@@ -90,7 +89,7 @@ namespace FluentEmail.Mailgun.Tests
             sw.Flush();
             stream.Seek(0, SeekOrigin.Begin);
 
-            var attachment = new Attachment()
+            var attachment = new Attachment
             {
                 Data = stream,
                 ContentType = "text/plain",
@@ -114,8 +113,7 @@ namespace FluentEmail.Mailgun.Tests
         {
             using (var stream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "logotest.png")}"))
             {
-
-                var attachment = new Attachment()
+                var attachment = new Attachment
                 {
                     IsInline = true,
                     Data = stream,

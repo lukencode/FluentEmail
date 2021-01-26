@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Net.Mail;
 using System.Threading.Tasks;
 using FluentEmail.Core;
 using FluentEmail.MailKitSmtp;
@@ -28,7 +27,7 @@ namespace FluentEmail.MailKit.Tests
         [SetUp]
         public void SetUp()
         {
-            var sender = new MailKitSender(new SmtpClientOptions()
+            var sender = new MailKitSender(new SmtpClientOptions
             { 
                  Server = "localhost",
                  Port = 25,
@@ -72,7 +71,7 @@ namespace FluentEmail.MailKit.Tests
             sw.Flush();
             stream.Seek(0, SeekOrigin.Begin);
 
-            var attachment = new Attachment()
+            var attachment = new Attachment
             {
                 Data = stream,
                 ContentType = "text/plain",

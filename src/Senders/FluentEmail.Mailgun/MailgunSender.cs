@@ -36,7 +36,7 @@ namespace FluentEmail.Mailgun
                 default:
                     throw new ArgumentException($"'{mailGunRegion}' is not a valid value for {nameof(mailGunRegion)}");
             }
-            _httpClient = new HttpClient()
+            _httpClient = new HttpClient
             {
                 BaseAddress = new Uri(url)
             };
@@ -88,7 +88,7 @@ namespace FluentEmail.Mailgun
                     key = "h:" + emailHeader.Key;
                 }
 
-                parameters.Add(new KeyValuePair<string, string>(key, emailHeader.Value));   
+                parameters.Add(new KeyValuePair<string, string>(key, emailHeader.Value));
             }
 
             var files = new List<HttpFile>();
@@ -101,7 +101,7 @@ namespace FluentEmail.Mailgun
                 else
                     param = "attachment";
 
-                files.Add(new HttpFile()
+                files.Add(new HttpFile
                 {
                     ParameterName = param,
                     Data = x.Data,
@@ -118,7 +118,7 @@ namespace FluentEmail.Mailgun
                 result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));
                 return result;
             }
-            
+
             return result;
         }
     }

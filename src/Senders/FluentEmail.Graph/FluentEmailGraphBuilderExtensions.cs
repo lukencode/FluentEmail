@@ -13,7 +13,7 @@ namespace Microsoft.Extensions.DependencyInjection
             string GraphEmailSecret,
             bool saveSentItems = false)
         {
-            builder.Services.TryAdd(ServiceDescriptor.Scoped<ISender>(x => new GraphSender(GraphEmailAppId, GraphEmailTenantId, GraphEmailSecret, saveSentItems)));
+            builder.Services.TryAdd(ServiceDescriptor.Scoped<ISender>(_ => new GraphSender(GraphEmailAppId, GraphEmailTenantId, GraphEmailSecret, saveSentItems)));
             return builder;
         }
     }

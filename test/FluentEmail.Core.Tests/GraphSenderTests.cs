@@ -65,7 +65,7 @@ namespace FluentEmail.Graph.Tests
             sw.Flush();
             stream.Seek(0, SeekOrigin.Begin);
 
-            var attachment = new Attachment()
+            var attachment = new Attachment
             {
                 ContentType = "text/plain",
                 Filename = "graphtest.txt",
