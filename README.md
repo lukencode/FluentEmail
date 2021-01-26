@@ -1,6 +1,7 @@
 ![alt text](https://github.com/lukencode/FluentEmail/raw/master/assets/fluentemail_logo_64x64.png "FluentEmail")
 
 # FluentEmail - All in one email sender for .NET and .NET Core
+
 The easiest way to send email from .NET and .NET Core. Use Razor for email templates and send using SendGrid, MailGun, SMTP and more.
 
 Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter.com/lukencode)** for updates.
@@ -43,8 +44,7 @@ var email = await Email
 
 ## Dependency Injection
 
-Configure FluentEmail in startup.cs with these helper methods. This will inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
-ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
+Configure FluentEmail in startup.cs with these helper methods. This will inject `IFluentEmail` (send a single email) and `IFluentEmailFactory` (used to send multiple emails in a single context) with the `ISender` and `ITemplateRenderer` configured using `AddRazorRenderer()`, `AddSmtpSender()` or other packages.
 
 <!-- snippet: ConfigureServices -->
 <a id='snippet-configureservices'></a>
