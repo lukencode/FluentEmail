@@ -3,6 +3,7 @@
   <PropertyGroup>
     <Description>Generate emails using Liquid templates. Uses the Fluid project under the hood.</Description>
     <AssemblyTitle>Fluent Email - Liquid</AssemblyTitle>
+    <Authors>Marko Lahma;$(Authors)</Authors>
     <PackageTags>$(PackageTags);liquid</PackageTags>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssetsDirectory>../../../assets</AssetsDirectory>
