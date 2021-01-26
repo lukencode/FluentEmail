@@ -13,9 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.6.1" />
-    <PackageReference Include="NUnit" Version="3.12.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
+    <PackageReference Include="NUnit" Version="3.13.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj" />
