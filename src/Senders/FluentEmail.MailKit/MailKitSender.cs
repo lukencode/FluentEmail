@@ -118,7 +118,7 @@ namespace FluentEmail.MailKitSmtp
                 {
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
-                        client.Connect(
+                        await client.ConnectAsync(
                             _smtpClientOptions.Server,
                             _smtpClientOptions.Port,
                             _smtpClientOptions.SocketOptions.Value,
@@ -126,7 +126,7 @@ namespace FluentEmail.MailKitSmtp
                     }
                     else
                     {
-                        client.Connect(
+                        await client.ConnectAsync(
                             _smtpClientOptions.Server,
                             _smtpClientOptions.Port,
                             _smtpClientOptions.UseSsl,
