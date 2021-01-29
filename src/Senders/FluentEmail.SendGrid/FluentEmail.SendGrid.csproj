@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Sendgrid" Version="9.15.1" />
+    <PackageReference Include="Sendgrid" Version="9.22.0" />
   </ItemGroup>
 
 </Project>
