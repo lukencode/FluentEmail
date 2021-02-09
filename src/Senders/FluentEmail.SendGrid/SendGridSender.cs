@@ -13,7 +13,7 @@ using SendGridAttachment = SendGrid.Helpers.Mail.Attachment;
 
 namespace FluentEmail.SendGrid
 {
-    public class SendGridSender : ISender
+    public class SendGridSender : ISendGridSender
     {
         private readonly string _apiKey;
         private readonly bool _sandBoxMode;
@@ -30,8 +30,41 @@ namespace FluentEmail.SendGrid
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
-            var sendGridClient = new SendGridClient(_apiKey);
+            var mailMessage = await BuildSendGridMessage(email);
 
+            if (email.Data.IsHtml)
+            {
+                mailMessage.HtmlContent = email.Data.Body;
+            }
+            else
+            {
+                mailMessage.PlainTextContent = email.Data.Body;
+            }
+
+            if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
+            {
+                mailMessage.PlainTextContent = email.Data.PlaintextAlternativeBody;
+            }
+
+            var sendResponse = await SendViaSendGrid(mailMessage, token);
+
+            return sendResponse;
+        }
+
+        public async Task<SendResponse> SendWithTemplateAsync(IFluentEmail email, string templateId, object templateData, CancellationToken? token = null)
+        {
+            var mailMessage = await BuildSendGridMessage(email);
+
+            mailMessage.SetTemplateId(templateId);
+            mailMessage.SetTemplateData(templateData);
+
+            var sendResponse = await SendViaSendGrid(mailMessage, token);
+
+            return sendResponse;
+        }
+
+        private async Task<SendGridMessage> BuildSendGridMessage(IFluentEmail email)
+        {
             var mailMessage = new SendGridMessage();
             mailMessage.SetSandBoxMode(_sandBoxMode);
 
@@ -55,15 +88,6 @@ namespace FluentEmail.SendGrid
             if (email.Data.Headers.Any())
             {
                 mailMessage.AddHeaders(email.Data.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
-            }
-
-            if (email.Data.IsHtml)
-            {
-                mailMessage.HtmlContent = email.Data.Body;
-            }
-            else
-            {
-                mailMessage.PlainTextContent = email.Data.Body;
             }
 
             switch (email.Data.Priority)
@@ -92,11 +116,6 @@ namespace FluentEmail.SendGrid
                     break;
             }
 
-            if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
-            {
-                mailMessage.PlainTextContent = email.Data.PlaintextAlternativeBody;
-            }
-
             if (email.Data.Attachments.Any())
             {
                 foreach (var attachment in email.Data.Attachments)
@@ -107,6 +126,12 @@ namespace FluentEmail.SendGrid
                 }
             }
 
+            return mailMessage;
+        }
+
+        private async Task<SendResponse> SendViaSendGrid(SendGridMessage mailMessage, CancellationToken? token = null)
+        {
+            var sendGridClient = new SendGridClient(_apiKey);
             var sendGridResponse = await sendGridClient.SendEmailAsync(mailMessage, token.GetValueOrDefault());
 
             var sendResponse = new SendResponse();
