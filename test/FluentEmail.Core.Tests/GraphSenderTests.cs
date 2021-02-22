@@ -25,7 +25,14 @@ namespace FluentEmail.Graph.Tests
             if (string.IsNullOrWhiteSpace(graphSecret)) throw new ArgumentException("Graph client secret needs to be supplied");
             if (string.IsNullOrWhiteSpace(senderEmail)) throw new ArgumentException("Sender email address needs to be supplied");
 
-            var sender = new GraphSender(appId, tenantId, graphSecret, saveSent);
+            var options = new GraphSenderOptions
+            {
+                ClientId = appId,
+                TenantId = tenantId,
+                Secret = graphSecret,
+                SaveSentItems = saveSent,
+            };
+            var sender = new GraphSender(options);
 
             Email.DefaultSender = sender;
         }
