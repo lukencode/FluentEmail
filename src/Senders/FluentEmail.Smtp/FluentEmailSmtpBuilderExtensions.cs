@@ -22,7 +22,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static FluentEmailServicesBuilder AddSmtpSender(this FluentEmailServicesBuilder builder, Func<SmtpClient> clientFactory)
         {
-            builder.Services.TryAdd(ServiceDescriptor.Scoped<ISender>(_ => new SmtpSender(clientFactory)));
+            builder.Services.TryAdd(ServiceDescriptor.Singleton<ISender>(_ => new SmtpSender(clientFactory)));
             return builder;
         }
     }
