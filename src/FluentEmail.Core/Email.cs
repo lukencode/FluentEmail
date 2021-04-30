@@ -210,7 +210,7 @@ namespace FluentEmail.Core
         /// Sets the ReplyTo address on the email
         /// </summary>
         /// <param name="address">The ReplyTo Address</param>
-        /// <returns></returns>
+        /// <returns>Instance of the Email class</returns>
         public IFluentEmail ReplyTo(string address)
         {
             Data.ReplyToAddresses.Add(new Address(address));
@@ -223,11 +223,25 @@ namespace FluentEmail.Core
         /// </summary>
         /// <param name="address">The ReplyTo Address</param>
         /// <param name="name">The Display Name of the ReplyTo</param>
-        /// <returns></returns>
+        /// <returns>Instance of the Email class</returns>
         public IFluentEmail ReplyTo(string address, string name)
         {
             Data.ReplyToAddresses.Add(new Address(address, name));
 
+            return this;
+        }
+
+        /// <summary>
+        /// Adds all ReplyTo in list to an email
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients to ReplyTo</param>
+        /// <returns>Instance of the Email class</returns>
+        public IFluentEmail ReplyTo(IEnumerable<Address> mailAddresses)
+        {
+            foreach (var address in mailAddresses)
+            {
+                Data.ReplyToAddresses.Add(address);
+            }
             return this;
         }
 
