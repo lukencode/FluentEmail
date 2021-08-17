@@ -22,7 +22,7 @@ namespace FluentEmail.Liquid.Tests
         public void SetUp()
         {
             // default to have no file provider, only required when layout files are in use
-            SetupRenderer(null);
+            SetupRenderer();
         }
 
         private static void SetupRenderer(
@@ -50,7 +50,6 @@ namespace FluentEmail.Liquid.Tests
 
             Assert.AreEqual("sup LUKE here is a list 123", email.Data.Body);
         }
-
 
         [Test]
         public void Custom_Context_Values()
@@ -155,8 +154,7 @@ namespace FluentEmail.Liquid.Tests
 	    {
             SetupRenderer(new PhysicalFileProvider(Path.Combine(new FileInfo(Assembly.GetExecutingAssembly().Location).Directory!.FullName, "EmailTemplates")));
 
-		    const string template = @"
-{% layout '_layout.liquid' %}
+		    const string template = @"{% layout '_layout.liquid' %}
 sup {{ Name }} here is a list {% for i in Numbers %}{{ i }}{% endfor %}";
 
 			var email = new Email(FromEmail)
@@ -167,14 +165,12 @@ sup {{ Name }} here is a list {% for i in Numbers %}{{ i }}{% endfor %}";
 		    Assert.AreEqual($"<h1>Hello!</h1>{Environment.NewLine}<div>{Environment.NewLine}sup LUKE here is a list 123</div>", email.Data.Body);
 	    }
 
-
         [Test]
         public void Should_be_able_to_use_embedded_layout()
         {
             SetupRenderer(new EmbeddedFileProvider(typeof(LiquidTests).Assembly, "FluentEmail.Liquid.Tests.EmailTemplates"));
 
-            const string template = @"
-{% layout '_embedded.liquid' %}
+            const string template = @"{% layout '_embedded.liquid' %}
 sup {{ Name }} here is a list {% for i in Numbers %}{{ i }}{% endfor %}";
 
             var email = new Email(FromEmail)
