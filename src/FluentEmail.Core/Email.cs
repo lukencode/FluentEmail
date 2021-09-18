@@ -516,5 +516,35 @@ namespace FluentEmail.Core
             else
                 return fileName;
         }
+
+        /// <summary>
+		/// Adds all recipients in list to email
+		/// </summary>
+		/// <param name="mailAddresses">List of recipients</param>
+		/// <returns>Instance of the Email class</returns>
+        public IFluentEmail To(IEnumerable<string> mailAddresses)
+        {
+            foreach (string address in mailAddresses)
+            {
+                Data.ToAddresses.Add(new Address(address));
+            }
+
+            return this;
+        }
+
+        /// <summary>
+		/// Adds all recipients in list to email
+		/// </summary>
+		/// <param name="mailAddresses">List of recipients</param>
+		/// <returns>Instance of the Email class</returns>
+        public IFluentEmail To(string[] mailAddresses)
+        {
+            foreach (string address in mailAddresses)
+            {
+                Data.ToAddresses.Add(new Address(address));
+            }
+
+            return this;
+        }
     }
 }
