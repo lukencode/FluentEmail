@@ -50,6 +50,26 @@ public void ConfigureServices(IServiceCollection services)
         .AddSmtpSender("localhost", 25);
 }
 ```
+Example to take a dependency on IFluentEmail:
+
+```c#
+public class EmailService {
+
+   private IFluentEmail _fluentEmail;
+
+   public EmailService(IFluentEmail fluentEmail) {
+     _fluentEmail = fluentEmail;
+   }
+
+   public async Task Send() {
+     await _fluentEmail.To("hellO@gmail.com")
+     .Body("The body").SendAsync();
+   }
+}
+
+```
+
+
 
 ## Using a Razor template
 
