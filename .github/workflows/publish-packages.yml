@@ -23,6 +23,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/FluentEmail.Core/FluentEmail.Core.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -30,6 +31,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Senders/FluentEmail.Smtp/FluentEmail.Smtp.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -37,6 +39,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Senders/FluentEmail.SendGrid/FluentEmail.SendGrid.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -50,6 +53,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Senders/FluentEmail.MailKit/FluentEmail.MailKit.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -57,6 +61,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Senders/FluentEmail.Mailgun/FluentEmail.Mailgun.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -64,6 +69,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Renderers/FluentEmail.Razor/FluentEmail.Razor.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
@@ -71,6 +77,7 @@ jobs:
       uses: brandedoutcast/publish-nuget@v2.5.2
       with:
           PROJECT_FILE_PATH: src/Renderers/FluentEmail.Liquid/FluentEmail.Liquid.csproj
+          VERSION_FILE_PATH: src/Directory.Build.props
           NUGET_KEY: ${{secrets.NUGET_API_KEY}}
           NUGET_SOURCE: https://api.nuget.org
           INCLUDE_SYMBOLS: true
