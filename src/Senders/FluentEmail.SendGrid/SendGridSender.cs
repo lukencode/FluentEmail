@@ -57,6 +57,8 @@ namespace FluentEmail.SendGrid
                 mailMessage.AddHeaders(email.Data.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
             }
 
+            mailMessage.Categories.AddRange(email.Data.Tags);
+
             if (email.Data.IsHtml)
             {
                 mailMessage.HtmlContent = email.Data.Body;
