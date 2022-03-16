@@ -9,7 +9,7 @@
     <PackageProjectUrl>https://github.com/lukencode/FluentEmail</PackageProjectUrl>
     <RepositoryUrl>https://github.com/lukencode/FluentEmail</RepositoryUrl>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <Version>3.0.0</Version>
+    <Version>3.0.1</Version>
 
 
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
