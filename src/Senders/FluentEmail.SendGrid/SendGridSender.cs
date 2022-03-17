@@ -123,7 +123,7 @@ namespace FluentEmail.SendGrid
             if (IsHttpSuccess((int)sendGridResponse.StatusCode)) return sendResponse;
 
             sendResponse.ErrorMessages.Add($"{sendGridResponse.StatusCode}");
-            var messageBodyDictionary = await sendGridResponse.DeserializeResponseBodyAsync(sendGridResponse.Body);
+            var messageBodyDictionary = await sendGridResponse.DeserializeResponseBodyAsync();
 
             if (messageBodyDictionary.ContainsKey("errors"))
             {
