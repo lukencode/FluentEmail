@@ -44,7 +44,7 @@ namespace FluentEmail.Mailtrap
             };
         }
         
-        public void Dispose() => this.smtpClient.Dispose();
+        public void Dispose() => _smtpClient?.Dispose();
         
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
