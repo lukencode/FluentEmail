@@ -90,6 +90,20 @@ namespace FluentEmail.SendGrid
                 mailMessage.AddHeaders(email.Data.Headers.ToDictionary(kvp => kvp.Key, kvp => kvp.Value));
             }
 
+            if(email.Data.Tags != null && email.Data.Tags.Any())
+            {
+                mailMessage.Categories = email.Data.Tags.ToList();
+            }
+
+            if (email.Data.IsHtml)
+            {
+                mailMessage.HtmlContent = email.Data.Body;
+            }
+            else
+            {
+                mailMessage.PlainTextContent = email.Data.Body;
+            }
+
             switch (email.Data.Priority)
             {
                 case Priority.High:
@@ -146,7 +160,7 @@ namespace FluentEmail.SendGrid
             if (IsHttpSuccess((int)sendGridResponse.StatusCode)) return sendResponse;
 
             sendResponse.ErrorMessages.Add($"{sendGridResponse.StatusCode}");
-            var messageBodyDictionary = await sendGridResponse.DeserializeResponseBodyAsync(sendGridResponse.Body);
+            var messageBodyDictionary = await sendGridResponse.DeserializeResponseBodyAsync();
 
             if (messageBodyDictionary.ContainsKey("errors"))
             {

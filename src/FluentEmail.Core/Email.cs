@@ -473,7 +473,7 @@ namespace FluentEmail.Core
         }
 
         /// <summary>
-        /// Adds tag to the Email. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging"/>
+        /// Adds tag to the Email. This is currently only supported by the Mailgun and SendGrid providers. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#tagging"/> and <see href="https://docs.sendgrid.com/for-developers/sending-email/categories"/>
         /// </summary>
         /// <param name="tag">Tag name, max 128 characters, ASCII only</param>
         /// <returns>Instance of the Email class</returns>

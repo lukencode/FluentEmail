@@ -62,12 +62,12 @@ namespace FluentEmail.Smtp
             {
                 using (var client = _clientFactory())
                 {
-                    await client.SendMailExAsync(message);
+                    await client.SendMailExAsync(message, token ?? default);
                 }
             }
             else
             {
-                await _smtpClient.SendMailExAsync(message);
+                await _smtpClient.SendMailExAsync(message, token ?? default);
             }
 
             return response;
@@ -202,7 +202,10 @@ namespace FluentEmail.Smtp
             try
             {
                 client.SendAsync(message, tcs);
-                using (token.Register(() => client.SendAsyncCancel(), useSynchronizationContext: false))
+                using (token.Register(() =>
+                {
+                    client.SendAsyncCancel();
+                }, useSynchronizationContext: false))
                 {
                     await tcs.Task;
                 }
