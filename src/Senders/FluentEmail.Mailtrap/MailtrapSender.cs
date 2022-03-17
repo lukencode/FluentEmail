@@ -14,7 +14,7 @@ namespace FluentEmail.Mailtrap
     /// <summary>
     /// Send emails to a Mailtrap.io inbox
     /// </summary>
-    public class MailtrapSender : ISender
+    public class MailtrapSender : ISender, IDisposable
     {
         private readonly SmtpClient _smtpClient;
         private static readonly int[] ValidPorts = {25, 465, 2525};
@@ -43,6 +43,8 @@ namespace FluentEmail.Mailtrap
                 EnableSsl = true
             };
         }
+        
+        public void Dispose() => this.smtpClient.Dispose();
         
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
