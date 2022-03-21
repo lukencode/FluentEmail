@@ -12,13 +12,13 @@ namespace FluentEmail.Liquid
 {
     public class LiquidRenderer : ITemplateRenderer
     {
-        private static readonly Func<IFluidTemplate> FluidTemplateFactory = () => new FluidViewTemplate();
-
         private readonly IOptions<LiquidRendererOptions> _options;
+        private readonly LiquidParser _parser;
 
         public LiquidRenderer(IOptions<LiquidRendererOptions> options)
         {
             _options = options;
+            _parser = new LiquidParser();
         }
 
         public string Parse<T>(string template, T model, bool isHtml = true)
@@ -42,9 +42,10 @@ namespace FluentEmail.Liquid
                     ["FileProvider"] = fileProvider,
                     ["Sections"] = new Dictionary<string, List<Statement>>()
                 },
-                ParserFactory = FluidViewTemplate.Factory,
-                TemplateFactory = FluidTemplateFactory,
-                FileProvider = fileProvider
+                Options =
+                {
+                    FileProvider = fileProvider
+                }
             };
 
             rendererOptions.ConfigureTemplateContext?.Invoke(context, model!);
@@ -63,7 +64,7 @@ namespace FluentEmail.Liquid
             return body;
         }
 
-        private static FluidViewTemplate ParseLiquidFile(
+        private IFluidTemplate ParseLiquidFile(
             string path,
             IFileProvider? fileProvider)
         {
@@ -85,9 +86,9 @@ namespace FluentEmail.Liquid
             return ParseTemplate(sr.ReadToEnd());
         }
 
-        private static FluidViewTemplate ParseTemplate(string content)
+        private IFluidTemplate ParseTemplate(string content)
         {
-            if (!FluidViewTemplate.TryParse(content, out var template, out var errors))
+            if (!_parser.TryParse(content, out var template, out var errors))
             {
                 throw new Exception(string.Join(Environment.NewLine, errors));
             }
