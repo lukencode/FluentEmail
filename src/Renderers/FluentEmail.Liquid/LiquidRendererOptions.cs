@@ -25,5 +25,10 @@ namespace FluentEmail.Liquid
         /// File provider to use, used when resolving references in templates, like master layout.
         /// </summary>
         public IFileProvider? FileProvider { get; set; }
+
+        /// <summary>
+        /// Set custom Template Options for Fluid 
+        /// </summary>
+        public TemplateOptions TemplateOptions { get; set; } = new();
     }
 }

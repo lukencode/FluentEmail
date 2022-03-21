@@ -34,7 +34,7 @@ namespace FluentEmail.Liquid
             var fileProvider = rendererOptions.FileProvider;
             var viewTemplate = ParseTemplate(template);
 
-            var context = new TemplateContext(model)
+            var context = new TemplateContext(model, rendererOptions.TemplateOptions)
             {
                 // provide some services to all statements
                 AmbientValues =
@@ -56,7 +56,7 @@ namespace FluentEmail.Liquid
             if (context.AmbientValues.TryGetValue("Layout", out var layoutPath))
             {
                 context.AmbientValues["Body"] = body;
-                var layoutTemplate = ParseLiquidFile((string) layoutPath, fileProvider!);
+                var layoutTemplate = ParseLiquidFile((string)layoutPath, fileProvider!);
 
                 return await layoutTemplate.RenderAsync(context, rendererOptions.TextEncoder);
             }
