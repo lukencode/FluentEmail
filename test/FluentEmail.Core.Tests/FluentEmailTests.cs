@@ -79,6 +79,36 @@ namespace FluentEmail.Core.Tests
 		}
 
 		[Test]
+		public void Can_Add_Mutlitple_Recipients_From_String_List()
+        {
+			var emails = new List<string>();
+			emails.Add("email1@email.com");
+			emails.Add("email2@email.com");
+
+			var email = Email
+				.From(fromEmail)
+				.To(emails);
+
+			Assert.AreEqual(2, email.Data.ToAddresses.Count);
+        }
+
+		[Test]
+		public void Can_Add_Mutlitple_Recipients_From_String_Array()
+		{
+			var emails = new string[]
+			{
+				"email1@email.com",
+				"email2@email.com"
+			};
+
+			var email = Email
+				.From(fromEmail)
+				.To(emails);
+
+			Assert.AreEqual(2, email.Data.ToAddresses.Count);
+		}
+
+		[Test]
 		public void Can_Add_Multiple_CCRecipients_From_List()
 		{
 			var emails = new List<Address>();
