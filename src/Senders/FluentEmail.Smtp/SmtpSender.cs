@@ -149,6 +149,7 @@ namespace FluentEmail.Smtp
                 System.Net.Mail.Attachment a = new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType);
 
                 a.ContentId = x.ContentId;
+                a.ContentDisposition.Inline = x.IsInline;
 
                 message.Attachments.Add(a);
             });
