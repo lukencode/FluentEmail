@@ -7,42 +7,34 @@ using Microsoft.Identity.Client;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace FluentEmail.Graph
 {
+    /// <summary>
+    /// Implementation of <see cref="ISender"/> for the Microsoft Graph API.
+    /// See <see cref="FluentEmailServicesBuilderExtensions"/>.
+    /// </summary>
     public class GraphSender : ISender
     {
-        private readonly string _appId;
-        private readonly string _tenantId;
-        private readonly string _graphSecret;
         private bool _saveSent;
 
-        private ClientCredentialProvider _authProvider;
         private GraphServiceClient _graphClient;
-        private IConfidentialClientApplication _clientApp;
 
-        public GraphSender(
-            string GraphEmailAppId,
-            string GraphEmailTenantId,
-            string GraphEmailSecret,
-            bool SaveSentItems)
+        public GraphSender(GraphSenderOptions options)
         {
-            _appId = GraphEmailAppId;
-            _tenantId = GraphEmailTenantId;
-            _graphSecret = GraphEmailSecret;
-            _saveSent = SaveSentItems;
+            _saveSent = options.SaveSentItems ?? true;
 
-            _clientApp = ConfidentialClientApplicationBuilder
-                .Create(_appId)
-                .WithTenantId(_tenantId)
-                .WithClientSecret(_graphSecret)
+            var clientApp = ConfidentialClientApplicationBuilder
+                .Create(options.ClientId)
+                .WithTenantId(options.TenantId)
+                .WithClientSecret(options.Secret)
                 .Build();
 
-            _authProvider = new ClientCredentialProvider(_clientApp);
-
-            _graphClient = new GraphServiceClient(_authProvider);
+            var authProvider = new ClientCredentialProvider(clientApp);
+            _graphClient = new GraphServiceClient(authProvider);
         }
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
@@ -52,73 +44,46 @@ namespace FluentEmail.Graph
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
-            var message = new Message
+            try
             {
-                Subject = email.Data.Subject,
-                Body = new ItemBody
+                var message = CreateMessage(email);
+                await _graphClient.Users[email.Data.FromAddress.EmailAddress]
+                    .SendMail(message, _saveSent)
+                    .Request()
+                    .PostAsync();
+
+                return new SendResponse
                 {
-                    Content = email.Data.Body,
-                    ContentType = email.Data.IsHtml ? BodyType.Html : BodyType.Text
-                },
-                From = new Recipient
+                    MessageId = message.Id,
+                };
+            }
+            catch (Exception ex)
+            {
+                return new SendResponse
                 {
-                    EmailAddress = new EmailAddress
-                    {
-                        Address = email.Data.FromAddress.EmailAddress,
-                        Name = email.Data.FromAddress.Name
-                    }
-                }
+                    ErrorMessages = new List<string> { ex.Message },
+                };
+            }
+        }
+
+        private static Message CreateMessage(IFluentEmail email)
+        {
+            var messageBody = new ItemBody
+            {
+                Content = email.Data.Body,
+                ContentType = email.Data.IsHtml ? BodyType.Html : BodyType.Text,
             };
 
-            if(email.Data.ToAddresses != null && email.Data.ToAddresses.Count > 0)
-            {
-                var toRecipients = new List<Recipient>();
+            var message = new Message();
+            message.Subject = email.Data.Subject;
+            message.Body = messageBody;
+            message.From = ConvertToRecipient(email.Data.FromAddress);
+            message.ReplyTo = CreateRecipientList(email.Data.ReplyToAddresses);
+            message.ToRecipients = CreateRecipientList(email.Data.ToAddresses);
+            message.CcRecipients = CreateRecipientList(email.Data.CcAddresses);
+            message.BccRecipients = CreateRecipientList(email.Data.BccAddresses);
 
-                email.Data.ToAddresses.ForEach(r => toRecipients.Add(new Recipient
-                {
-                    EmailAddress = new EmailAddress
-                    { 
-                        Address = r.EmailAddress.ToString(),
-                        Name = r.Name
-                    }
-                }));
-
-                message.ToRecipients = toRecipients;
-            }
-
-            if(email.Data.BccAddresses != null && email.Data.BccAddresses.Count > 0)
-            {
-                var bccRecipients = new List<Recipient>();
-
-                email.Data.BccAddresses.ForEach(r => bccRecipients.Add(new Recipient
-                {
-                    EmailAddress = new EmailAddress
-                    {
-                        Address = r.EmailAddress.ToString(),
-                        Name = r.Name
-                    }
-                }));
-
-                message.BccRecipients = bccRecipients;
-            }
-
-            if (email.Data.CcAddresses != null && email.Data.CcAddresses.Count > 0)
-            {
-                var ccRecipients = new List<Recipient>();
-
-                email.Data.CcAddresses.ForEach(r => ccRecipients.Add(new Recipient
-                {
-                    EmailAddress = new EmailAddress
-                    {
-                        Address = r.EmailAddress.ToString(),
-                        Name = r.Name
-                    }
-                }));
-
-                message.CcRecipients = ccRecipients;
-            }
-
-            if(email.Data.Attachments != null && email.Data.Attachments.Count > 0)
+            if (email.Data.Attachments != null && email.Data.Attachments.Count > 0)
             {
                 message.Attachments = new MessageAttachmentsCollectionPage();
 
@@ -135,7 +100,7 @@ namespace FluentEmail.Graph
                 });
             }
 
-            switch(email.Data.Priority)
+            switch (email.Data.Priority)
             {
                 case Priority.High:
                     message.Importance = Importance.High;
@@ -151,34 +116,43 @@ namespace FluentEmail.Graph
                     break;
             }
 
-            try
-            {
-                await _graphClient.Users[email.Data.FromAddress.EmailAddress]
-                    .SendMail(message, _saveSent)
-                    .Request()
-                    .PostAsync();
+            return message;
+        }
 
-                return new SendResponse
-                {
-                    MessageId = message.Id
-                };
-            }
-            catch (Exception ex)
+        private static IList<Recipient> CreateRecipientList(IEnumerable<Address> addressList)
+        {
+            if (addressList == null)
             {
-                return new SendResponse
-                {
-                    ErrorMessages = new List<string> { ex.Message }
-                };
+                return new List<Recipient>();
             }
+
+            return addressList
+                .Select(ConvertToRecipient)
+                .ToList();
+        }
+
+        private static Recipient ConvertToRecipient(Address address)
+        {
+            if (address is null)
+            {
+                throw new ArgumentNullException(nameof(address));
+            }
+
+            return new Recipient
+            {
+                EmailAddress = new EmailAddress
+                {
+                    Address = address.EmailAddress,
+                    Name = address.Name,
+                },
+            };
         }
 
         private static byte[] GetAttachmentBytes(Stream stream)
         {
-            using(MemoryStream m = new MemoryStream())
-            {
-                stream.CopyTo(m);
-                return m.ToArray();
-            }
+            using var m = new MemoryStream();
+            stream.CopyTo(m);
+            return m.ToArray();
         }
     }
 }
