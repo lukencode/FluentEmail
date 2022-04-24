@@ -484,6 +484,18 @@ namespace FluentEmail.Core
             return this;
         }
 
+        /// <summary>
+        /// Turns test mode on or off. This is currently only supported by the Mailgun provider. <see href="https://documentation.mailgun.com/en/latest/user_manual.html#sending-in-test-mode"/>
+        /// </summary>
+        /// <param name="testMode">Whether the test mode should be active</param>
+        /// <returns>Instance of the Email class</returns>
+        public IFluentEmail TestMode(bool testMode = true)
+        {
+            Data.TestMode = testMode;
+            
+            return this;
+        }
+
         public IFluentEmail Header(string header, string body)
         {
             Data.Headers.Add(header, body);
