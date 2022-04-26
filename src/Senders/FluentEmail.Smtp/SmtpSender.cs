@@ -3,6 +3,7 @@ using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using System;
 using System.Net.Mail;
+using System.Net.Mime;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -146,9 +147,12 @@ namespace FluentEmail.Smtp
 
             data.Attachments.ForEach(x =>
             {
-                System.Net.Mail.Attachment a = new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType);
+                System.Net.Mail.Attachment a = new System.Net.Mail.Attachment(x.Data, x.Filename, x.ContentType)
+                {
+                    ContentId = x.ContentId
+                };
 
-                a.ContentId = x.ContentId;
+                a.ContentDisposition.Inline = x.IsInline;
 
                 message.Attachments.Add(a);
             });

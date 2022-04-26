@@ -30,6 +30,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="test-embedded.txt" />
+    <None Update="Attachments\fluentemail_logo_64x64.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="logotest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
