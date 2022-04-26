@@ -91,6 +91,63 @@ namespace FluentEmail.Smtp.Tests
         }
 
         [Test]
+        public async Task CanSendEmailWithInlineImageAndAttachments()
+        {
+            var stream = File.OpenRead(@"C:\Users\wilko.vanderveen\source\repos\FluentEmail\test\FluentEmail.Core.Tests\Attachments\fluentemail_logo_64x64.png");
+                    
+            stream.Seek(0, SeekOrigin.Begin);
+
+            var attachment = new Attachment
+            {
+                IsInline = true,
+                Data = stream,
+                ContentType = "image/png",
+                Filename = "fluentemail-logo.png",
+                ContentId = "MyVeryCoolContentId"
+            };
+
+            var email = TestEmail
+                .Attach(attachment);
+
+            email.Body("<html><head></head><body><img src=\"cid:MyVeryCoolContentId\" /></body></html", true);
+      
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
+            Assert.IsNotEmpty(files);
+        }
+
+        [Test]
+        public async Task CanSendEmailWithInlineImage()
+        {
+            var stream = File.OpenRead(@"C:\Users\wilko.vanderveen\source\repos\FluentEmail\test\FluentEmail.Core.Tests\Attachments\fluentemail_logo_64x64.png");
+
+            stream.Seek(0, SeekOrigin.Begin);
+
+            var attachment = new Attachment
+            {
+                IsInline = true,
+                Data = stream,
+                ContentType = "image/png",              
+                ContentId = "MyVeryCoolContentId"
+            };
+
+            var email = TestEmail
+                .Attach(attachment);
+
+            email.Body("<html><head></head><body><img src=\"cid:MyVeryCoolContentId\" /></body></html", true);
+
+
+            var response = await email.SendAsync();
+
+            Assert.IsTrue(response.Successful);
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
+            Assert.IsNotEmpty(files);
+        }
+
+        [Test]
         public async Task CanSendAsyncHtmlAndPlaintextTogether()
         {
             var email = TestEmail
