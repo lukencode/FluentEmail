@@ -1,11 +1,11 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using FluentEmail.Core;
 using FluentEmail.Core.Models;
-using NUnit.Framework;
+using FluentEmail.Mailgun;
 using Newtonsoft.Json;
+using NUnit.Framework;
 
-namespace FluentEmail.Mailgun.Tests
+namespace FluentEmail.Core.Tests
 {
     public class MailgunSenderTests
     {

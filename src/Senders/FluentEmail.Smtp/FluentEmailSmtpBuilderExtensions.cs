@@ -1,11 +1,12 @@
-﻿using FluentEmail.Core.Interfaces;
-using FluentEmail.Smtp;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using System;
+﻿using System;
 using System.Net;
 using System.Net.Mail;
+using FluentEmail.Core;
+using FluentEmail.Core.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.Smtp
 {
     public static class FluentEmailSmtpBuilderExtensions
     {

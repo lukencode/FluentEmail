@@ -1,4 +1,4 @@
-﻿namespace FluentEmail.Liquid.Tests
+﻿namespace FluentEmail.Liquid.Tests.ComplexModel
 {
     public static class TestData
     {

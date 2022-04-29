@@ -1,9 +1,9 @@
 ﻿using System;
-using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.Core
 {
     public static class FluentEmailServiceCollectionExtensions
     {

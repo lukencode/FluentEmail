@@ -1,10 +1,11 @@
 ﻿using System;
+using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
-using FluentEmail.Razor;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using RazorLight.Razor;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.Razor
 {
 	public static class FluentEmailRazorBuilderExtensions
     {

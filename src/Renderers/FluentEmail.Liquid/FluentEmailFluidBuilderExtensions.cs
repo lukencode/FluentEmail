@@ -1,12 +1,10 @@
 using System;
-
+using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
-using FluentEmail.Liquid;
-
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-// ReSharper disable once CheckNamespace
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.Liquid
 {
     public static class FluentEmailFluidBuilderExtensions
     {

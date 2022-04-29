@@ -1,10 +1,10 @@
 using System.IO;
 using System.Threading.Tasks;
-using FluentEmail.Core;
 using FluentEmail.Core.Models;
+using FluentEmail.Mailtrap;
 using NUnit.Framework;
 
-namespace FluentEmail.Mailtrap.Tests
+namespace FluentEmail.Core.Tests
 {
     public class MailtrapSenderTests
     {

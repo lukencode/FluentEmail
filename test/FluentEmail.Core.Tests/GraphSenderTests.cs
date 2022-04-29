@@ -1,11 +1,11 @@
-using FluentEmail.Core;
-using FluentEmail.Core.Models;
-using NUnit.Framework;
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using FluentEmail.Core.Models;
+using FluentEmail.Graph;
+using NUnit.Framework;
 
-namespace FluentEmail.Graph.Tests
+namespace FluentEmail.Core.Tests
 {
     public class Tests
     {

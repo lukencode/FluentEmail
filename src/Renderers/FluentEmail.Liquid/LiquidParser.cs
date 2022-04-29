@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using Fluid;
 using Fluid.Ast;
 
+namespace FluentEmail.Liquid;
+
 public class LiquidParser : FluidParser
 {
     public LiquidParser()

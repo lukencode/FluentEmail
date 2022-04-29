@@ -1,8 +1,9 @@
-﻿using FluentEmail.Core.Interfaces;
-using FluentEmail.Graph;
+﻿using FluentEmail.Core;
+using FluentEmail.Core.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.Graph
 {
     public static class FluentEmailGraphBuilderExtensions
     {

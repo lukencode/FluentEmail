@@ -1,11 +1,11 @@
-﻿using FluentEmail.Core;
-using NUnit.Framework;
-using System;
+﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using FluentEmail.SendGrid;
+using NUnit.Framework;
 using Attachment = FluentEmail.Core.Models.Attachment;
 
-namespace FluentEmail.SendGrid.Tests
+namespace FluentEmail.Core.Tests
 {
     public class SendGridSenderTests
     {

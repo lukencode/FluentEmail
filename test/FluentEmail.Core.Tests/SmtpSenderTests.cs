@@ -2,11 +2,11 @@
 using System.Net.Mail;
 using System.Threading;
 using System.Threading.Tasks;
-using FluentEmail.Core;
+using FluentEmail.Smtp;
 using NUnit.Framework;
 using Attachment = FluentEmail.Core.Models.Attachment;
 
-namespace FluentEmail.Smtp.Tests
+namespace FluentEmail.Core.Tests
 {
     [NonParallelizable]
     public class SmtpSenderTests
