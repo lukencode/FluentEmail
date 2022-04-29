@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace FluentEmail.Liquid.Tests
+namespace FluentEmail.Liquid.Tests.ComplexModel
 {
     public class ParentModel
     {

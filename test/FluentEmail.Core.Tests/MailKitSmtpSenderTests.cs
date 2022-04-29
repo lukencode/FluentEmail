@@ -1,11 +1,10 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
-using FluentEmail.Core;
 using FluentEmail.MailKitSmtp;
 using NUnit.Framework;
 using Attachment = FluentEmail.Core.Models.Attachment;
 
-namespace FluentEmail.MailKit.Tests
+namespace FluentEmail.Core.Tests
 {
     [NonParallelizable]
     public class MailKitSmtpSenderTests

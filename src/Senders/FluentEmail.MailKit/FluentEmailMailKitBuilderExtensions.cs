@@ -1,8 +1,9 @@
-﻿using FluentEmail.Core.Interfaces;
-using FluentEmail.MailKitSmtp;
+﻿using FluentEmail.Core;
+using FluentEmail.Core.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace FluentEmail.MailKitSmtp
 {
     public static class FluentEmailMailKitBuilderExtensions
     {
