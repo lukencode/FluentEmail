@@ -82,10 +82,12 @@ namespace FluentEmail.MailKitSmtp
                     }
 
                     var mre = new ManualResetEventSlim(false);
+                    string messageId = null;
+
                     if (_isAmazonSes)
                     {
                         // If using Amazon SES, subscribe to the MessageSent event where we can retrieve the overwritten MessageId, then signal ManualResetEventSlim
-                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre);
+                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre, ref messageId);
                     }
                     else
                     {
@@ -96,8 +98,14 @@ namespace FluentEmail.MailKitSmtp
                     client.Send(message, token.GetValueOrDefault());
                     client.Disconnect(true, token.GetValueOrDefault());
 
-                    // Block until ManualResetEventSlim is signaled
+                    // Block until ManualResetEventSlim is signaled to make sure messageId's value is final
                     mre.Wait();
+
+                    if (messageId != null)
+                    {
+                        // If we were able to parse a MessageId in SmtpClient_MessageSent, use it instead of our own value
+                        response.MessageId = messageId;
+                    }
                 }
             }
             catch (Exception ex)
@@ -159,10 +167,12 @@ namespace FluentEmail.MailKitSmtp
                     }
 
                     var mre = new ManualResetEventSlim(false);
+                    string messageId = null;
+
                     if (_isAmazonSes)
                     {
                         // If using Amazon SES, subscribe to the MessageSent event where we can retrieve the overwritten MessageId, then signal ManualResetEventSlim
-                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre);
+                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre, ref messageId);
                     }
                     else
                     {
@@ -173,8 +183,14 @@ namespace FluentEmail.MailKitSmtp
                     await client.SendAsync(message, token.GetValueOrDefault());
                     await client.DisconnectAsync(true, token.GetValueOrDefault());
 
-                    // Block until ManualResetEventSlim is signaled
+                    // Block until ManualResetEventSlim is signaled to make sure messageId's value is final
                     mre.Wait();
+
+                    if (messageId != null)
+                    {
+                        // If we were able to parse a MessageId in SmtpClient_MessageSent, use it instead of our own value
+                        response.MessageId = messageId;
+                    }
                 }
             }
             catch (Exception ex)
@@ -185,7 +201,7 @@ namespace FluentEmail.MailKitSmtp
             return response;
         }
 
-        private void SmtpClient_MessageSent(object sender, MessageSentEventArgs e, ManualResetEventSlim mre)
+        private void SmtpClient_MessageSent(object sender, MessageSentEventArgs e, ManualResetEventSlim mre, ref string messageId)
         {
             // Example response format: "Ok 010701805bea386d-8411ef2a-5a8b-46bc-9cbb-585ace484c24-000000"
             var match = Regex.Match(e.Response, @"Ok ([0-9a-z\-]+)");
@@ -194,10 +210,10 @@ namespace FluentEmail.MailKitSmtp
                 // Strip "email-smtp" and similar prefixes from SMTP hostname: https://docs.aws.amazon.com/general/latest/gr/ses.html
                 var domain = _smtpClientOptions.Server.Substring(_smtpClientOptions.Server.IndexOf('.') + 1);
                 var id = $"<{match.Groups[1].Value}@{domain}>";
-                e.Message.MessageId = id;
+                messageId = id;
             }
 
-            // Trigger ManualResetEventSlim to signal that the processing is now complete
+            // Trigger ManualResetEventSlim to signal that the processing is now complete and the passed in messageId reference now has a value
             mre.Set();
         }
 
