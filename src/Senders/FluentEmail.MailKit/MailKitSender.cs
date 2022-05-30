@@ -1,11 +1,13 @@
 ﻿using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
+using MailKit;
 using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -17,6 +19,7 @@ namespace FluentEmail.MailKitSmtp
     public class MailKitSender : ISender
     {
         private readonly SmtpClientOptions _smtpClientOptions;
+        private readonly bool _isAmazonSes;
 
         /// <summary>
         /// Creates a sender that uses the given SmtpClientOptions when sending with MailKit. Since the client is internal this will dispose of the client.
@@ -25,6 +28,7 @@ namespace FluentEmail.MailKitSmtp
         public MailKitSender(SmtpClientOptions smtpClientOptions)
         {
             _smtpClientOptions = smtpClientOptions;
+            _isAmazonSes = smtpClientOptions.Server.EndsWith("amazonaws.com");
         }
 
         /// <summary>
@@ -35,8 +39,8 @@ namespace FluentEmail.MailKitSmtp
         /// <param name="token">Cancellation Token.</param>
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
         {
-            var response = new SendResponse();
             var message = CreateMailMessage(email);
+            var response = new SendResponse() { MessageId = message.MessageId };
 
             if (token?.IsCancellationRequested ?? false)
             {
@@ -77,8 +81,31 @@ namespace FluentEmail.MailKitSmtp
                         client.Authenticate(_smtpClientOptions.User, _smtpClientOptions.Password, token.GetValueOrDefault());
                     }
 
+                    var mre = new ManualResetEventSlim(false);
+                    string messageId = null;
+
+                    if (_isAmazonSes)
+                    {
+                        // If using Amazon SES, subscribe to the MessageSent event where we can retrieve the overwritten MessageId, then signal ManualResetEventSlim
+                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre, ref messageId);
+                    }
+                    else
+                    {
+                        // Otherwise signal ManualResetEventSlim right away
+                        mre.Set();
+                    }
+
                     client.Send(message, token.GetValueOrDefault());
                     client.Disconnect(true, token.GetValueOrDefault());
+
+                    // Block until ManualResetEventSlim is signaled to make sure messageId's value is final
+                    mre.Wait();
+
+                    if (messageId != null)
+                    {
+                        // If we were able to parse a MessageId in SmtpClient_MessageSent, use it instead of our own value
+                        response.MessageId = messageId;
+                    }
                 }
             }
             catch (Exception ex)
@@ -97,8 +124,8 @@ namespace FluentEmail.MailKitSmtp
         /// <param name="token">Cancellation Token.</param>
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
-            var response = new SendResponse();
             var message = CreateMailMessage(email);
+            var response = new SendResponse() { MessageId = message.MessageId };
 
             if (token?.IsCancellationRequested ?? false)
             {
@@ -139,8 +166,31 @@ namespace FluentEmail.MailKitSmtp
                         await client.AuthenticateAsync(_smtpClientOptions.User, _smtpClientOptions.Password, token.GetValueOrDefault());
                     }
 
+                    var mre = new ManualResetEventSlim(false);
+                    string messageId = null;
+
+                    if (_isAmazonSes)
+                    {
+                        // If using Amazon SES, subscribe to the MessageSent event where we can retrieve the overwritten MessageId, then signal ManualResetEventSlim
+                        client.MessageSent += (s, e) => SmtpClient_MessageSent(s, e, mre, ref messageId);
+                    }
+                    else
+                    {
+                        // Otherwise signal ManualResetEventSlim right away
+                        mre.Set();
+                    }
+
                     await client.SendAsync(message, token.GetValueOrDefault());
                     await client.DisconnectAsync(true, token.GetValueOrDefault());
+
+                    // Block until ManualResetEventSlim is signaled to make sure messageId's value is final
+                    mre.Wait();
+
+                    if (messageId != null)
+                    {
+                        // If we were able to parse a MessageId in SmtpClient_MessageSent, use it instead of our own value
+                        response.MessageId = messageId;
+                    }
                 }
             }
             catch (Exception ex)
@@ -149,6 +199,22 @@ namespace FluentEmail.MailKitSmtp
             }
 
             return response;
+        }
+
+        private void SmtpClient_MessageSent(object sender, MessageSentEventArgs e, ManualResetEventSlim mre, ref string messageId)
+        {
+            // Example response format: "Ok 010701805bea386d-8411ef2a-5a8b-46bc-9cbb-585ace484c24-000000"
+            var match = Regex.Match(e.Response, @"Ok ([0-9a-z\-]+)");
+            if (match.Success)
+            {
+                // Strip "email-smtp" and similar prefixes from SMTP hostname: https://docs.aws.amazon.com/general/latest/gr/ses.html
+                var domain = _smtpClientOptions.Server.Substring(_smtpClientOptions.Server.IndexOf('.') + 1);
+                var id = $"<{match.Groups[1].Value}@{domain}>";
+                messageId = id;
+            }
+
+            // Trigger ManualResetEventSlim to signal that the processing is now complete and the passed in messageId reference now has a value
+            mre.Set();
         }
 
         /// <summary>
