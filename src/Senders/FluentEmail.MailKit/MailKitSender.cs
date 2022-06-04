@@ -54,6 +54,8 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
+                    client.CheckCertificateRevocation = _smtpClientOptions.CheckCertificateRevocation;
+
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
                         client.Connect(

@@ -14,5 +14,8 @@ namespace FluentEmail.MailKitSmtp
         public bool UsePickupDirectory { get; set; } = false;
         public string MailPickupDirectory { get; set; } = string.Empty;
         public SecureSocketOptions? SocketOptions { get; set; }
+
+        /// <inheritdoc cref="MailKit.IMailService.CheckCertificateRevocation" />
+        public bool CheckCertificateRevocation { get; set; } = true;
     }
 }
