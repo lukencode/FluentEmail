@@ -1,4 +1,5 @@
 ﻿using MailKit.Security;
+using System.Net.Security;
 
 namespace FluentEmail.MailKitSmtp
 {
@@ -14,5 +15,6 @@ namespace FluentEmail.MailKitSmtp
         public bool UsePickupDirectory { get; set; } = false;
         public string MailPickupDirectory { get; set; } = string.Empty;
         public SecureSocketOptions? SocketOptions { get; set; }
+        public RemoteCertificateValidationCallback ServerCertificateValidationCallback { get; set; }
     }
 }
