@@ -55,7 +55,7 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
-                    if(_smtpClientOptions.ServerCertificateValidationCallback is not null)
+                    if(_smtpClientOptions.ServerCertificateValidationCallback != null)
                     {
                         client.ServerCertificateValidationCallback = _smtpClientOptions.ServerCertificateValidationCallback;
                     }
@@ -122,7 +122,7 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
-                    if (_smtpClientOptions.ServerCertificateValidationCallback is not null)
+                    if (_smtpClientOptions.ServerCertificateValidationCallback != null)
                     {
                         client.ServerCertificateValidationCallback = _smtpClientOptions.ServerCertificateValidationCallback;
                     }
