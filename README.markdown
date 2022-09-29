@@ -24,6 +24,7 @@ Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter
 * [FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
 * [FluentEmail.Mailtrap](src/Senders/FluentEmail.Mailtrap) - Send emails to Mailtrap. Uses [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) for delivery.
 * [FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
+* [FluentEmail.MailerSend](https://github.com/marcoatribeiro/FluentEmail.MailerSend) - Send email via [MailerSend](https://www.mailersend.com/)'s API.
 
 ## Basic Usage
 ```csharp
