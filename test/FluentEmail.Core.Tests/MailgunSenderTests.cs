@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 
 namespace FluentEmail.Mailgun.Tests
 {
+    [Explicit("Requires a valid sender name and API key")]
     public class MailgunSenderTests
     {
         const string toEmail = "bentest1@mailinator.com";
