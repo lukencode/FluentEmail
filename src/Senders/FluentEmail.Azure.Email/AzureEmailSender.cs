@@ -143,8 +143,11 @@ public class AzureEmailSender : ISender
                     ErrorMessages = new List<string> { "Failed to send email." }
                 };
             }
-
-            // wait max 2 minutes to check the send status for mail.
+            
+            /*
+                We want to verify that the email was sent.
+                The maximum time we will wait for the message status to be sent/delivered is 2 minutes. 
+            */
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(2));
             SendStatusResult sendStatusResult;
             do
