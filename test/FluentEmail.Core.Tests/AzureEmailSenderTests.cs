@@ -84,8 +84,6 @@ namespace FluentEmail.Azure.Email.Tests
 
 
             var response = await email.SendAsync();
-            
-            Console.WriteLine($"Response: {JsonSerializer.Serialize(response)}");
 
             Assert.IsTrue(response.Successful);
         }
