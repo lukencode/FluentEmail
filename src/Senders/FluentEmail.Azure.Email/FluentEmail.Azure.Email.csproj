@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Send emails via Azure Email Communication Services API</Description>
+        <AssemblyTitle>Fluent Email - Azure Email</AssemblyTitle>
+        <PackageTags>$(PackageTags);azureemail</PackageTags>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <RootNamespace>FluentEmail.Azure.Email</RootNamespace>
+        <AssemblyVersion></AssemblyVersion>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Azure.Communication.Email" Version="1.0.0-beta.1" />
+    </ItemGroup>
+
+</Project>
