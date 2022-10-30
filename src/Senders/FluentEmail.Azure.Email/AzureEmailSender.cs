@@ -144,10 +144,8 @@ public class AzureEmailSender : ISender
                 };
             }
             
-            /*
-                We want to verify that the email was sent.
-                The maximum time we will wait for the message status to be sent/delivered is 2 minutes. 
-            */
+            // We want to verify that the email was sent.
+            // The maximum time we will wait for the message status to be sent/delivered is 2 minutes.
             var cancellationToken = new CancellationTokenSource(TimeSpan.FromMinutes(2));
             SendStatusResult sendStatusResult;
             do
