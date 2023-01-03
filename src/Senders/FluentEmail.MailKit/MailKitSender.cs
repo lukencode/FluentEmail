@@ -2,6 +2,7 @@
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using MailKit.Net.Smtp;
+using MailKit;
 using MimeKit;
 using System;
 using System.IO;
@@ -17,6 +18,7 @@ namespace FluentEmail.MailKitSmtp
     public class MailKitSender : ISender
     {
         private readonly SmtpClientOptions _smtpClientOptions;
+        private readonly IProtocolLogger _protocolLogger;
 
         /// <summary>
         /// Creates a sender that uses the given SmtpClientOptions when sending with MailKit. Since the client is internal this will dispose of the client.
@@ -25,6 +27,12 @@ namespace FluentEmail.MailKitSmtp
         public MailKitSender(SmtpClientOptions smtpClientOptions)
         {
             _smtpClientOptions = smtpClientOptions;
+        }
+
+        public MailKitSender(SmtpClientOptions smtpClientOptions, IProtocolLogger protocolLogger)
+        {
+            _smtpClientOptions = smtpClientOptions;
+            _protocolLogger = protocolLogger;
         }
 
         /// <summary>
@@ -52,7 +60,7 @@ namespace FluentEmail.MailKitSmtp
                     return response;
                 }
 
-                using (var client = new SmtpClient())
+                using (var client = _protocolLogger == null ? new SmtpClient() : new SmtpClient(_protocolLogger))
                 {
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
@@ -114,7 +122,7 @@ namespace FluentEmail.MailKitSmtp
                     return response;
                 }
 
-                using (var client = new SmtpClient())
+                using (var client = _protocolLogger == null ? new SmtpClient() : new SmtpClient(_protocolLogger))
                 {
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
