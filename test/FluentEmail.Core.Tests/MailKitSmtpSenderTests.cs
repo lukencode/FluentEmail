@@ -93,6 +93,81 @@ namespace FluentEmail.MailKit.Tests
         }
 
         [Test]
+        [TestCase]
+        [TestCase("logotest.png")]
+        public async Task CanSendEmailWithInlineImages(string contentId = null)
+        {
+            using (var stream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "logotest.png")}"))
+            {
+                var attachment = new Attachment
+                {
+                    IsInline = true,
+                    Data = stream,
+                    ContentType = "image/png",
+                    Filename = "logotest.png",
+                    ContentId = contentId
+                };
+
+                var email = Email
+                    .From(fromEmail)
+                    .To(toEmail)
+                    .Subject(subject)
+                    .Body("<html>Inline image here: <img src=\"cid:logotest.png\">" +
+                          "<p>You should see an image without an attachment, or without a download prompt, depending on the email client.</p></html>", true)
+                    .Attach(attachment);
+
+                var response = await email.SendAsync();
+
+                var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
+                Assert.IsTrue(response.Successful);
+                Assert.IsNotEmpty(files);
+            }
+        }
+
+        [Test]
+        public async Task CanSendEmailWithInlineImagesAndAttachmentTogether()
+        {
+            var attachmentStream = new MemoryStream();
+            var sw = new StreamWriter(attachmentStream);
+            sw.WriteLine("Hey this is some text in an attachment");
+            sw.Flush();
+            attachmentStream.Seek(0, SeekOrigin.Begin);
+
+            var attachment = new Attachment
+            {
+                Data = attachmentStream,
+                ContentType = "text/plain",
+                Filename = "MailKitAttachment.txt",
+            };
+
+            using var inlineStream = File.OpenRead($"{Path.Combine(Directory.GetCurrentDirectory(), "logotest.png")}");
+
+            var attachmentInline = new Attachment
+            {
+                IsInline = true,
+                Data = inlineStream,
+                ContentType = "image/png",
+                Filename = "logotest.png",
+            };
+
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body("<html>Inline image here: <img src=\"cid:logotest.png\">" +
+                      "<p>You should see an image inline without a picture attachment.</p>" +
+                      "<p>A single .txt file should also be attached.</p></html>", true)
+                .Attach(attachment)
+                .Attach(attachmentInline);
+
+            var response = await email.SendAsync();
+
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
+            Assert.IsTrue(response.Successful);
+            Assert.IsNotEmpty(files);
+        }
+
+        [Test]
         public async Task CanSendAsyncHtmlAndPlaintextTogether()
         {
             var email = Email
