@@ -164,5 +164,38 @@ namespace FluentEmail.SendGrid.Tests
 
             Assert.IsTrue(response.Successful);
         }
+
+        [Test, Ignore("No sendgrid credentials")]
+        public async Task CanSendEmailWithInlineAttachments()
+        {
+            // Arrange
+            const string subject = "SendMail With Inline Attachments Test";
+            const string body = "This email is testing the inline attachment functionality of SendGrid Sender.";
+
+            using (var stream = File.OpenRead($"{Directory.GetCurrentDirectory()}/logotest.png"))
+            {
+                var attachment = new Attachment
+                {
+                    Data = stream,
+                    ContentType = "image/png",
+                    Filename = "logotest.png",
+                    IsInline = true,
+                    ContentId = "logotest_id"
+                };
+
+                var email = Email
+                    .From(fromEmail, fromName)
+                    .To(toEmail, toName)
+                    .Subject(subject)
+                    .Body(body)
+                    .Attach(attachment);
+                
+                // Act
+                var response = await email.SendAsync();
+                
+                // Assert
+                Assert.IsTrue(response.Successful);
+            }
+        }
     }
 }
