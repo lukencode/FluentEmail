@@ -219,8 +219,18 @@ namespace FluentEmail.MailKitSmtp
 
             data.Attachments.ForEach(x =>
             {
-                var attachment = builder.Attachments.Add(x.Filename, x.Data, ContentType.Parse(x.ContentType));
-                attachment.ContentId = x.ContentId;
+                var contentType = ContentType.Parse(x.ContentType);
+
+                if (x.IsInline)
+                {
+                    var attachment = builder.LinkedResources.Add(x.Filename, x.Data, contentType);
+                    attachment.ContentId = x.ContentId ?? x.Filename;
+                }
+                else
+                {
+                    var attachment = builder.Attachments.Add(x.Filename, x.Data, contentType);
+                    attachment.ContentId = x.ContentId;
+                }
             });
 
 
