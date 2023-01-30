@@ -5,6 +5,7 @@
         <AssemblyTitle>Fluent Email - Azure Email</AssemblyTitle>
         <PackageTags>$(PackageTags);azureemail</PackageTags>
         <TargetFramework>net6.0</TargetFramework>
+        <Version>$(Version)-pre</Version>
     </PropertyGroup>
 
     <ItemGroup>
