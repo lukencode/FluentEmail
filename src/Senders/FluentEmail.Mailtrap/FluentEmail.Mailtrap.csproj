@@ -6,6 +6,8 @@
     <Authors>Luke Lowrey;Ben Cull;Anthony Zigenbine;Github Contributors</Authors>
     <PackageTags>$(PackageTags);mailtrap</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
   </PropertyGroup>
 
   <ItemGroup>

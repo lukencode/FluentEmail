@@ -9,6 +9,8 @@
     <AssetsDirectory>../../../assets</AssetsDirectory>
     <NoWarn>NU5104</NoWarn>
     <Nullable>enable</Nullable>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
   </PropertyGroup>
 
   <ItemGroup>

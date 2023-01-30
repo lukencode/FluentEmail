@@ -7,7 +7,9 @@
     <PackageTags>$(PackageTags);mailkit</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
-  </PropertyGroup>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
+</PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />

@@ -6,6 +6,8 @@
     <Authors>Luke Lowrey;Ben Cull;Ricardo Santos;Github Contributors</Authors>
     <PackageTags>$(PackageTags);sendgrid</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
   </PropertyGroup>
 
   <ItemGroup>

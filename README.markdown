@@ -1,32 +1,39 @@
-![alt text](https://github.com/lukencode/FluentEmail/raw/master/assets/fluentemail_logo_64x64.png "FluentEmail")
+![alt text](https://github.com/lukencode/FluentEmail/raw/master/assets/fluentemail_logo_64x64.png 'FluentEmail')
 
 # FluentEmail - All in one email sender for .NET and .NET Core
+
 The easiest way to send email from .NET and .NET Core. Use Razor for email templates and send using SendGrid, MailGun, SMTP and more.
 
-Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter.com/lukencode)** for updates. See my blog for a detailed guide [A complete guide to send email in .NET](https://lukelowrey.com/dotnet-email-guide-2021/) 
+Forked from original by **[@lukencode](https://github.com/lukencode/fluentemail)**
 
+My packages are the same names, but prefixed with `jcamp.` to differentiate them.
+
+The original repo has not been updated in almost a year and I needed some updates to the package that were provided by various PRs. I've tried to give all credit where due.
+
+Original blog post here for a detailed guide [A complete guide to send email in .NET](https://lukelowrey.com/dotnet-email-guide-2021/)
 
 ## Nuget Packages
 
 ### Core Library
 
-* [FluentEmail.Core](src/FluentEmail.Core) - Just the domain model. Includes very basic defaults, but is also included with every other package here.
-* [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) - Send email via SMTP server.
+- [FluentEmail.Core](src/FluentEmail.Core) - Just the domain model. Includes very basic defaults, but is also included with every other package here.
+- [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) - Send email via SMTP server.
 
 ### Renderers
 
-* [FluentEmail.Razor](src/Renderers/FluentEmail.Razor) - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight](https://github.com/toddams/RazorLight) project under the hood. 
-* [FluentEmail.Liquid](src/Renderers/FluentEmail.Liquid) - Generate emails using [Liquid templates](https://shopify.github.io/liquid/). Uses the [Fluid](https://github.com/sebastienros/fluid) project under the hood. 
+- [FluentEmail.Razor](src/Renderers/FluentEmail.Razor) - Generate emails using Razor templates. Anything you can do in ASP.NET is possible here. Uses the [RazorLight](https://github.com/toddams/RazorLight) project under the hood.
+- [FluentEmail.Liquid](src/Renderers/FluentEmail.Liquid) - Generate emails using [Liquid templates](https://shopify.github.io/liquid/). Uses the [Fluid](https://github.com/sebastienros/fluid) project under the hood.
 
 ### Mail Provider Integrations
 
-* [FluentEmail.Mailgun](src/Senders/FluentEmail.Mailgun) - Send emails via MailGun's REST API.
-* [FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
-* [FluentEmail.Mailtrap](src/Senders/FluentEmail.Mailtrap) - Send emails to Mailtrap. Uses [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) for delivery.
-* [FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
-* [FluentEmail.MailerSend](https://github.com/marcoatribeiro/FluentEmail.MailerSend) - Send email via [MailerSend](https://www.mailersend.com/)'s API.
+- [FluentEmail.Mailgun](src/Senders/FluentEmail.Mailgun) - Send emails via MailGun's REST API.
+- [FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
+- [FluentEmail.Mailtrap](src/Senders/FluentEmail.Mailtrap) - Send emails to Mailtrap. Uses [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) for delivery.
+- [FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
+- [FluentEmail.MailerSend](https://github.com/marcoatribeiro/FluentEmail.MailerSend) - Send email via [MailerSend](https://www.mailersend.com/)'s API.
 
 ## Basic Usage
+
 ```csharp
 var email = await Email
     .From("john@email.com")
@@ -36,10 +43,9 @@ var email = await Email
     .SendAsync();
 ```
 
-
 ## Dependency Injection
 
-Configure FluentEmail in startup.cs with these helper methods. This will inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the 
+Configure FluentEmail in startup.cs with these helper methods. This will inject IFluentEmail (send a single email) and IFluentEmailFactory (used to send multiple emails in a single context) with the
 ISender and ITemplateRenderer configured using AddRazorRenderer(), AddSmtpSender() or other packages.
 
 ```csharp
@@ -51,6 +57,7 @@ public void ConfigureServices(IServiceCollection services)
         .AddSmtpSender("localhost", 25);
 }
 ```
+
 Example to take a dependency on IFluentEmail:
 
 ```c#
@@ -69,8 +76,6 @@ public class EmailService {
 }
 
 ```
-
-
 
 ## Using a Razor template
 
@@ -157,8 +162,7 @@ var email = Email
 var email = new Email("bob@hotmail.com")
 	.To("benwholikesbeer@twitter.com")
 	.Subject("Hey cool name!")
-	.UsingTemplateFromEmbedded("Example.Project.Namespace.template-name.cshtml", 
-		new { Name = "Bob" }, 
+	.UsingTemplateFromEmbedded("Example.Project.Namespace.template-name.cshtml",
+		new { Name = "Bob" },
 		TypeFromYourEmbeddedAssembly.GetType().GetTypeInfo().Assembly);
 ```
-

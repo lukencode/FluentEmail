@@ -7,6 +7,8 @@
     <TargetFramework>net6.0</TargetFramework>
     <AssetsDirectory>../../../assets</AssetsDirectory>
     <NoWarn>NU5104</NoWarn>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
   </PropertyGroup>
 
   <ItemGroup>

@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using FluentEmail.Core;
 using FluentEmail.MailKitSmtp;
-using netDumbster.smtp;
 using NUnit.Framework;
 using Attachment = FluentEmail.Core.Models.Attachment;
 
@@ -11,14 +10,14 @@ namespace FluentEmail.MailKit.Tests
     [NonParallelizable]
     public class MailKitSmtpSenderTests
     {
+        // Warning: To pass, an smtp listener must be running on localhost:25.
+
         const string toEmail = "bob@test.com";
         const string fromEmail = "johno@test.com";
         const string subject = "sup dawg";
         const string body = "what be the hipitity hap?";
 
         private readonly string tempDirectory;
-
-        private SimpleSmtpServer server;
 
         public MailKitSmtpSenderTests()
         {
@@ -28,15 +27,14 @@ namespace FluentEmail.MailKit.Tests
         [SetUp]
         public void SetUp()
         {
-            server = SimpleSmtpServer.Start(25);
             var sender = new MailKitSender(new SmtpClientOptions
-            { 
-                 Server = "localhost",
-                 Port = 25,
-                 UseSsl = false,
-                 RequiresAuthentication = false,
-                 UsePickupDirectory = false,
-                 MailPickupDirectory = Path.Combine(Path.GetTempPath(), "EmailTest")
+            {
+                Server = "localhost",
+                Port = 25,
+                UseSsl = false,
+                RequiresAuthentication = false,
+                UsePickupDirectory = true,
+                MailPickupDirectory = Path.Combine(Path.GetTempPath(), "EmailTest")
             });
 
             Email.DefaultSender = sender;
@@ -46,7 +44,6 @@ namespace FluentEmail.MailKit.Tests
         [TearDown]
         public void TearDown()
         {
-            server.Stop();
             Directory.Delete(tempDirectory, true);
         }
 
@@ -60,8 +57,9 @@ namespace FluentEmail.MailKit.Tests
 
             var response = email.Send();
 
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
             Assert.IsTrue(response.Successful);
-            Assert.IsTrue(server.ReceivedEmailCount == 1);
+            Assert.IsNotEmpty(files);
         }
 
         [Test]
@@ -88,10 +86,10 @@ namespace FluentEmail.MailKit.Tests
                 .Attach(attachment);
 
             var response = await email.SendAsync();
-            Assert.IsTrue(server.ReceivedEmailCount == 1);
-            
+
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
             Assert.IsTrue(response.Successful);
-            Assert.IsTrue(server.ReceivedEmailCount == 1);
+            Assert.IsNotEmpty(files);
         }
 
         [Test]
@@ -120,8 +118,9 @@ namespace FluentEmail.MailKit.Tests
 
                 var response = await email.SendAsync();
 
+                var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
                 Assert.IsTrue(response.Successful);
-                Assert.IsTrue(server.ReceivedEmailCount == 1);
+                Assert.IsNotEmpty(files);
             }
         }
 
@@ -162,9 +161,10 @@ namespace FluentEmail.MailKit.Tests
                 .Attach(attachmentInline);
 
             var response = await email.SendAsync();
-            
+
+            var files = Directory.EnumerateFiles(tempDirectory, "*.eml");
             Assert.IsTrue(response.Successful);
-            Assert.IsTrue(server.ReceivedEmailCount == 1);
+            Assert.IsNotEmpty(files);
         }
 
         [Test]

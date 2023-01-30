@@ -28,7 +28,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="test-embedded.txt" />
-    <PackageReference Include="netDumbster" Version="3.0.1" />
     <None Update="logotest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

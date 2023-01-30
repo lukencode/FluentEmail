@@ -6,6 +6,8 @@
     <PackageTags>$(PackageTags);graph</PackageTags>
     <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU5104</NoWarn>
+    <PackageId>jcamp.$(AssemblyName)</PackageId>
+    <Product>jcamp.$(AssemblyName)</Product>
   </PropertyGroup>
 
   <ItemGroup>
