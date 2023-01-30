@@ -14,77 +14,14 @@ jobs:
         uses: actions/setup-dotnet@v1
         with:
           dotnet-version: 6.0.x
+      - name: Setup NuGet
+        uses: NuGet/setup-nuget@v1
+
       - name: Install dependencies
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
 
-      - name: Publish FluentEmail.Core
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/FluentEmail.Core/FluentEmail.Core.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      - name: Publish FluentEmail.Smtp
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.Smtp/FluentEmail.Smtp.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      - name: Publish FluentEmail.Sendgrid
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.SendGrid/FluentEmail.SendGrid.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      #- name: Publish FluentEmail.MailTrap
-      #  uses: brandedoutcast/publish-nuget@v2.5.2
-      #  with:
-      #      PROJECT_FILE_PATH: src/Senders/FluentEmail.Mailtrap/FluentEmail.Mailtrap.csproj
-      #      NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-      #      NUGET_SOURCE: https://api.nuget.org
-      - name: Publish FluentEmail.MailKit
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.MailKit/FluentEmail.MailKit.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      - name: Publish FluentEmail.Mailgun
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Senders/FluentEmail.Mailgun/FluentEmail.Mailgun.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      - name: Publish FluentEmail.Razor
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Renderers/FluentEmail.Razor/FluentEmail.Razor.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-      - name: Publish FluentEmail.Liquid
-        uses: brandedoutcast/publish-nuget@v2.5.2
-        with:
-          PROJECT_FILE_PATH: src/Renderers/FluentEmail.Liquid/FluentEmail.Liquid.csproj
-          VERSION_FILE_PATH: src/Directory.Build.props
-          NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-          NUGET_SOURCE: https://api.nuget.org
-          INCLUDE_SYMBOLS: true
-    # This is currently maintained separately
-    #- name: Publish FluentEmail.Graph
-    #  uses: brandedoutcast/publish-nuget@v2.5.2
-    #  with:
-    #      PROJECT_FILE_PATH: src/Senders/FluentEmail.Graph/FluentEmail.Graph.csproj
-    #      NUGET_KEY: ${{secrets.NUGET_API_KEY}}
-    #      NUGET_SOURCE: https://api.nuget.org
+      - name: Publish jcamp.FluentEmail.*
+      - name: Publish
+        run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
