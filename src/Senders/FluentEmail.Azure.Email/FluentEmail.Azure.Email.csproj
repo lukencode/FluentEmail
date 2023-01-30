@@ -4,7 +4,7 @@
         <Description>Send emails via Azure Email Communication Services API</Description>
         <AssemblyTitle>Fluent Email - Azure Email</AssemblyTitle>
         <PackageTags>$(PackageTags);azureemail</PackageTags>
-        <TargetFramework>netstandard2.0</TargetFramework>
+        <TargetFramework>net6.0</TargetFramework>
     </PropertyGroup>
 
     <ItemGroup>

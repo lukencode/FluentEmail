@@ -1,21 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\FluentEmail.Core\FluentEmail.Core.csproj" />
+    <ProjectReference Include="..\..\src\Senders\FluentEmail.Azure.Email\FluentEmail.Azure.Email.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Smtp\FluentEmail.Smtp.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.MailKit\FluentEmail.MailKit.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Graph\FluentEmail.Graph.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Include="NUnit" Version="3.13.0" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailtrap\FluentEmail.Mailtrap.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.SendGrid\FluentEmail.SendGrid.csproj" />
     <ProjectReference Include="..\..\src\Senders\FluentEmail.Mailgun\FluentEmail.Mailgun.csproj" />
@@ -30,6 +28,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <EmbeddedResource Include="test-embedded.txt" />
+    <PackageReference Include="netDumbster" Version="3.0.1" />
     <None Update="logotest.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

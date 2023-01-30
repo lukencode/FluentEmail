@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
     <Description>Now we're talking. Send emails via SMTP.</Description>
     <AssemblyTitle>Fluent Email - SMTP</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
     <PackageTags>$(PackageTags);smtp</PackageTags>
-    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

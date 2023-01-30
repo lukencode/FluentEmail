@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <PreserveCompilationContext>true</PreserveCompilationContext>
   </PropertyGroup>
 
@@ -14,23 +14,14 @@
     <ProjectReference Include="..\..\src\Renderers\FluentEmail.Liquid\FluentEmail.Liquid.csproj" />
   </ItemGroup>
 
-
   <ItemGroup>
     <Service Include="{82a7f48d-3b50-4b1e-b82e-3ada8210c358}" />
   </ItemGroup>
 
-
   <ItemGroup>
-    <PackageReference Include="FluentAssertions" Version="6.1.0" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="5.0.2" />
-    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="5.0.0" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <PackageReference Update="Microsoft.NET.Test.Sdk" Version="16.8.3" />
-    <PackageReference Update="NUnit" Version="3.13.0" />
-    <PackageReference Update="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="FluentAssertions" Version="6.9.0" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Embedded" Version="6.0.13" />
+    <PackageReference Include="Microsoft.Extensions.FileProviders.Physical" Version="6.0.0" />
   </ItemGroup>
 
 </Project>
