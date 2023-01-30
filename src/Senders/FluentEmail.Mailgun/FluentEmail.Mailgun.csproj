@@ -4,11 +4,11 @@
     <Description>Send emails via MailGun using their REST API</Description>
     <AssemblyTitle>Fluent Email - MailGun</AssemblyTitle>
     <PackageTags>$(PackageTags);mailgun</PackageTags>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
   </ItemGroup>
 
   <ItemGroup>

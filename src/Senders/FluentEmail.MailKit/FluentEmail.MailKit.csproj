@@ -5,7 +5,7 @@
     <AssemblyTitle>Fluent Email - MailKit</AssemblyTitle>
     <Authors>Luke Lowrey;Ben Cull;Matt Rutledge;Github Contributors</Authors>
     <PackageTags>$(PackageTags);mailkit</PackageTags>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <RootNamespace>FluentEmail.MailKitSmtp</RootNamespace>
   </PropertyGroup>
 

@@ -4,14 +4,14 @@
     <Description>Send emails via Microsoft Graph API</Description>
     <AssemblyTitle>Fluent Email - Graph</AssemblyTitle>
     <PackageTags>$(PackageTags);graph</PackageTags>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <NoWarn>NU5104</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Graph" Version="3.22.0" />
+    <PackageReference Include="Microsoft.Graph" Version="4.52.0" />
     <PackageReference Include="Microsoft.Graph.Auth" Version="1.0.0-preview.5" />
-    <PackageReference Include="Microsoft.Identity.Client" Version="4.25.0" />
+    <PackageReference Include="Microsoft.Identity.Client" Version="4.49.1" />
   </ItemGroup>
 
   <ItemGroup>
