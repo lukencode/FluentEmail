@@ -161,9 +161,39 @@ namespace FluentEmail.Core.Tests
 
 			Assert.AreEqual(replyEmail, email.Data.ReplyToAddresses.First().EmailAddress);
 		}
-		
-		#region Refactored tests using setup through constructors.
-		[Test]
+
+        [Test]
+        public void Can_Add_Mutlitple_ReplyTo_From_String_List()
+        {
+            var emails = new List<string>();
+            emails.Add("email1@email.com");
+            emails.Add("email2@email.com");
+
+            var email = Email
+                .From(fromEmail)
+                .ReplyTo(emails);
+
+            Assert.AreEqual(2, email.Data.ReplyToAddresses.Count);
+        }
+
+        [Test]
+        public void Can_Add_Mutlitple_ReplyTo_From_String_Array()
+        {
+            var emails = new string[]
+            {
+                "email1@email.com",
+                "email2@email.com"
+            };
+
+            var email = Email
+                .From(fromEmail)
+                .ReplyTo(emails);
+
+            Assert.AreEqual(2, email.Data.ReplyToAddresses.Count);
+        }
+
+#region Refactored tests using setup through constructors.
+        [Test]
 		public void New_To_Address_Is_Set()
 		{
 			var email = new Email(fromEmail)

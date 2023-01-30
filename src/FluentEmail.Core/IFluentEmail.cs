@@ -103,12 +103,26 @@ namespace FluentEmail.Core
 	    /// <returns></returns>
 	    IFluentEmail ReplyTo(string address, string name);
 
-	    /// <summary>
-	    /// Sets the subject of the email
-	    /// </summary>
-	    /// <param name="subject">email subject</param>
-	    /// <returns>Instance of the Email class</returns>
-	    IFluentEmail Subject(string subject);
+        /// <summary>
+        /// Adds all recipients in list to email's ReplyTo list
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients</param>
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail ReplyTo(IEnumerable<string> mailAddresses);
+
+        /// <summary>
+        /// Adds all recipients in list to email's ReplyTo list
+        /// </summary>
+        /// <param name="mailAddresses">List of recipients</param>
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail ReplyTo(string[] mailAddresses);
+
+/// <summary>
+        /// Sets the subject of the email
+        /// </summary>
+        /// <param name="subject">email subject</param>
+        /// <returns>Instance of the Email class</returns>
+        IFluentEmail Subject(string subject);
 
 	    /// <summary>
 	    /// Adds a Body to the Email

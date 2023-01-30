@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <Description>Send emails very easily. Use razor templates, smtp, embedded files, all without hassle. This is a Base Package and includes just the domain model, very basic defaults, and is also included with every other Fluent Email package here.</Description>
+    <Description>Send emails very easily. Use razor templates, smtp, embedded files, all without hassle. This is a Base Package and includes just the domain model, very basic defaults, and is also included with every other jcamp.FluentEmail.* package here.</Description>
     <AssemblyTitle>Fluent Email</AssemblyTitle>
     <TargetFramework>net6.0</TargetFramework>
     <AssetsDirectory>../../assets</AssetsDirectory>

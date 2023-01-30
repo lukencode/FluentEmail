@@ -2,7 +2,7 @@
 
   <PropertyGroup>
 
-    <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
+    <Authors>Luke Lowrey;Ben Cull;Github Contributors;John Campion</Authors>
     <PackageTags>email;smtp;fluent;fluentemail</PackageTags>
     <PackageIconUrl>https://raw.githubusercontent.com/lukencode/FluentEmail/master/assets/fluentemail_logo_64x64.png</PackageIconUrl>
     <PackageIcon>fluentemail_logo_64x64.png</PackageIcon>
