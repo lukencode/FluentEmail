@@ -23,5 +23,4 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Publish jcamp.FluentEmail.*
-      - name: Publish
         run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
