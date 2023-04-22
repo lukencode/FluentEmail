@@ -5,7 +5,6 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentEmail.Core;
-using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using SendGrid;
 using SendGrid.Helpers.Mail;
@@ -16,11 +15,13 @@ namespace FluentEmail.SendGrid
     public class SendGridSender : ISendGridSender
     {
         private readonly string _apiKey;
+        private readonly string _host;
         private readonly bool _sandBoxMode;
 
-        public SendGridSender(string apiKey, bool sandBoxMode = false)
+        public SendGridSender(string apiKey, string host = null, bool sandBoxMode = false)
         {
             _apiKey = apiKey;
+            _host = host;
             _sandBoxMode = sandBoxMode;
         }
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
@@ -145,7 +146,7 @@ namespace FluentEmail.SendGrid
 
         private async Task<SendResponse> SendViaSendGrid(SendGridMessage mailMessage, CancellationToken? token = null)
         {
-            var sendGridClient = new SendGridClient(_apiKey);
+            var sendGridClient = new SendGridClient(_apiKey, _host);
             var sendGridResponse = await sendGridClient.SendEmailAsync(mailMessage, token.GetValueOrDefault());
 
             var sendResponse = new SendResponse();
