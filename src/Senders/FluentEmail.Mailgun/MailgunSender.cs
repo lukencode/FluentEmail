@@ -10,10 +10,11 @@ using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using FluentEmail.Mailgun.HttpHelpers;
+using Newtonsoft.Json;
 
 namespace FluentEmail.Mailgun
 {
-    public class MailgunSender : ISender
+    public class MailgunSender : IMailgunSender
     {
         private readonly string _apiKey;
         private readonly string _domainName;
@@ -51,46 +52,39 @@ namespace FluentEmail.Mailgun
 
         public async Task<SendResponse> SendAsync(IFluentEmail email, CancellationToken? token = null)
         {
-            var parameters = new List<KeyValuePair<string, string>>();
-
-            parameters.Add(new KeyValuePair<string, string>("from", $"{email.Data.FromAddress.Name} <{email.Data.FromAddress.EmailAddress}>"));
-            email.Data.ToAddresses.ForEach(x => {
-                parameters.Add(new KeyValuePair<string, string>("to", $"{x.Name} <{x.EmailAddress}>"));
-            });
-            email.Data.CcAddresses.ForEach(x => {
-                parameters.Add(new KeyValuePair<string, string>("cc", $"{x.Name} <{x.EmailAddress}>"));
-            });
-            email.Data.BccAddresses.ForEach(x => {
-                parameters.Add(new KeyValuePair<string, string>("bcc", $"{x.Name} <{x.EmailAddress}>"));
-            });
-            email.Data.ReplyToAddresses.ForEach(x => {
-                parameters.Add(new KeyValuePair<string, string>("h:Reply-To", $"{x.Name} <{x.EmailAddress}>"));
-            });
-            parameters.Add(new KeyValuePair<string, string>("subject", email.Data.Subject));
-
+            var parameters = BuildMailgunParameters(email);
+            
             parameters.Add(new KeyValuePair<string, string>(email.Data.IsHtml ? "html" : "text", email.Data.Body));
 
             if (!string.IsNullOrEmpty(email.Data.PlaintextAlternativeBody))
             {
                 parameters.Add(new KeyValuePair<string, string>("text", email.Data.PlaintextAlternativeBody));
             }
+            
+            var files = BuildMailgunFiles(email);
 
-            email.Data.Tags.ForEach(x =>
+            return await SendAsync(parameters, files, token);
+        }
+
+        private async Task<SendResponse> SendAsync(List<KeyValuePair<string, string>> parameters, List<HttpFile> files, CancellationToken? token = null)
+        {
+            token?.ThrowIfCancellationRequested();
+            
+            var response = await _httpClient.PostMultipart<MailgunResponse>("messages", parameters, files)
+                .ConfigureAwait(false);
+
+            var result = new SendResponse {MessageId = response.Data?.Id};
+            if (!response.Success)
             {
-                parameters.Add(new KeyValuePair<string, string>("o:tag", x));
-            });
-
-            foreach (var emailHeader in email.Data.Headers)
-            {
-                var key = emailHeader.Key;
-                if (!key.StartsWith("h:"))
-                {
-                    key = "h:" + emailHeader.Key;
-                }
-
-                parameters.Add(new KeyValuePair<string, string>(key, emailHeader.Value));
+                result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));
+                return result;
             }
 
+            return result;
+        }
+
+        private static List<HttpFile> BuildMailgunFiles(IFluentEmail email)
+        {
             var files = new List<HttpFile>();
             email.Data.Attachments.ForEach(x =>
             {
@@ -109,17 +103,60 @@ namespace FluentEmail.Mailgun
                     ContentType = x.ContentType
                 });
             });
+            return files;
+        }
 
-            var response = await _httpClient.PostMultipart<MailgunResponse>("messages", parameters, files).ConfigureAwait(false);
+        private static List<KeyValuePair<string, string>> BuildMailgunParameters(IFluentEmail email)
+        {
+            var parameters = new List<KeyValuePair<string, string>>();
 
-            var result = new SendResponse {MessageId = response.Data?.Id};
-            if (!response.Success)
+            parameters.Add(new KeyValuePair<string, string>("from",
+                $"{email.Data.FromAddress.Name} <{email.Data.FromAddress.EmailAddress}>"));
+            
+            email.Data.ToAddresses.ForEach(x =>
             {
-                result.ErrorMessages.AddRange(response.Errors.Select(x => x.ErrorMessage));
-                return result;
-            }
+                parameters.Add(new KeyValuePair<string, string>("to", $"{x.Name} <{x.EmailAddress}>"));
+            });
+            email.Data.CcAddresses.ForEach(x =>
+            {
+                parameters.Add(new KeyValuePair<string, string>("cc", $"{x.Name} <{x.EmailAddress}>"));
+            });
+            email.Data.BccAddresses.ForEach(x =>
+            {
+                parameters.Add(new KeyValuePair<string, string>("bcc", $"{x.Name} <{x.EmailAddress}>"));
+            });
+            email.Data.ReplyToAddresses.ForEach(x =>
+            {
+                parameters.Add(new KeyValuePair<string, string>("h:Reply-To", $"{x.Name} <{x.EmailAddress}>"));
+            });
+            parameters.Add(new KeyValuePair<string, string>("subject", email.Data.Subject));
 
-            return result;
+            email.Data.Tags.ForEach(x => { parameters.Add(new KeyValuePair<string, string>("o:tag", x)); });
+
+            foreach (var emailHeader in email.Data.Headers)
+            {
+                var key = emailHeader.Key;
+                if (!key.StartsWith("h:"))
+                {
+                    key = "h:" + emailHeader.Key;
+                }
+
+                parameters.Add(new KeyValuePair<string, string>(key, emailHeader.Value));
+            }
+            
+            return parameters;
+        }
+
+        public async Task<SendResponse> SendWithTemplateAsync(IFluentEmail email, string templateName, object templateData,
+            CancellationToken? token = null)
+        {
+            var parameters = BuildMailgunParameters(email);
+            var files = BuildMailgunFiles(email);
+
+            parameters.Add(new KeyValuePair<string, string>("template", templateName));
+            parameters.Add(new KeyValuePair<string, string>("h:X-Mailgun-Variables", JsonConvert.SerializeObject(templateData)));
+
+            return await SendAsync(parameters, files, token);
         }
     }
 }

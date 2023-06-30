@@ -134,6 +134,19 @@ namespace FluentEmail.Mailgun.Tests
                 Assert.IsTrue(response.Successful);
             }
         }
+        
+        // [Test]
+        // public async Task CanSendEmailWithTemplate()
+        // {
+        //     var email = Email
+        //         .From(fromEmail)
+        //         .To(toEmail)
+        //         .Subject(subject);
+        //
+        //     var response = await email.SendWithTemplateAsync("test-template", new { var1 = "Test" });
+        //
+        //     Assert.IsTrue(response.Successful);
+        // }
 
         class Variable
         {
