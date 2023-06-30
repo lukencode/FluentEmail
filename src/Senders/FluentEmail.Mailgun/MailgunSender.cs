@@ -10,6 +10,7 @@ using FluentEmail.Core;
 using FluentEmail.Core.Interfaces;
 using FluentEmail.Core.Models;
 using FluentEmail.Mailgun.HttpHelpers;
+using Newtonsoft.Json;
 
 namespace FluentEmail.Mailgun
 {
@@ -153,6 +154,7 @@ namespace FluentEmail.Mailgun
             var files = BuildMailgunFiles(email);
 
             parameters.Add(new KeyValuePair<string, string>("template", templateName));
+            parameters.Add(new KeyValuePair<string, string>("h:X-Mailgun-Variables", JsonConvert.SerializeObject(templateData)));
 
             return await SendAsync(parameters, files, token);
         }
