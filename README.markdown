@@ -22,6 +22,7 @@ Maintained by Luke Lowrey - follow me  on twitter **[@lukencode](https://twitter
 
 * [FluentEmail.Mailgun](src/Senders/FluentEmail.Mailgun) - Send emails via MailGun's REST API.
 * [FluentEmail.SendGrid](src/Senders/FluentEmail.SendGrid) - Send email via the SendGrid API.
+* [FluentEmail.MailPace](src/Senders/FluentEmail.MailPace) - Send emails via the [MailPace](https://www.mailpace.com/) REST API.
 * [FluentEmail.Mailtrap](src/Senders/FluentEmail.Mailtrap) - Send emails to Mailtrap. Uses [FluentEmail.Smtp](src/Senders/FluentEmail.Smtp) for delivery.
 * [FluentEmail.MailKit](src/Senders/FluentEmail.MailKit) - Send emails using the [MailKit](https://github.com/jstedfast/MailKit) email library.
 
@@ -160,4 +161,3 @@ var email = new Email("bob@hotmail.com")
 		new { Name = "Bob" }, 
 		TypeFromYourEmbeddedAssembly.GetType().GetTypeInfo().Assembly);
 ```
-
