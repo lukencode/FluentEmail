@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <Description>Send emails via MailPace using their REST API</Description>
+        <AssemblyTitle>Fluent Email - MailPace</AssemblyTitle>
+        <Authors>Luke Lowrey;Ben Cull;Github Contributors</Authors>
+        <PackageTags>$(PackageTags);smtp</PackageTags>
+        <TargetFramework>netstandard2.0</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\FluentEmail.Core\FluentEmail.Core.csproj" />
+    </ItemGroup>
+
+</Project>

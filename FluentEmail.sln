@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid", "src\R
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid.Tests", "test\FluentEmail.Liquid.Tests\FluentEmail.Liquid.Tests.csproj", "{C8063CBA-D8F3-467A-A75C-63843F0DE862}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.MailPace", "src\Senders\FluentEmail.MailPace\FluentEmail.MailPace.csproj", "{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -97,6 +99,10 @@ Global
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{0C7819AD-BC76-465D-9B2A-BE2DA75042F2} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{17100F47-A555-4756-A25F-4F05EDAFA74E} = {12F031E5-8DDC-40A0-9862-8764A6E190C0}
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862} = {47CB89AC-9615-4FA8-90DE-2D849935C36D}
+		{B7A5D5CF-9804-41CA-BF0A-16D5252CE7A9} = {926C0980-31D9-4449-903F-3C756044C28A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23736554-5288-4B30-9710-B4D9880BCF0B}
