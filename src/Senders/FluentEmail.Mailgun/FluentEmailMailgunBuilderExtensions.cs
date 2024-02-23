@@ -8,7 +8,7 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static FluentEmailServicesBuilder AddMailGunSender(this FluentEmailServicesBuilder builder, string domainName, string apiKey, MailGunRegion mailGunRegion = MailGunRegion.USA)
         {
-            builder.Services.TryAdd(ServiceDescriptor.Scoped<ISender>(_ => new MailgunSender(domainName, apiKey, mailGunRegion)));
+            builder.Services.TryAdd(ServiceDescriptor.Singleton<ISender>(_ => new MailgunSender(domainName, apiKey, mailGunRegion)));
             return builder;
         }
     }
