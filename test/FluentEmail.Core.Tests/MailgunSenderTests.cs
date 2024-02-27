@@ -4,6 +4,8 @@ using FluentEmail.Core;
 using FluentEmail.Core.Models;
 using NUnit.Framework;
 using Newtonsoft.Json;
+using System.Net.Http;
+using Moq;
 
 namespace FluentEmail.Mailgun.Tests
 {
@@ -17,7 +19,7 @@ namespace FluentEmail.Mailgun.Tests
         [SetUp]
         public void SetUp()
         {
-            var sender = new MailgunSender("sandboxcf5f41bbf2f84f15a386c60e253b5fe9.mailgun.org", "key-8d32c046d7f14ada8d5ba8253e3e30de");
+            var sender = new MailgunSender(Mock.Of<IHttpClientFactory>());
             Email.DefaultSender = sender;
         }
 

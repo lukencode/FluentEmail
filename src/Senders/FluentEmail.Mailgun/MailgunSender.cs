@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using FluentEmail.Core;
@@ -15,33 +12,11 @@ namespace FluentEmail.Mailgun
 {
     public class MailgunSender : ISender
     {
-        private readonly string _apiKey;
-        private readonly string _domainName;
-        private HttpClient _httpClient;
+        private readonly HttpClient _httpClient;
 
-        public MailgunSender(string domainName, string apiKey, MailGunRegion mailGunRegion = MailGunRegion.USA)
-        {
-            _domainName = domainName;
-            _apiKey = apiKey;
-            string url = string.Empty;
-            switch(mailGunRegion)
-            {
-                case MailGunRegion.USA:
-                    url = $"https://api.mailgun.net/v3/{_domainName}/";
-                    break;
-                case MailGunRegion.EU:
-                    url = $"https://api.eu.mailgun.net/v3/{_domainName}/";
-                    break;
-
-                default:
-                    throw new ArgumentException($"'{mailGunRegion}' is not a valid value for {nameof(mailGunRegion)}");
-            }
-            _httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(url)
-            };
-
-            _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", Convert.ToBase64String(Encoding.ASCII.GetBytes($"api:{_apiKey}")));
+        public MailgunSender(IHttpClientFactory httpClientfactory)
+        {              
+            _httpClient = httpClientfactory.CreateClient(nameof(MailgunSender));           
         }
 
         public SendResponse Send(IFluentEmail email, CancellationToken? token = null)
