@@ -5,6 +5,7 @@ using MailKit.Net.Smtp;
 using MimeKit;
 using System;
 using System.IO;
+using System.Net.Security;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,6 +55,12 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
+                    client.CheckCertificateRevocation = _smtpClientOptions.CheckCertificateRevocation;
+                    if(_smtpClientOptions.ServerCertificateValidationCallback != null)
+                    {
+                        client.ServerCertificateValidationCallback = _smtpClientOptions.ServerCertificateValidationCallback;
+                    }
+
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
                         client.Connect(
@@ -116,6 +123,12 @@ namespace FluentEmail.MailKitSmtp
 
                 using (var client = new SmtpClient())
                 {
+                    client.CheckCertificateRevocation = _smtpClientOptions.CheckCertificateRevocation;
+                    if (_smtpClientOptions.ServerCertificateValidationCallback != null)
+                    {
+                        client.ServerCertificateValidationCallback = _smtpClientOptions.ServerCertificateValidationCallback;
+                    }
+
                     if (_smtpClientOptions.SocketOptions.HasValue)
                     {
                         await client.ConnectAsync(
