@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30011.22
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36429.23
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC215BD-05EF-49A6-ADBE-8AE399952EEC}"
 EndProject
@@ -42,6 +42,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid", "src\Renderers\FluentEmail.Liquid\FluentEmail.Liquid.csproj", "{17100F47-A555-4756-A25F-4F05EDAFA74E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FluentEmail.Liquid.Tests", "test\FluentEmail.Liquid.Tests\FluentEmail.Liquid.Tests.csproj", "{C8063CBA-D8F3-467A-A75C-63843F0DE862}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FluentEmail.SES", "src\Senders\FluentEmail.SES\FluentEmail.SES.csproj", "{86BE04B5-E78B-7808-FF7B-95510C6A1F74}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862}.Release|Any CPU.Build.0 = Release|Any CPU
+		{86BE04B5-E78B-7808-FF7B-95510C6A1F74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{86BE04B5-E78B-7808-FF7B-95510C6A1F74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{86BE04B5-E78B-7808-FF7B-95510C6A1F74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{86BE04B5-E78B-7808-FF7B-95510C6A1F74}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -117,6 +123,7 @@ Global
 		{0C7819AD-BC76-465D-9B2A-BE2DA75042F2} = {926C0980-31D9-4449-903F-3C756044C28A}
 		{17100F47-A555-4756-A25F-4F05EDAFA74E} = {12F031E5-8DDC-40A0-9862-8764A6E190C0}
 		{C8063CBA-D8F3-467A-A75C-63843F0DE862} = {47CB89AC-9615-4FA8-90DE-2D849935C36D}
+		{86BE04B5-E78B-7808-FF7B-95510C6A1F74} = {926C0980-31D9-4449-903F-3C756044C28A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {23736554-5288-4B30-9710-B4D9880BCF0B}
