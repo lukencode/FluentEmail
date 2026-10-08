@@ -1,7 +1,10 @@
 ﻿using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentEmail.Core;
+using FluentEmail.Core.Interfaces;
 using FluentEmail.MailKitSmtp;
+using MimeKit;
 using NUnit.Framework;
 using Attachment = FluentEmail.Core.Models.Attachment;
 
@@ -118,6 +121,51 @@ namespace FluentEmail.MailKit.Tests
             var response = email.Send();
 
             Assert.IsTrue(response.Successful);
+        }
+
+        [Test]
+        public void CanPreprocessMessageByOverridingCreateMailMessage()
+        {
+            var sender = new PreprocessingMailKitSender(new SmtpClientOptions
+            {
+                Server = "localhost",
+                Port = 25,
+                UseSsl = false,
+                RequiresAuthentication = false,
+                UsePickupDirectory = true,
+                MailPickupDirectory = tempDirectory
+            });
+            Email.DefaultSender = sender;
+
+            var email = Email
+                .From(fromEmail)
+                .To(toEmail)
+                .Subject(subject)
+                .Body(body);
+
+            var response = email.Send();
+
+            Assert.IsTrue(response.Successful);
+            var eml = Directory.EnumerateFiles(tempDirectory, "*.eml").First();
+            var content = File.ReadAllText(eml);
+            Assert.IsTrue(content.Contains("X-Preprocessed: yes"),
+                "Override of CreateMailMessage should be able to modify the message before sending.");
+        }
+
+        /// <summary>
+        /// Simulates e.g. DKIM-signing: preprocess the MimeMessage after creation.
+        /// Possible since CreateMailMessage is protected virtual (issue #388).
+        /// </summary>
+        private class PreprocessingMailKitSender : MailKitSender
+        {
+            public PreprocessingMailKitSender(SmtpClientOptions options) : base(options) { }
+
+            protected override MimeMessage CreateMailMessage(IFluentEmail email)
+            {
+                var message = base.CreateMailMessage(email);
+                message.Headers.Add("X-Preprocessed", "yes");
+                return message;
+            }
         }
     }
 }

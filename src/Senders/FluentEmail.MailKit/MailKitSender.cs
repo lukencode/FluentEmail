@@ -181,11 +181,13 @@ namespace FluentEmail.MailKitSmtp
         }
 
         /// <summary>
-        /// Create a MimMessage so MailKit can send it
+        /// Create a MimeMessage so MailKit can send it.
+        /// Virtual so subclasses can preprocess the message before sending
+        /// (e.g. DKIM-sign it) — see https://github.com/lukencode/FluentEmail/issues/388
         /// </summary>
         /// <returns>The mail message.</returns>
         /// <param name="email">Email data.</param>
-        private MimeMessage CreateMailMessage(IFluentEmail email)
+        protected virtual MimeMessage CreateMailMessage(IFluentEmail email)
         {
             var data = email.Data;
 
